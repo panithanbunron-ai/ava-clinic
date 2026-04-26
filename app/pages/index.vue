@@ -6,10 +6,10 @@
 
 <template>
     <div>
-        <p class="mb-4 text-lg font-medium">{{ t('message') }}</p>
+        <!-- <p class="mb-4 text-lg font-medium">{{ t('message') }}</p> -->
 
         <UPageHero
-            title="Nuxt Starter Templateซ หกดหด"
+            title="Nuxt Starter Template"
             description="A production-ready starter template powered by Nuxt UI. Build beautiful, accessible, and performant applications in minutes, not hours."
             :links="[
                 {
