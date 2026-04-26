@@ -1,7 +1,15 @@
+<script setup>
+    import { useI18n } from 'vue-i18n'
+
+    const { t } = useI18n({ useScope: 'global' })
+</script>
+
 <template>
     <div>
+        <p class="mb-4 text-lg font-medium">{{ t('message') }}</p>
+
         <UPageHero
-            title="Nuxt Starter Template"
+            title="Nuxt Starter Templateซ หกดหด"
             description="A production-ready starter template powered by Nuxt UI. Build beautiful, accessible, and performant applications in minutes, not hours."
             :links="[
                 {
@@ -75,7 +83,7 @@
                 :links="[
                     {
                         label: 'Start building',
-                        to: 'https://ui.nuxt.com/docs/getting-started/installation/nuxt',
+                        // to: 'https://ui.nuxt.com/docs/getting-started/installation/nuxt',
                         target: '_blank',
                         trailingIcon: 'i-lucide-arrow-right',
                         color: 'neutral'
