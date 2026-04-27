@@ -1,12 +1,22 @@
 <script setup>
     import { useI18n } from 'vue-i18n'
+    import { playerInfo } from '~/client/ava-users/user-info'
 
     const { t } = useI18n({ useScope: 'global' })
+    const res = await playerInfo()
 </script>
 
 <template>
     <div>
-        <!-- <p class="mb-4 text-lg font-medium">{{ t('message') }}</p> -->
+        <div v-if="res.status === 'success'">
+            <p
+                v-for="user in res.data"
+                :key="user.id"
+            >
+                {{ user.name }}
+            </p>
+        </div>
+        <p class="mb-4 text-lg font-medium">{{ t('message') }}</p>
 
         <UPageHero
             title="Nuxt Starter Template"

@@ -13,9 +13,9 @@ export default withNuxt([
         }
     },
     {
-        files: ['*.vue'],
+        files: ['**/*.vue'],
         rules: {
-            indent: 'off',
+            'indent': 'off',
             '@stylistic/indent': 'off'
         }
     }
