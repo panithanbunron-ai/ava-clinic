@@ -36,6 +36,7 @@
         <div class="flex-1 overflow-y-auto px-4">
             <div class="text-xs font-semibold text-gray-400 mb-2 px-2">เมนูหลัก</div>
             <nav class="space-y-1 mb-6">
+                <!-- Keep NuxtLink here for perfect layout control with the badge, but utilize UBadge and UIcon -->
                 <NuxtLink
                     v-for="item in menuItems"
                     :key="item.name"
@@ -78,23 +79,28 @@
 
         <!-- User Profile Area -->
         <div class="p-4 border-t border-gray-200 mt-auto">
-            <div
-                class="flex items-center gap-3 cursor-pointer group"
+            <UButton
+                variant="ghost"
+                color="neutral"
+                block
+                class="justify-start h-auto py-2"
                 @click="handleLogout"
                 data-testid="sidebar-logout"
             >
-                <UAvatar
-                    src="https://avatars.githubusercontent.com/u/739984?v=4"
-                    alt="Avatar"
-                    size="md"
-                />
-                <div class="flex-1 min-w-0">
-                    <p class="text-sm font-medium text-gray-900 truncate">
-                        {{ authStore.user?.name || 'จิตราภรณ์' }}
-                    </p>
-                    <p class="text-xs text-gray-500 truncate">พนักงานต้อนรับ</p>
+                <div class="flex items-center gap-3 w-full text-left">
+                    <UAvatar
+                        src="https://avatars.githubusercontent.com/u/739984?v=4"
+                        alt="Avatar"
+                        size="md"
+                    />
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-gray-900 truncate">
+                            {{ authStore.user?.name || 'จิตราภรณ์' }}
+                        </p>
+                        <p class="text-xs text-gray-500 truncate">พนักงานต้อนรับ</p>
+                    </div>
                 </div>
-            </div>
+            </UButton>
         </div>
     </aside>
 </template>

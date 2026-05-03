@@ -32,9 +32,9 @@
 </script>
 
 <template>
-    <div
-        class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex flex-col justify-between border-l-4"
-        :class="colorMap[themeColor].border"
+    <UCard
+        :ui="{ root: 'border-l-4 ' + colorMap[themeColor].border }"
+        class="shadow-sm flex flex-col justify-between"
         data-testid="summary-card"
     >
         <div class="flex justify-between items-start mb-4">
@@ -52,5 +52,5 @@
                 </slot>
             </div>
         </div>
-    </div>
+    </UCard>
 </template>

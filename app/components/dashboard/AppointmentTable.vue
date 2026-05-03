@@ -1,12 +1,30 @@
 <script setup lang="ts">
-    const appointments = [
+    import type { TableColumn } from '@nuxt/ui'
+
+    type Appointment = {
+        id: number
+        time: string
+        customer: string
+        service: string
+        status: string
+        badgeColor: 'success' | 'info' | 'warning' | 'error' | 'neutral'
+    }
+
+    const columns: TableColumn<Appointment>[] = [
+        { accessorKey: 'time', header: 'เวลา' },
+        { accessorKey: 'customer', header: 'ชื่อลูกค้า' },
+        { accessorKey: 'service', header: 'บริการ' },
+        { accessorKey: 'status', header: 'สถานะ' }
+    ]
+
+    const appointments: Appointment[] = [
         {
             id: 1,
             time: '09:00',
             customer: 'คุณนลินี แสงทอง',
             service: 'Botox Aestox 50u',
             status: 'สำเร็จ',
-            badgeColor: 'success' as const
+            badgeColor: 'success'
         },
         {
             id: 2,
@@ -14,7 +32,7 @@
             customer: 'คุณวิไลพร มั่นคง',
             service: 'Meso Fat Face',
             status: 'กำลังรอ',
-            badgeColor: 'info' as const
+            badgeColor: 'info'
         },
         {
             id: 3,
@@ -22,7 +40,7 @@
             customer: 'คุณธนภูมิ ยิ่งใหญ่',
             service: 'Pico Laser Full Face',
             status: 'นัดหมาย',
-            badgeColor: 'neutral' as const
+            badgeColor: 'neutral'
         }
     ]
 </script>
@@ -39,40 +57,20 @@
             </button>
         </div>
 
-        <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-gray-50/50">
-                        <th class="px-5 py-3 text-sm font-medium text-gray-500 w-24">เวลา</th>
-                        <th class="px-5 py-3 text-sm font-medium text-gray-500">ชื่อลูกค้า</th>
-                        <th class="px-5 py-3 text-sm font-medium text-gray-500">บริการ</th>
-                        <th class="px-5 py-3 text-sm font-medium text-gray-500 w-28">สถานะ</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-100">
-                    <tr
-                        v-for="row in appointments"
-                        :key="row.id"
-                        class="hover:bg-gray-50/50 transition-colors"
-                    >
-                        <td class="px-5 py-4 text-sm font-semibold text-blue-900">
-                            {{ row.time }}
-                        </td>
-                        <td class="px-5 py-4 text-sm text-gray-800">{{ row.customer }}</td>
-                        <td class="px-5 py-4 text-sm text-gray-800">{{ row.service }}</td>
-                        <td class="px-5 py-4 text-sm">
-                            <UBadge
-                                :color="row.badgeColor"
-                                variant="subtle"
-                                size="xs"
-                                class="rounded-full px-2 py-0.5"
-                            >
-                                {{ row.status }}
-                            </UBadge>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <UTable :data="appointments" :columns="columns">
+            <template #time-cell="{ row }">
+                <span class="font-semibold text-blue-900">{{ row.original.time }}</span>
+            </template>
+            <template #status-cell="{ row }">
+                <UBadge
+                    :color="row.original.badgeColor"
+                    variant="subtle"
+                    size="xs"
+                    class="rounded-full px-2 py-0.5"
+                >
+                    {{ row.original.status }}
+                </UBadge>
+            </template>
+        </UTable>
     </div>
 </template>
