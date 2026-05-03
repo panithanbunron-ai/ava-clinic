@@ -13,7 +13,7 @@
                 v-for="user in res.data"
                 :key="user.id"
             >
-                {{ user.name }}
+                {{ user.name }}.  index/login
             </p>
         </div>
         <p class="mb-4 text-lg font-medium">{{ t('message') }}</p>
