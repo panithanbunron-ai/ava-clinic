@@ -1,14 +1,9 @@
 <script setup lang="ts">
     import type { TableColumn } from '@nuxt/ui'
+    import { getAppointments, type Appointment } from '~/client/dashboard/appointments'
+    import { useAuthStore } from '~/stores/auth'
 
-    type Appointment = {
-        id: number
-        time: string
-        customer: string
-        service: string
-        status: string
-        badgeColor: 'success' | 'info' | 'warning' | 'error' | 'neutral'
-    }
+    const authStore = useAuthStore()
 
     const columns: TableColumn<Appointment>[] = [
         { accessorKey: 'time', header: 'เวลา' },
@@ -17,32 +12,21 @@
         { accessorKey: 'status', header: 'สถานะ' }
     ]
 
-    const appointments: Appointment[] = [
-        {
-            id: 1,
-            time: '09:00',
-            customer: 'คุณนลินี แสงทอง',
-            service: 'Botox Aestox 50u',
-            status: 'สำเร็จ',
-            badgeColor: 'success'
+    const getToken = () => {
+        return authStore.token || ''
+    }
+
+    const { data: appointments, status } = await useAsyncData(
+        'dashboard-appointments',
+        async () => {
+            const resp = await getAppointments(getToken())
+            if (resp.status === 'success') {
+                return resp.data
+            }
+            return []
         },
-        {
-            id: 2,
-            time: '10:30',
-            customer: 'คุณวิไลพร มั่นคง',
-            service: 'Meso Fat Face',
-            status: 'กำลังรอ',
-            badgeColor: 'info'
-        },
-        {
-            id: 3,
-            time: '14:00',
-            customer: 'คุณธนภูมิ ยิ่งใหญ่',
-            service: 'Pico Laser Full Face',
-            status: 'นัดหมาย',
-            badgeColor: 'neutral'
-        }
-    ]
+        { default: () => [] as Appointment[] }
+    )
 </script>
 
 <template>
@@ -57,7 +41,7 @@
             </button>
         </div>
 
-        <UTable :data="appointments" :columns="columns">
+        <UTable :data="appointments" :columns="columns" :loading="status === 'pending'">
             <template #time-cell="{ row }">
                 <span class="font-semibold text-blue-900">{{ row.original.time }}</span>
             </template>

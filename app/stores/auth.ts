@@ -1,30 +1,39 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
-export type UserRole = 'admin' | 'superadmin' | null
+export type UserRole = 'admin' | 'superadmin' | 'doctor' | 'nurse' | null
+
+export type User = {
+    id: number
+    name: string
+    role: UserRole
+    email: string
+}
 
 export const useAuthStore = defineStore('auth', () => {
-    const user = ref<{ name: string } | null>(null)
-    const role = ref<UserRole>(null)
+    const user = ref<User | null>(null)
+    const token = useCookie<string | null>('auth_token')
+    
+    // Derived state
+    const role = computed(() => user.value?.role || null)
+    const isAuthenticated = computed(() => !!token.value)
 
-    const isAuthenticated = computed(() => !!user.value)
-
-    function login(selectedRole: NonNullable<UserRole>) {
-        // Mock authentication
-        role.value = selectedRole
-        user.value = { name: selectedRole === 'superadmin' ? 'Super Admin User' : 'Admin User' }
+    function setAuth(newToken: string, userData: User) {
+        token.value = newToken
+        user.value = userData
     }
 
     function logout() {
         user.value = null
-        role.value = null
+        token.value = null
     }
 
     return {
         user,
         role,
+        token,
         isAuthenticated,
-        login,
+        setAuth,
         logout
     }
 })

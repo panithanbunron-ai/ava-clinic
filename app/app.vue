@@ -18,6 +18,21 @@
         ogImage: 'https://ui.nuxt.com/assets/templates/nuxt/starter-light.png',
         twitterCard: 'summary_large_image'
     })
+
+    // Auto-fetch user profile if token exists (SSR or initial load)
+    import { useAuthStore } from '~/stores/auth'
+    import { meApi } from '~/client/auth'
+
+    const authStore = useAuthStore()
+    
+    if (authStore.token && !authStore.user) {
+        const { data } = await useAsyncData('auth-me', () => meApi(authStore.token!))
+        if (data.value && data.value.status === 'success') {
+            authStore.user = data.value.data
+        } else {
+            authStore.logout() // Invalid token, clean it up
+        }
+    }
 </script>
 
 <template>

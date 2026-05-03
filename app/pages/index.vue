@@ -1,5 +1,7 @@
 <script setup lang="ts">
-    import { useAuthStore, type UserRole } from '~/stores/auth'
+    import { ref } from 'vue'
+    import { useAuthStore } from '~/stores/auth'
+    import { loginApi } from '~/client/auth'
 
     definePageMeta({
         layout: 'auth'
@@ -12,11 +14,25 @@
         navigateTo('/dashboard')
     }
 
-    const handleLogin = (role: UserRole) => {
-        if (role) {
-            authStore.login(role)
+    const email = ref('admin@avaclinic.com')
+    const password = ref('password')
+    const isLoading = ref(false)
+    const errorMessage = ref('')
+
+    const handleLogin = async () => {
+        isLoading.value = true
+        errorMessage.value = ''
+        
+        const resp = await loginApi(email.value, password.value)
+        
+        if (resp.status === 'success') {
+            authStore.setAuth(resp.data.token, resp.data.user)
             navigateTo('/dashboard')
+        } else {
+            errorMessage.value = resp.message
         }
+        
+        isLoading.value = false
     }
 </script>
 
@@ -24,35 +40,39 @@
     <UCard class="w-full max-w-sm">
         <template #header>
             <div class="text-center">
-                <h2 class="text-2xl font-bold">Ava Clinic</h2>
-                <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                    Please select your role to login
+                <h2 class="text-2xl font-bold text-blue-600">AVA CLINIC</h2>
+                <p class="text-sm text-gray-500 mt-1">
+                    เข้าสู่ระบบเพื่อจัดการคลินิก
                 </p>
             </div>
         </template>
 
-        <div class="space-y-4">
+        <form @submit.prevent="handleLogin" class="space-y-4">
+            <UFormGroup label="อีเมล">
+                <UInput v-model="email" type="email" placeholder="admin@avaclinic.com" icon="i-lucide-mail" />
+            </UFormGroup>
+
+            <UFormGroup label="รหัสผ่าน">
+                <UInput v-model="password" type="password" placeholder="••••••••" icon="i-lucide-lock" />
+            </UFormGroup>
+
+            <UAlert v-if="errorMessage" color="error" variant="subtle" :title="errorMessage" />
+
             <UButton
+                type="submit"
                 block
                 color="primary"
                 variant="solid"
-                size="lg"
-                icon="i-lucide-shield"
-                @click="handleLogin('admin')"
+                size="md"
+                :loading="isLoading"
             >
-                Login as Admin
+                เข้าสู่ระบบ
             </UButton>
-
-            <UButton
-                block
-                color="error"
-                variant="solid"
-                size="lg"
-                icon="i-lucide-shield-alert"
-                @click="handleLogin('superadmin')"
-            >
-                Login as Super Admin
-            </UButton>
-        </div>
+            
+            <div class="text-xs text-gray-500 text-center mt-4">
+                <p>Admin: admin@avaclinic.com / password</p>
+                <p>Superadmin: super@avaclinic.com / password</p>
+            </div>
+        </form>
     </UCard>
 </template>
