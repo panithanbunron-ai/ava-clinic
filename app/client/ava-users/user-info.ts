@@ -25,8 +25,7 @@ type RespData = {
     }
 }
 
-export async function playerInfo(
-): Promise<ClientResp<RespData[]>> {
+export async function playerInfo(): Promise<ClientResp<RespData[]>> {
     // const endpoint = `${baseTxsURL}/front/player/info`
     const endpoint = `https://jsonplaceholder.typicode.com/users`
     const res = await fetch(endpoint)
