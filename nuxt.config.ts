@@ -8,6 +8,11 @@ export default defineNuxtConfig({
 
     css: ['~/assets/css/main.css'],
 
+    // 🎨 กำหนด color mode default เป็น light (ไม่ follow OS)
+    colorMode: {
+        preference: 'light' // 'light' | 'dark' | 'system'
+    },
+
     routeRules: {
         '/': { prerender: true }
     },
