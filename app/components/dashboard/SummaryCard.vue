@@ -1,56 +1,81 @@
 <script setup lang="ts">
-    defineProps<{
-        title: string
-        value: string | number
-        description: string
-        icon: string
-        themeColor: 'red' | 'yellow' | 'blue' | 'green'
-    }>()
-
-    const colorMap = {
-        red: {
-            border: 'border-l-red-500',
-            icon: 'text-red-500',
-            desc: 'text-red-500'
-        },
-        yellow: {
-            border: 'border-l-yellow-500',
-            icon: 'text-yellow-500',
-            desc: 'text-gray-500'
-        },
-        blue: {
-            border: 'border-l-blue-600',
-            icon: 'text-blue-500',
-            desc: 'text-gray-600'
-        },
-        green: {
-            border: 'border-l-emerald-500',
-            icon: 'text-emerald-500',
-            desc: 'text-emerald-600'
-        }
-    }
+defineProps<{
+    title: string
+    value: string | number
+    description: string
+    icon: string
+    iconColor: string
+    iconBg: string
+}>()
 </script>
 
 <template>
-    <UCard
-        :ui="{ root: 'border-l-4 ' + colorMap[themeColor].border }"
-        class="shadow-sm flex flex-col justify-between"
-        data-testid="summary-card"
-    >
-        <div class="flex justify-between items-start mb-4">
-            <h3 class="text-gray-700 font-medium">{{ title }}</h3>
-            <UIcon :name="icon" class="w-5 h-5" :class="colorMap[themeColor].icon" />
-        </div>
-        <div>
-            <div class="text-2xl font-bold text-gray-900 mb-1">{{ value }}</div>
-            <div
-                class="text-xs font-medium flex items-center gap-1"
-                :class="colorMap[themeColor].desc"
-            >
-                <slot name="description">
-                    {{ description }}
-                </slot>
+    <div class="summary-card" data-testid="summary-card">
+        <div class="card-top">
+            <div class="card-title">{{ title }}</div>
+            <div class="card-icon-wrap" :style="{ background: iconBg }">
+                <UIcon :name="icon" class="card-icon" :style="{ color: iconColor }" />
             </div>
         </div>
-    </UCard>
+        <div class="card-value">{{ value }}</div>
+        <div class="card-description">
+            <slot name="description">{{ description }}</slot>
+        </div>
+    </div>
 </template>
+
+<style scoped>
+.summary-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid #f1f5f9;
+    transition: box-shadow 0.2s;
+}
+.summary-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.card-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #64748b;
+}
+.card-icon-wrap {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.card-icon {
+    width: 20px;
+    height: 20px;
+}
+.card-value {
+    font-size: 30px;
+    font-weight: 800;
+    color: #1e293b;
+    line-height: 1.1;
+    margin-top: 4px;
+}
+.card-description {
+    font-size: 12px;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-height: 18px;
+}
+</style>

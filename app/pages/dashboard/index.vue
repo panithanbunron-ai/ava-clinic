@@ -13,185 +13,150 @@
         {
             title: 'เพิ่มลูกค้าใหม่',
             icon: 'i-lucide-user-plus',
-            bgColor: 'bg-blue-50/50',
-            textColor: 'text-blue-600'
+            gradient: 'linear-gradient(135deg, #3b82f6, #2563eb)'
         },
         {
             title: 'ลงทะเบียน',
-            icon: 'i-lucide-user-check',
-            bgColor: 'bg-emerald-50/50',
-            textColor: 'text-emerald-600'
+            icon: 'i-lucide-clipboard-check',
+            gradient: 'linear-gradient(135deg, #f59e0b, #d97706)'
         },
         {
             title: 'คิวรับบริการ',
-            icon: 'i-lucide-clipboard-list',
-            bgColor: 'bg-orange-50/50',
-            textColor: 'text-orange-600'
+            icon: 'i-lucide-clock',
+            gradient: 'linear-gradient(135deg, #10b981, #059669)'
         },
         {
             title: 'ปฏิทินนัดหมาย',
             icon: 'i-lucide-calendar',
-            bgColor: 'bg-purple-50/50',
-            textColor: 'text-purple-600'
+            gradient: 'linear-gradient(135deg, #8b5cf6, #7c3aed)'
         },
         {
             title: 'รับเข้าสินค้า',
             icon: 'i-lucide-package-plus',
-            bgColor: 'bg-gray-50/50',
-            textColor: 'text-gray-600'
+            gradient: 'linear-gradient(135deg, #f97316, #ea580c)'
         }
     ]
 
-    const recentActivities = [
+    const summaryCards = [
         {
-            id: 1,
-            title: 'เช็คอินลูกค้าใหม่',
-            time: 'เมื่อ 10 นาทีที่แล้ว',
-            border: 'border-emerald-500'
+            title: 'สินค้าหมดอายุ',
+            value: 12,
+            icon: 'i-lucide-alert-triangle',
+            iconColor: '#f59e0b',
+            iconBg: '#fef3c7',
+            description: ''
         },
         {
-            id: 2,
-            title: 'ออกใบเสร็จรับเงิน',
-            time: 'เมื่อ 45 นาทีที่แล้ว',
-            border: 'border-blue-500'
+            title: 'ต้องสั่งซื้อเพิ่ม',
+            value: 5,
+            icon: 'i-lucide-shopping-cart',
+            iconColor: '#8b5cf6',
+            iconBg: '#ede9fe',
+            description: 'รอดำเนินการ'
+        },
+        {
+            title: 'นัดหมายวันนี้',
+            value: 8,
+            icon: 'i-lucide-calendar-days',
+            iconColor: '#3b82f6',
+            iconBg: '#dbeafe',
+            description: ''
+        },
+        {
+            title: 'LINE / เลื่อนนัด',
+            value: 3,
+            icon: 'i-lucide-message-square',
+            iconColor: '#10b981',
+            iconBg: '#d1fae5',
+            description: 'รอการตอบกลับ'
         }
     ]
 </script>
 
 <template>
-    <div class="max-w-7xl mx-auto space-y-8">
-        <!-- Clinic Header & Search -->
-        <div class="flex flex-col items-center justify-center space-y-6 pt-4 pb-2">
-            <div class="text-center">
-                <h1 class="text-blue-600 font-medium text-lg">AVA CLINIC</h1>
-                <p class="text-gray-500 text-sm mt-1">สาขาพระราม 9 | ศูนย์ความงามครบวงจร</p>
-            </div>
+    <div class="dash-page">
+        <!-- ── Clinic Header & Search ── -->
+        <div class="dash-header">
+            <h1 class="clinic-name">AVA CLINIC</h1>
+            <p class="clinic-sub">สาขาพระราม 9 | ศูนย์ความงามครบวงจร</p>
 
-            <div class="w-full max-w-2xl relative">
-                <UIcon
-                    name="i-lucide-search"
-                    class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
-                />
+            <div class="search-wrap">
+                <UIcon name="i-lucide-search" class="search-icon" />
                 <input
                     v-model="searchQuery"
                     type="text"
                     placeholder="ค้นหาลูกค้า ชื่อ, เบอร์โทร, HN..."
-                    class="w-full pl-12 pr-4 py-3.5 rounded-full border border-gray-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 text-gray-700 bg-white"
+                    class="search-input"
                     data-testid="global-search"
-                />
+                >
             </div>
         </div>
 
-        <!-- Quick Actions -->
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <!-- ── Quick Actions ── -->
+        <div class="quick-actions-grid">
             <DashboardQuickActionCard
                 v-for="(action, idx) in quickActions"
                 :key="idx"
                 :title="action.title"
                 :icon="action.icon"
-                :bg-color-class="action.bgColor"
-                :text-color-class="action.textColor"
+                :gradient="action.gradient"
             />
         </div>
 
-        <!-- Summaries -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- ── Summary Cards ── -->
+        <div class="summary-grid">
             <DashboardSummaryCard
-                title="สินค้าหมดอายุ"
-                value="12"
-                description=""
-                icon="i-lucide-alert-triangle"
-                theme-color="red"
+                v-for="(card, idx) in summaryCards"
+                :key="idx"
+                :title="card.title"
+                :value="card.value"
+                :icon="card.icon"
+                :icon-color="card.iconColor"
+                :icon-bg="card.iconBg"
+                :description="card.description"
             >
-                <template #description>
-                    <UIcon name="i-lucide-trending-up" class="w-3 h-3" />
-                    <span>+2 จากเมื่อวาน</span>
+                <template v-if="card.title === 'สินค้าหมดอายุ'" #description>
+                    <UIcon name="i-lucide-trending-up" style="width:12px;height:12px;color:#f59e0b;" />
+                    <span style="color:#f59e0b;">+2 จากเมื่อวาน</span>
                 </template>
-            </DashboardSummaryCard>
-
-            <DashboardSummaryCard
-                title="ต้องสั่งซื้อเพิ่ม"
-                value="5"
-                description="รอการอนุมัติ"
-                icon="i-lucide-shopping-cart"
-                theme-color="yellow"
-            />
-
-            <DashboardSummaryCard
-                title="นัดหมายวันนี้"
-                value="8"
-                description=""
-                icon="i-lucide-calendar-days"
-                theme-color="blue"
-            >
-                <template #description>
-                    <UIcon name="i-lucide-clock" class="w-3 h-3" />
+                <template v-else-if="card.title === 'นัดหมายวันนี้'" #description>
+                    <UIcon name="i-lucide-clock" style="width:12px;height:12px;" />
                     <span>นัดถัดไป 14:00 น.</span>
                 </template>
             </DashboardSummaryCard>
-
-            <DashboardSummaryCard
-                title="LINE / เลื่อนนัด"
-                value="3"
-                description="รอการตอบกลับ"
-                icon="i-lucide-message-square"
-                theme-color="green"
-            />
         </div>
 
-        <!-- Main Content & Right Panel -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <!-- Left side (Table) -->
-            <div class="lg:col-span-2 space-y-6">
+        <!-- ── Bottom: Table + Right Panel ── -->
+        <div class="bottom-grid">
+            <!-- Appointment table (left 2/3) -->
+            <div class="table-col">
                 <DashboardAppointmentTable />
             </div>
 
-            <!-- Right side (Announcements & Activities) -->
-            <div class="space-y-6">
-                <!-- Announcement Card -->
-                <div
-                    class="bg-blue-900 rounded-xl p-6 text-white relative overflow-hidden shadow-sm"
-                    data-testid="announcement-card"
-                >
-                    <UIcon
-                        name="i-lucide-megaphone"
-                        class="absolute -right-4 -bottom-4 w-32 h-32 text-blue-800/50"
-                    />
-                    <div class="relative z-10">
-                        <h3 class="text-blue-100 font-medium text-sm mb-3">ข่าวสารพนักงาน</h3>
-                        <p class="text-white font-medium leading-relaxed mb-4">
-                            ประกาศปรับปรุงระบบ Teleconsult ประจำเดือนพฤษภาคม 2567
-                        </p>
-                        <UButton
-                            color="neutral"
-                            variant="solid"
-                            size="sm"
-                            class="bg-white text-blue-900 font-semibold px-4 hover:bg-gray-50"
-                        >
-                            อ่านรายละเอียด
-                        </UButton>
-                    </div>
-                </div>
+            <!-- Right panel (1/3) -->
+            <div class="right-col">
+                <DashboardAnnouncementCard />
 
                 <!-- Recent Activities -->
-                <div
-                    class="bg-white rounded-xl shadow-sm border border-gray-100 p-5"
-                    data-testid="recent-activities"
-                >
-                    <div class="flex justify-between items-center mb-5">
-                        <h3 class="font-medium text-gray-800 text-sm">กิจกรรมล่าสุด</h3>
-                        <UIcon name="i-lucide-history" class="w-4 h-4 text-gray-400" />
+                <div class="activity-card" data-testid="recent-activities">
+                    <div class="activity-header">
+                        <h3 class="activity-title">กิจกรรมล่าสุด</h3>
+                        <UIcon name="i-lucide-history" style="width:16px;height:16px;color:#cbd5e1;" />
                     </div>
-
-                    <div class="space-y-4">
-                        <div
-                            v-for="activity in recentActivities"
-                            :key="activity.id"
-                            class="pl-4 border-l-2"
-                            :class="activity.border"
-                        >
-                            <p class="font-medium text-gray-900 text-sm">{{ activity.title }}</p>
-                            <p class="text-xs text-gray-400 mt-0.5">{{ activity.time }}</p>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-dot dot-green" />
+                            <div>
+                                <p class="activity-name">เช็คอินลูกค้าใหม่</p>
+                                <p class="activity-time">เมื่อ 10 นาทีที่แล้ว</p>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-dot dot-blue" />
+                            <div>
+                                <p class="activity-name">ออกใบเสร็จรับเงิน</p>
+                                <p class="activity-time">เมื่อ 45 นาทีที่แล้ว</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -199,3 +164,164 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+.dash-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* ── Header ── */
+.dash-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 24px 0 8px;
+}
+.clinic-name {
+    font-size: 26px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    letter-spacing: 1px;
+}
+.clinic-sub {
+    font-size: 13px;
+    color: #94a3b8;
+    margin: 0;
+}
+
+/* Search */
+.search-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 580px;
+    margin-top: 12px;
+}
+.search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: #94a3b8;
+}
+.search-input {
+    width: 100%;
+    padding: 13px 18px 13px 46px;
+    border-radius: 50px;
+    border: 1.5px solid #e2e8f0;
+    background: white;
+    font-size: 14px;
+    color: #374151;
+    outline: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-input::placeholder { color: #94a3b8; }
+.search-input:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79,70,229,0.1);
+}
+
+/* ── Quick Actions ── */
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+}
+
+/* ── Summary Cards ── */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+/* ── Bottom Grid ── */
+.bottom-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+.table-col {
+    min-width: 0;
+}
+.right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Activities card */
+.activity-card {
+    background: white;
+    border-radius: 16px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border: 1px solid #f1f5f9;
+}
+.activity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.activity-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+}
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+.activity-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+.dot-green { background: #10b981; }
+.dot-blue { background: #3b82f6; }
+.activity-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+.activity-time {
+    font-size: 11px;
+    color: #94a3b8;
+    margin: 2px 0 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .quick-actions-grid { grid-template-columns: repeat(3, 1fr); }
+    .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    .bottom-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+    .quick-actions-grid { grid-template-columns: repeat(2, 1fr); }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>

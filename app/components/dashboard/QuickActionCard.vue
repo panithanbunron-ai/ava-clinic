@@ -1,24 +1,67 @@
 <script setup lang="ts">
-    defineProps<{
-        title: string
-        icon: string
-        bgColorClass: string
-        textColorClass: string
-    }>()
+defineProps<{
+    title: string
+    icon: string
+    gradient: string
+}>()
 </script>
 
 <template>
-    <UCard
-        as="button"
-        :class="['border-transparent hover:border-gray-200 transition-all duration-200 cursor-pointer shadow-none hover:shadow-md', bgColorClass]"
-        :ui="{ body: 'w-full flex flex-col items-center justify-center p-6' }"
+    <button
+        class="quick-action-card"
+        :style="{ background: gradient }"
         data-testid="quick-action-card"
+        type="button"
     >
-        <div
-            class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center mx-auto mb-4"
-        >
-            <UIcon :name="icon" class="w-6 h-6" :class="textColorClass" />
+        <div class="action-icon-wrap">
+            <UIcon :name="icon" class="action-icon" />
         </div>
-        <span class="font-medium text-sm block text-center" :class="textColorClass">{{ title }}</span>
-    </UCard>
+        <span class="action-title">{{ title }}</span>
+    </button>
 </template>
+
+<style scoped>
+.quick-action-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 28px 16px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+.quick-action-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+}
+.quick-action-card:active {
+    transform: translateY(0);
+}
+
+.action-icon-wrap {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.action-icon {
+    width: 26px;
+    height: 26px;
+    color: white;
+}
+.action-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    line-height: 1.3;
+}
+</style>
