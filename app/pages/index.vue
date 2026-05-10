@@ -1,78 +1,74 @@
 <script setup lang="ts">
-    import { ref } from 'vue'
-    import { useAuthStore } from '~/stores/auth'
-    import { loginApi } from '~/client/auth'
+import { useAuthStore } from '~/stores/auth'
 
-    definePageMeta({
-        layout: 'auth'
-    })
+definePageMeta({
+    layout: 'auth'
+})
 
-    const authStore = useAuthStore()
+const authStore = useAuthStore()
 
-    // If already logged in, redirect to dashboard automatically
-    if (authStore.isAuthenticated) {
-        navigateTo('/dashboard')
-    }
-
-    const email = ref('admin@avaclinic.com')
-    const password = ref('password')
-    const isLoading = ref(false)
-    const errorMessage = ref('')
-
-    const handleLogin = async () => {
-        isLoading.value = true
-        errorMessage.value = ''
-        
-        const resp = await loginApi(email.value, password.value)
-        
-        if (resp.status === 'success') {
-            authStore.setAuth(resp.data.token, resp.data.user)
-            navigateTo('/dashboard')
-        } else {
-            errorMessage.value = resp.message
-        }
-        
-        isLoading.value = false
-    }
+// If already logged in, redirect to dashboard automatically
+if (authStore.isAuthenticated) {
+    navigateTo('/dashboard')
+}
 </script>
 
 <template>
-    <UCard class="w-full max-w-sm">
-        <template #header>
-            <div class="text-center">
-                <h2 class="text-2xl font-bold text-blue-600">AVA CLINIC</h2>
-                <p class="text-sm text-gray-500 mt-1">
-                    เข้าสู่ระบบเพื่อจัดการคลินิก
-                </p>
+    <div class="login-page">
+        <!-- Left: Hero (50%) -->
+        <LoginHero class="login-left" />
+
+        <!-- Right: Form (50%) -->
+        <div class="login-right">
+            <div class="form-wrapper">
+                <LoginFormTabs />
+                <LoginFooter />
             </div>
-        </template>
-
-        <form @submit.prevent="handleLogin" class="space-y-4">
-            <UFormGroup label="อีเมล">
-                <UInput v-model="email" type="email" placeholder="admin@avaclinic.com" icon="i-lucide-mail" />
-            </UFormGroup>
-
-            <UFormGroup label="รหัสผ่าน">
-                <UInput v-model="password" type="password" placeholder="••••••••" icon="i-lucide-lock" />
-            </UFormGroup>
-
-            <UAlert v-if="errorMessage" color="error" variant="subtle" :title="errorMessage" />
-
-            <UButton
-                type="submit"
-                block
-                color="primary"
-                variant="solid"
-                size="md"
-                :loading="isLoading"
-            >
-                เข้าสู่ระบบ
-            </UButton>
-            
-            <div class="text-xs text-gray-500 text-center mt-4">
-                <p>Admin: admin@avaclinic.com / password</p>
-                <p>Superadmin: super@avaclinic.com / password</p>
-            </div>
-        </form>
-    </UCard>
+        </div>
+    </div>
 </template>
+
+<style scoped>
+.login-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* Left panel — hero handles its own bg */
+/* .login-left {
+    /* height is driven by grid row height
+} */
+
+/* Right panel */
+.login-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9ff;
+    padding: 40px 32px;
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
+    max-width: 420px;
+}
+
+/* Responsive: stack on mobile */
+@media (max-width: 768px) {
+    .login-page {
+        grid-template-columns: 1fr;
+    }
+    .login-left {
+        display: none;
+    }
+    .login-right {
+        padding: 32px 20px;
+    }
+}
+</style>
