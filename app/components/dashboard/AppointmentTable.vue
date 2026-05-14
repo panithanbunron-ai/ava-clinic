@@ -56,7 +56,7 @@
         <table v-else class="appt-tbl">
             <thead>
                 <tr>
-                    <th v-for="col in columns" :key="col.accessorKey as string">
+                    <th v-for="col in columns" :key="col.header as string">
                         {{ col.header }}
                     </th>
                 </tr>

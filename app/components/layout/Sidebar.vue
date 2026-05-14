@@ -7,9 +7,9 @@ const route = useRoute()
 
 const menuItems = [
     { name: 'หน้าแรก', icon: 'i-lucide-home', to: '/dashboard' },
-    { name: 'ข้อมูลลูกค้า', icon: 'i-lucide-users', to: '#' },
+    { name: 'ข้อมูลลูกค้า', icon: 'i-lucide-users', to: '/customerInfo' },
     { name: 'คลังสินค้า', icon: 'i-lucide-package', to: '#' },
-    { name: 'รายงาน', icon: 'i-lucide-bar-chart-2', to: '#' },
+    { name: 'รายงาน', icon: 'i-lucide-bar-chart-2', to: '/report' },
     { name: 'จุดบริการ', icon: 'i-lucide-activity', to: '#' },
     { name: 'Teleconsult', icon: 'i-lucide-video', to: '#', badge: 'BETA' }
 ]
@@ -96,7 +96,7 @@ const handleLogout = () => {
 
 <style scoped>
 .sidebar {
-    width: 224px;
+    width: 255px;
     flex-shrink: 0;
     background: linear-gradient(180deg, #3730a3 0%, #4f46e5 40%, #7c3aed 100%);
     display: flex;
@@ -127,7 +127,7 @@ const handleLogout = () => {
     align-items: center;
     gap: 12px;
     padding: 22px 20px 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    /* border-bottom: 1px solid rgba(255,255,255,0.1); */
     flex-shrink: 0;
 }
 .logo-avatar {
