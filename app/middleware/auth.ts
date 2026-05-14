@@ -1,6 +1,6 @@
 import { useAuthStore } from '~/stores/auth'
 
-export default defineNuxtRouteMiddleware((to) => {
+export default defineNuxtRouteMiddleware(to => {
     const authStore = useAuthStore()
 
     // Protected route prefixes

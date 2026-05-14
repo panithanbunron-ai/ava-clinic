@@ -11,7 +11,10 @@ export type LoginRespData = {
     }
 }
 
-export async function loginApi(email: string, password: string): Promise<ClientResp<LoginRespData>> {
+export async function loginApi(
+    email: string,
+    password: string
+): Promise<ClientResp<LoginRespData>> {
     try {
         const res = await fetch('/api/auth/login', {
             method: 'POST',
@@ -22,11 +25,11 @@ export async function loginApi(email: string, password: string): Promise<ClientR
         })
 
         const json = await res.json()
-        
+
         if (res.status !== 200) {
             return { status: 'fails', code: res.status, message: json?.statusMessage ?? 'error' }
         }
-        
+
         return { status: 'success', code: res.status, data: json.data }
     } catch (e) {
         return { status: 'fails', code: 500, message: 'Internal Client Error' }
@@ -37,16 +40,16 @@ export async function meApi(token: string): Promise<ClientResp<LoginRespData['us
     try {
         const res = await fetch('/api/auth/me', {
             headers: {
-                'Authorization': `Bearer ${token}`
+                Authorization: `Bearer ${token}`
             }
         })
 
         const json = await res.json()
-        
+
         if (res.status !== 200) {
             return { status: 'fails', code: res.status, message: json?.statusMessage ?? 'error' }
         }
-        
+
         return { status: 'success', code: res.status, data: json.data }
     } catch (e) {
         return { status: 'fails', code: 500, message: 'Internal Client Error' }

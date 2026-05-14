@@ -1,22 +1,22 @@
-export default defineEventHandler(async (event) => {
-  // Simulate network latency
-  await simulateDelay(600)
-  
-  // Require authentication to access dashboard data
-  requireAuth(event)
+export default defineEventHandler(async event => {
+    // Simulate network latency
+    await simulateDelay(600)
 
-  const query = getQuery(event)
-  const statusFilter = query.status as string
+    // Require authentication to access dashboard data
+    requireAuth(event)
 
-  let data = [...mockAppointments]
+    const query = getQuery(event)
+    const statusFilter = query.status as string
 
-  if (statusFilter) {
-    data = data.filter(app => app.status === statusFilter)
-  }
+    let data = [...mockAppointments]
 
-  return {
-    statusCode: 200,
-    message: 'Appointments fetched successfully',
-    data: data
-  }
+    if (statusFilter) {
+        data = data.filter(app => app.status === statusFilter)
+    }
+
+    return {
+        statusCode: 200,
+        message: 'Appointments fetched successfully',
+        data: data
+    }
 })

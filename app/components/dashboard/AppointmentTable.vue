@@ -87,116 +87,120 @@
 </template>
 
 <style scoped>
-.appt-table {
-    background: white;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    border: 1px solid #f1f5f9;
-}
+    .appt-table {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        border: 1px solid #f1f5f9;
+    }
 
-/* Header */
-.table-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 22px 14px;
-    border-bottom: 1px solid #f1f5f9;
-}
-.table-title-wrap {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.title-bar {
-    width: 4px;
-    height: 20px;
-    background: linear-gradient(180deg, #4f46e5, #7c3aed);
-    border-radius: 4px;
-}
-.table-title {
-    font-size: 15px;
-    font-weight: 700;
-    color: #1e293b;
-    margin: 0;
-}
-.see-all-btn {
-    font-size: 13px;
-    font-weight: 600;
-    color: #4f46e5;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 6px;
-    transition: background 0.15s;
-}
-.see-all-btn:hover {
-    background: #ede9fe;
-}
+    /* Header */
+    .table-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 22px 14px;
+        border-bottom: 1px solid #f1f5f9;
+    }
+    .table-title-wrap {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .title-bar {
+        width: 4px;
+        height: 20px;
+        background: linear-gradient(180deg, #4f46e5, #7c3aed);
+        border-radius: 4px;
+    }
+    .table-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0;
+    }
+    .see-all-btn {
+        font-size: 13px;
+        font-weight: 600;
+        color: #4f46e5;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px 8px;
+        border-radius: 6px;
+        transition: background 0.15s;
+    }
+    .see-all-btn:hover {
+        background: #ede9fe;
+    }
 
-/* Loading */
-.table-loading {
-    display: flex;
-    justify-content: center;
-    padding: 40px;
-}
-.loading-spinner {
-    width: 28px;
-    height: 28px;
-    border: 3px solid #e2e8f0;
-    border-top-color: #4f46e5;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
+    /* Loading */
+    .table-loading {
+        display: flex;
+        justify-content: center;
+        padding: 40px;
+    }
+    .loading-spinner {
+        width: 28px;
+        height: 28px;
+        border: 3px solid #e2e8f0;
+        border-top-color: #4f46e5;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
 
-/* Table */
-.appt-tbl {
-    width: 100%;
-    border-collapse: collapse;
-}
-.appt-tbl thead tr {
-    background: #f8fafc;
-}
-.appt-tbl th {
-    padding: 11px 22px;
-    text-align: left;
-    font-size: 12px;
-    font-weight: 600;
-    color: #94a3b8;
-    letter-spacing: 0.3px;
-    text-transform: uppercase;
-}
-.appt-tbl tbody tr {
-    border-top: 1px solid #f8fafc;
-    transition: background 0.12s;
-}
-.appt-tbl tbody tr:hover {
-    background: #fafafe;
-}
-.appt-tbl td {
-    padding: 13px 22px;
-    font-size: 13.5px;
-    color: #374151;
-}
-.td-time {
-    font-weight: 700;
-    color: #1e293b;
-    white-space: nowrap;
-}
-.td-empty {
-    text-align: center;
-    color: #94a3b8;
-    padding: 32px;
-}
+    /* Table */
+    .appt-tbl {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .appt-tbl thead tr {
+        background: #f8fafc;
+    }
+    .appt-tbl th {
+        padding: 11px 22px;
+        text-align: left;
+        font-size: 12px;
+        font-weight: 600;
+        color: #94a3b8;
+        letter-spacing: 0.3px;
+        text-transform: uppercase;
+    }
+    .appt-tbl tbody tr {
+        border-top: 1px solid #f8fafc;
+        transition: background 0.12s;
+    }
+    .appt-tbl tbody tr:hover {
+        background: #fafafe;
+    }
+    .appt-tbl td {
+        padding: 13px 22px;
+        font-size: 13.5px;
+        color: #374151;
+    }
+    .td-time {
+        font-weight: 700;
+        color: #1e293b;
+        white-space: nowrap;
+    }
+    .td-empty {
+        text-align: center;
+        color: #94a3b8;
+        padding: 32px;
+    }
 
-/* Status badge */
-.status-badge {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-}
+    /* Status badge */
+    .status-badge {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+    }
 </style>

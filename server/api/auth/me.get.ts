@@ -1,19 +1,19 @@
-export default defineEventHandler(async (event) => {
-  await simulateDelay(400)
-  
-  // This will throw 401/403 if invalid
-  const { role } = requireAuth(event)
+export default defineEventHandler(async event => {
+    await simulateDelay(400)
 
-  // Find user based on token role (mocking decoded token payload)
-  const user = mockUsers.find(u => u.role === role)
+    // This will throw 401/403 if invalid
+    const { role } = requireAuth(event)
 
-  if (!user) {
-    throw createError({ statusCode: 404, statusMessage: 'Not Found: User not found' })
-  }
+    // Find user based on token role (mocking decoded token payload)
+    const user = mockUsers.find(u => u.role === role)
 
-  return {
-    statusCode: 200,
-    message: 'Profile fetched successfully',
-    data: user
-  }
+    if (!user) {
+        throw createError({ statusCode: 404, statusMessage: 'Not Found: User not found' })
+    }
+
+    return {
+        statusCode: 200,
+        message: 'Profile fetched successfully',
+        data: user
+    }
 })

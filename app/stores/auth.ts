@@ -14,7 +14,7 @@ export const useAuthStore = defineStore('auth', () => {
     // Both token and user persisted in cookies — survives page refresh
     const token = useCookie<string | null>('auth_token', { default: () => null })
     const userCookie = useCookie<User | null>('auth_user', {
-        default: () => null,
+        default: () => null
         // serialize/parse JSON automatically via useCookie
     })
 
@@ -27,7 +27,7 @@ export const useAuthStore = defineStore('auth', () => {
     function setAuth(newToken: string, userData: User) {
         token.value = newToken
         user.value = userData
-        userCookie.value = userData  // persist to cookie
+        userCookie.value = userData // persist to cookie
     }
 
     function logout() {
