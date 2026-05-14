@@ -17,7 +17,7 @@ defineProps<{ form: any }>()
                     <div class="text-xs text-gray-400 mt-1.5 font-medium">รองรับ JPG, PNG (สูงสุด 2MB)</div>
                 </div>
             </div>
-            
+
             <!-- Customer Code Banner -->
             <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-700 shadow-xl shadow-slate-900/10 relative overflow-hidden group">
                 <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
@@ -29,7 +29,7 @@ defineProps<{ form: any }>()
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Form -->
         <div class="flex-1 space-y-8">
             <div class="flex items-center gap-3 border-b border-gray-100 pb-4">
@@ -38,35 +38,35 @@ defineProps<{ form: any }>()
                 </div>
                 <h2 class="text-lg font-bold text-gray-800">ข้อมูลส่วนตัว</h2>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
                 <UFormGroup label="คำนำหน้า" class="col-span-1 md:col-span-3 font-medium text-gray-700">
-                    <USelectMenu v-model="form.title" :options="['นาย', 'นาง', 'นางสาว']" size="lg" :ui="{ rounded: 'rounded-xl', color: { white: { outline: 'shadow-sm ring-1 ring-gray-200 focus:ring-2 focus:ring-blue-500' } } }" />
+                    <USelectMenu v-model="form.title" :options="['นาย', 'นาง', 'นางสาว']" size="lg" :ui="{ }" />
                 </UFormGroup>
                 <UFormGroup required class="col-span-1 md:col-span-4 font-medium text-gray-700">
                     <template #label>
                         ชื่อ <span class="text-red-500">*</span>
                     </template>
-                    <UInput v-model="form.firstName" placeholder="กรอกชื่อ" size="lg" :ui="{ rounded: 'rounded-xl' }" />
+                    <UInput v-model="form.firstName" placeholder="กรอกชื่อ" size="lg" :ui="{ }" />
                 </UFormGroup>
                 <UFormGroup required class="col-span-1 md:col-span-5 font-medium text-gray-700">
                     <template #label>
                         นามสกุล <span class="text-red-500">*</span>
                     </template>
-                    <UInput v-model="form.lastName" placeholder="กรอกนามสกุล" size="lg" :ui="{ rounded: 'rounded-xl' }" />
+                    <UInput v-model="form.lastName" placeholder="กรอกนามสกุล" size="lg" :ui="{ }" />
                 </UFormGroup>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
                 <UFormGroup label="เพศ" class="col-span-1 md:col-span-3 font-medium text-gray-700">
                     <div class="flex bg-slate-100/80 p-1 rounded-xl ring-1 ring-slate-200 shadow-inner">
-                        <button 
+                        <button
                             type="button"
                             class="flex-1 py-1.5 text-sm rounded-lg transition-all duration-300 font-bold"
                             :class="form.gender === 'ชาย' ? 'bg-white shadow-sm text-blue-600 ring-1 ring-gray-200/50 scale-100' : 'text-slate-500 hover:text-slate-700 scale-95 hover:bg-slate-200/50'"
                             @click="form.gender = 'ชาย'"
                         >ชาย</button>
-                        <button 
+                        <button
                             type="button"
                             class="flex-1 py-1.5 text-sm rounded-lg transition-all duration-300 font-bold"
                             :class="form.gender === 'หญิง' ? 'bg-white shadow-sm text-pink-600 ring-1 ring-gray-200/50 scale-100' : 'text-slate-500 hover:text-slate-700 scale-95 hover:bg-slate-200/50'"
@@ -75,10 +75,10 @@ defineProps<{ form: any }>()
                     </div>
                 </UFormGroup>
                 <UFormGroup label="วันเกิด" class="col-span-1 md:col-span-4 font-medium text-gray-700">
-                    <UInput v-model="form.birthDate" placeholder="DD/MM/YYYY" type="date" size="lg" :ui="{ rounded: 'rounded-xl' }" icon="i-heroicons-calendar" />
+                    <UInput v-model="form.birthDate" placeholder="DD/MM/YYYY" type="date" size="lg" :ui="{ }" icon="i-heroicons-calendar" />
                 </UFormGroup>
                 <UFormGroup label="อายุ (คำนวณอัตโนมัติ)" class="col-span-1 md:col-span-5 font-medium text-gray-700">
-                    <UInput disabled placeholder="—" size="lg" :ui="{ rounded: 'rounded-xl', base: 'bg-slate-50' }" />
+                    <UInput disabled placeholder="—" size="lg" :ui="{ base: 'bg-slate-50' }" />
                 </UFormGroup>
             </div>
 
@@ -88,10 +88,10 @@ defineProps<{ form: any }>()
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
                             <UIcon name="i-heroicons-credit-card" class="h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
                         </div>
-                        <input 
-                            v-model="form.idCard" 
-                            placeholder="X-XXXX-XXXXX-XX-X" 
-                            class="block w-full pl-11 pr-4 py-3 bg-slate-800 text-white rounded-xl border-none ring-1 ring-slate-700 focus:ring-2 focus:ring-blue-500 shadow-inner font-mono text-lg transition-shadow placeholder-slate-500" 
+                        <input
+                            v-model="form.idCard"
+                            placeholder="X-XXXX-XXXXX-XX-X"
+                            class="block w-full pl-11 pr-4 py-3 bg-slate-800 text-white rounded-xl border-none ring-1 ring-slate-700 focus:ring-2 focus:ring-blue-500 shadow-inner font-mono text-lg transition-shadow placeholder-slate-500"
                         />
                     </div>
                     <div class="flex items-center px-5 py-3 bg-emerald-50 text-emerald-700 rounded-xl text-sm font-bold border border-emerald-200/60 shadow-sm shrink-0">
@@ -103,12 +103,12 @@ defineProps<{ form: any }>()
                     </div>
                 </div>
             </UFormGroup>
-            
+
             <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200/60 rounded-2xl p-4 flex gap-3 text-amber-800 text-sm mt-8 shadow-sm">
                 <UIcon name="i-heroicons-exclamation-triangle" class="w-5 h-5 shrink-0 text-amber-500 mt-0.5" />
                 <div class="font-medium leading-relaxed">
-                    ฟิลด์ที่จำเป็นมีเครื่องหมาย <span class="text-red-500 font-bold text-base">*</span> 
-                    <span class="text-amber-700/80 mx-1">·</span> 
+                    ฟิลด์ที่จำเป็นมีเครื่องหมาย <span class="text-red-500 font-bold text-base">*</span>
+                    <span class="text-amber-700/80 mx-1">·</span>
                     ข้อมูลส่วนที่เหลือสามารถกลับมาเพิ่มหรือแก้ไขได้ที่หน้า <span class="font-bold underline decoration-amber-300 underline-offset-4">โปรไฟล์ลูกค้า</span> ในภายหลัง
                 </div>
             </div>
@@ -130,7 +130,7 @@ defineProps<{ form: any }>()
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="group bg-white ring-1 ring-gray-200 hover:ring-indigo-300 rounded-2xl transition-all duration-200 hover:shadow-md overflow-hidden">
                     <div class="flex items-center justify-between p-4 cursor-pointer text-gray-700 hover:bg-slate-50/50">
                         <div class="flex items-center font-bold">

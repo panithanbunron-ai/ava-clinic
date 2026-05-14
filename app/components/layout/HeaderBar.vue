@@ -2,7 +2,7 @@
 
 <template>
     <header
-        class="h-16 border-b border-gray-200 bg-white flex items-center justify-between px-6 sticky top-0 z-10"
+        class="h-16 border-b border-gray-200 bg-white flex items-center justify-between px-6 fixed top-0 left-[255px] right-0 z-40"
     >
         <div class="flex items-center text-sm">
             <span class="text-gray-400">หน้าแรก</span>

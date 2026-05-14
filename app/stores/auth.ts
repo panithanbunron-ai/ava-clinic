@@ -11,9 +11,15 @@ export type User = {
 }
 
 export const useAuthStore = defineStore('auth', () => {
-    const user = ref<User | null>(null)
-    const token = useCookie<string | null>('auth_token')
-    
+    // Both token and user persisted in cookies — survives page refresh
+    const token = useCookie<string | null>('auth_token', { default: () => null })
+    const userCookie = useCookie<User | null>('auth_user', {
+        default: () => null,
+        // serialize/parse JSON automatically via useCookie
+    })
+
+    const user = ref<User | null>(userCookie.value)
+
     // Derived state
     const role = computed(() => user.value?.role || null)
     const isAuthenticated = computed(() => !!token.value)
@@ -21,11 +27,13 @@ export const useAuthStore = defineStore('auth', () => {
     function setAuth(newToken: string, userData: User) {
         token.value = newToken
         user.value = userData
+        userCookie.value = userData  // persist to cookie
     }
 
     function logout() {
-        user.value = null
         token.value = null
+        user.value = null
+        userCookie.value = null
     }
 
     return {

@@ -14,36 +14,37 @@ defineProps<{ form: any }>()
                     </h2>
                     <p class="text-xs text-gray-400 mt-1">รายละเอียดที่อยู่สำหรับจัดส่งเอกสารและเวชระเบียน</p>
                 </div>
-                <UButton size="sm" color="blue" variant="soft" class="rounded-lg shadow-sm font-medium hover:bg-blue-100 transition-all">
+                <UButton size="sm" variant="soft" class="rounded-lg shadow-sm font-medium hover:bg-blue-100 transition-all">
+                    asdasd
                     <template #leading>
                         <UIcon name="i-heroicons-document-duplicate" class="w-4 h-4" />
                     </template>
                     ดึงจากบัตรประชาชน
                 </UButton>
             </div>
-            
+
             <div class="bg-white rounded-2xl p-6 ring-1 ring-gray-200 shadow-sm space-y-6">
                 <UFormGroup label="ที่อยู่ (เลขที่ / หมู่ / ซอย / ถนน)" class="font-medium text-gray-700">
-                    <UTextarea v-model="form.address" placeholder="เช่น 125/4 หมู่ 5 ซอยพหลโยธิน 24 ถ.พหลโยธิน" :rows="3" size="lg" :ui="{ rounded: 'rounded-xl', base: 'bg-slate-50 focus:bg-white transition-colors' }" />
+                    <UTextarea v-model="form.address" placeholder="เช่น 125/4 หมู่ 5 ซอยพหลโยธิน 24 ถ.พหลโยธิน" :rows="3" size="lg" :ui="{ base: 'bg-slate-50 focus:bg-white transition-colors' }" />
                 </UFormGroup>
-                
+
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
                     <UFormGroup label="จังหวัด" class="font-medium text-gray-700">
-                        <USelectMenu v-model="form.province" :options="['กรุงเทพมหานคร', 'เชียงใหม่', 'ภูเก็ต']" placeholder="เลือกจังหวัด" size="lg" :ui="{ rounded: 'rounded-xl' }" />
+                        <USelectMenu v-model="form.province" :options="['กรุงเทพมหานคร', 'เชียงใหม่', 'ภูเก็ต']" placeholder="เลือกจังหวัด" size="lg" :ui="{}" />
                     </UFormGroup>
                     <UFormGroup label="อำเภอ / เขต" class="font-medium text-gray-700">
-                        <USelectMenu v-model="form.district" :options="['จตุจักร', 'บางเขน', 'ลาดพร้าว']" placeholder="เลือกอำเภอ" size="lg" :ui="{ rounded: 'rounded-xl' }" />
+                        <USelectMenu v-model="form.district" :options="['จตุจักร', 'บางเขน', 'ลาดพร้าว']" placeholder="เลือกอำเภอ" size="lg" :ui="{ }" />
                     </UFormGroup>
                     <UFormGroup label="ตำบล / แขวง" class="font-medium text-gray-700">
-                        <USelectMenu v-model="form.subDistrict" :options="['ลาดยาว', 'จันทรเกษม']" placeholder="เลือกตำบล" size="lg" :ui="{ rounded: 'rounded-xl' }" />
+                        <USelectMenu v-model="form.subDistrict" :options="['ลาดยาว', 'จันทรเกษม']" placeholder="เลือกตำบล" size="lg" :ui="{ }" />
                     </UFormGroup>
                     <UFormGroup label="รหัสไปรษณีย์" class="font-medium text-gray-700">
-                        <UInput v-model="form.zipcode" placeholder="เช่น 10900" size="lg" :ui="{ rounded: 'rounded-xl' }" />
+                        <UInput v-model="form.zipcode" placeholder="เช่น 10900" size="lg" :ui="{ }" />
                     </UFormGroup>
                 </div>
             </div>
         </div>
-        
+
         <!-- Contact Section -->
         <div class="space-y-6 pt-4">
             <div class="border-b border-gray-100 pb-3">
@@ -59,16 +60,16 @@ defineProps<{ form: any }>()
                     <template #label>
                         เบอร์มือถือ <span class="text-red-500">*</span>
                     </template>
-                    <UInput v-model="form.mobile" placeholder="08X-XXX-XXXX" icon="i-heroicons-phone" size="lg" :ui="{ rounded: 'rounded-xl' }" class="dark-input-premium" />
+                    <UInput v-model="form.mobile" placeholder="08X-XXX-XXXX" icon="i-heroicons-phone" size="lg" :ui="{ }" class="dark-input-premium" />
                 </UFormGroup>
                 <UFormGroup label="เบอร์บ้าน / สำรอง" class="font-medium text-gray-700">
-                    <UInput v-model="form.homePhone" placeholder="02-XXX-XXXX" icon="i-heroicons-phone" size="lg" :ui="{ rounded: 'rounded-xl' }" />
+                    <UInput v-model="form.homePhone" placeholder="02-XXX-XXXX" icon="i-heroicons-phone" size="lg" :ui="{ }" />
                 </UFormGroup>
                 <UFormGroup label="อีเมล" class="font-medium text-gray-700">
-                    <UInput v-model="form.email" placeholder="name@example.com" icon="i-heroicons-envelope" size="lg" :ui="{ rounded: 'rounded-xl' }" />
+                    <UInput v-model="form.email" placeholder="name@example.com" icon="i-heroicons-envelope" size="lg" :ui="{ }" />
                 </UFormGroup>
                 <UFormGroup label="Line ID" class="font-medium text-gray-700">
-                    <UInput v-model="form.lineId" placeholder="line_id" size="lg" :ui="{ rounded: 'rounded-xl' }">
+                    <UInput v-model="form.lineId" placeholder="line_id" size="lg" :ui="{ }">
                         <template #leading>
                             <span class="text-emerald-500 font-black text-sm bg-emerald-50 px-2 py-0.5 rounded-md">@</span>
                         </template>
@@ -76,7 +77,7 @@ defineProps<{ form: any }>()
                 </UFormGroup>
             </div>
         </div>
-        
+
         <!-- Marketing Section -->
         <div class="space-y-6 pt-4">
             <div class="border-b border-gray-100 pb-3">
@@ -86,15 +87,15 @@ defineProps<{ form: any }>()
                 </h2>
                 <p class="text-xs text-gray-400 mt-1">ข้อมูลเพื่อช่วยให้คลินิกวิเคราะห์และวัดผลแคมเปญได้ดียิ่งขึ้น</p>
             </div>
-            
+
             <div class="bg-gradient-to-br from-purple-50/50 to-white rounded-2xl p-6 ring-1 ring-gray-200 shadow-sm space-y-8">
                 <UFormGroup label="รู้จักคลินิกผ่านช่องทางใด?" class="font-medium text-gray-800">
                     <div class="flex flex-wrap gap-3 mt-3">
                         <button v-for="channel in ['Facebook', 'Instagram', 'TikTok', 'Google', 'เพื่อนแนะนำ', 'ผ่านหน้าร้าน']" :key="channel"
                             type="button"
                             class="px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center shadow-sm"
-                            :class="form.marketingChannels.includes(channel) 
-                                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-blue-500/30 scale-105' 
+                            :class="form.marketingChannels.includes(channel)
+                                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-blue-500/30 scale-105'
                                 : 'bg-white text-gray-600 ring-1 ring-gray-200 hover:bg-gray-50 hover:ring-gray-300'"
                             @click="form.marketingChannels.includes(channel) ? form.marketingChannels = form.marketingChannels.filter((c: string) => c !== channel) : form.marketingChannels.push(channel)"
                         >
@@ -106,14 +107,14 @@ defineProps<{ form: any }>()
                         </button>
                     </div>
                 </UFormGroup>
-                
+
                 <UFormGroup label="ช่องทางที่ต้องการให้ติดต่อกลับ (สามารถเลือกได้มากกว่า 1)" class="font-medium text-gray-800">
                     <div class="flex flex-wrap gap-3 mt-3">
                         <button v-for="pref in ['Line', 'โทรศัพท์', 'SMS', 'อีเมล']" :key="pref"
                             type="button"
                             class="px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center shadow-sm"
-                            :class="form.contactPreference.includes(pref) 
-                                ? 'bg-emerald-500 text-white shadow-emerald-500/30 scale-105' 
+                            :class="form.contactPreference.includes(pref)
+                                ? 'bg-emerald-500 text-white shadow-emerald-500/30 scale-105'
                                 : 'bg-white text-gray-600 ring-1 ring-gray-200 hover:bg-gray-50 hover:ring-gray-300'"
                             @click="form.contactPreference.includes(pref) ? form.contactPreference = form.contactPreference.filter((c: string) => c !== pref) : form.contactPreference.push(pref)"
                         >

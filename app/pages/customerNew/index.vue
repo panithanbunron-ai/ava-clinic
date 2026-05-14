@@ -76,13 +76,13 @@ const saveCustomer = async () => {
             method: 'POST',
             body: form
         })
-        useToast().add({ title: 'สำเร็จ', description: 'บันทึกลูกค้าใหม่เรียบร้อยแล้ว', color: 'green', icon: 'i-heroicons-check-circle' })
+        useToast().add({ title: 'สำเร็จ', description: 'บันทึกลูกค้าใหม่เรียบร้อยแล้ว', icon: 'i-heroicons-check-circle' })
         setTimeout(() => {
             navigateTo('/customerInfo')
         }, 800)
     } catch (error) {
         isLoading.value = false
-        useToast().add({ title: 'ข้อผิดพลาด', description: 'ไม่สามารถบันทึกข้อมูลได้', color: 'red', icon: 'i-heroicons-x-circle' })
+        useToast().add({ title: 'ข้อผิดพลาด', description: 'ไม่สามารถบันทึกข้อมูลได้', icon: 'i-heroicons-x-circle' })
     }
 }
 </script>
@@ -105,7 +105,7 @@ const saveCustomer = async () => {
                     <div>
                         <h1 class="text-2xl font-extrabold text-gray-900 flex items-center gap-3 tracking-tight">
                             เพิ่มลูกค้าใหม่
-                            <UBadge v-if="activeTab > 1 && form.firstName" color="blue" variant="subtle" class="rounded-full px-3 py-1 font-semibold">
+                            <UBadge v-if="activeTab > 1 && form.firstName" class="rounded-full px-3 py-1 font-semibold">
                                 {{ form.firstName }} {{ form.lastName }}
                             </UBadge>
                         </h1>
@@ -123,13 +123,13 @@ const saveCustomer = async () => {
                 </div>
 
                 <div class="flex items-center gap-3 relative z-10">
-                    <UButton v-if="activeTab === 1" color="white" variant="solid" class="shadow-sm ring-1 ring-gray-200 hover:bg-gray-50 transition-all hover:shadow-md rounded-xl font-medium">
+                    <UButton v-if="activeTab === 1" variant="solid" class="shadow-sm ring-1 ring-gray-200 hover:bg-gray-50 transition-all hover:shadow-md rounded-xl font-medium">
                         <template #leading>
                             <UIcon name="i-heroicons-identification" class="w-5 h-5 text-blue-500" />
                         </template>
                         เสียบบัตรประชาชน
                     </UButton>
-                    <UButton color="gray" variant="ghost" icon="i-heroicons-x-mark" class="rounded-full hover:bg-red-50 hover:text-red-500 transition-colors" @click="navigateTo('/dashboard')" />
+                    <UButton variant="ghost" icon="i-heroicons-x-mark" class="rounded-full hover:bg-red-50 hover:text-red-500 transition-colors" @click="navigateTo('/dashboard')" />
                 </div>
             </div>
 
@@ -205,26 +205,26 @@ const saveCustomer = async () => {
                 <!-- Action Buttons -->
                 <div class="flex gap-4">
                     <template v-if="activeTab === 1">
-                        <UButton color="gray" variant="ghost" class="px-6 rounded-xl hover:bg-gray-100 font-medium" @click="navigateTo('/dashboard')">ยกเลิก</UButton>
-                        <UButton color="white" variant="solid" class="px-6 rounded-xl shadow-sm ring-1 ring-gray-200 hover:bg-gray-50 font-medium text-gray-700">บันทึกร่าง</UButton>
-                        <UButton color="blue" variant="solid" class="px-8 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-md shadow-blue-500/20 font-bold transition-transform hover:-translate-y-0.5" @click="nextTab">
+                        <UButton variant="ghost" class="px-6 rounded-xl hover:bg-gray-100 font-medium" @click="navigateTo('/dashboard')">ยกเลิก</UButton>
+                        <UButton variant="solid" class="px-6 rounded-xl shadow-sm ring-1 ring-gray-200 hover:bg-gray-50 font-medium text-gray-700">บันทึกร่าง</UButton>
+                        <UButton variant="solid" class="px-8 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-md shadow-blue-500/20 font-bold transition-transform hover:-translate-y-0.5" @click="nextTab">
                             ถัดไป <UIcon name="i-heroicons-arrow-right-20-solid" class="w-5 h-5 ml-1.5" />
                         </UButton>
                     </template>
                     <template v-else-if="activeTab < 4">
-                        <UButton color="white" variant="solid" class="px-6 rounded-xl shadow-sm ring-1 ring-gray-200 hover:bg-gray-50 font-medium text-gray-700 transition-transform hover:-translate-y-0.5" @click="prevTab">
+                        <UButton variant="solid" class="px-6 rounded-xl shadow-sm ring-1 ring-gray-200 hover:bg-gray-50 font-medium text-gray-700 transition-transform hover:-translate-y-0.5" @click="prevTab">
                             <UIcon name="i-heroicons-arrow-left-20-solid" class="w-5 h-5 mr-1.5" /> ย้อนกลับ
                         </UButton>
-                        <UButton color="white" variant="ghost" class="px-6 rounded-xl hover:bg-gray-100 font-medium text-gray-500" @click="nextTab">ข้าม</UButton>
-                        <UButton color="blue" variant="solid" class="px-8 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-md shadow-blue-500/20 font-bold transition-transform hover:-translate-y-0.5" @click="nextTab">
+                        <UButton variant="ghost" class="px-6 rounded-xl hover:bg-gray-100 font-medium text-gray-500" @click="nextTab">ข้าม</UButton>
+                        <UButton variant="solid" class="px-8 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-md shadow-blue-500/20 font-bold transition-transform hover:-translate-y-0.5" @click="nextTab">
                             ถัดไป <UIcon name="i-heroicons-arrow-right-20-solid" class="w-5 h-5 ml-1.5" />
                         </UButton>
                     </template>
                     <template v-else>
-                        <UButton color="white" variant="solid" class="px-6 rounded-xl shadow-sm ring-1 ring-gray-200 hover:bg-gray-50 font-medium text-gray-700 transition-transform hover:-translate-y-0.5" @click="prevTab">
+                        <UButton variant="solid" class="px-6 rounded-xl shadow-sm ring-1 ring-gray-200 hover:bg-gray-50 font-medium text-gray-700 transition-transform hover:-translate-y-0.5" @click="prevTab">
                             <UIcon name="i-heroicons-arrow-left-20-solid" class="w-5 h-5 mr-1.5" /> ย้อนกลับ
                         </UButton>
-                        <UButton color="emerald" variant="solid" class="px-8 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 shadow-md shadow-emerald-500/20 font-bold transition-transform hover:-translate-y-0.5" :loading="isLoading" @click="saveCustomer">
+                        <UButton variant="solid" class="px-8 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 shadow-md shadow-emerald-500/20 font-bold transition-transform hover:-translate-y-0.5" :loading="isLoading" @click="saveCustomer">
                             <UIcon v-if="!isLoading" name="i-heroicons-check-circle-20-solid" class="w-5 h-5 mr-1.5" /> บันทึกลูกค้า
                         </UButton>
                     </template>

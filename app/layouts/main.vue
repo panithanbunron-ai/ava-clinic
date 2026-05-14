@@ -1,11 +1,9 @@
 <template>
-    <div class="min-h-screen bg-slate-50 flex">
+    <div class="min-h-screen bg-slate-50">
         <LayoutSidebar />
-        <div class="flex-1 flex flex-col ml-64 min-w-0">
-            <LayoutHeaderBar />
-            <main class="flex-1 overflow-y-auto p-6 lg:p-8">
-                <slot />
-            </main>
-        </div>
+        <LayoutHeaderBar />
+        <main class="ml-[224px] pt-16 min-h-screen overflow-y-auto p-6 lg:p-8 mt-10">
+            <slot />
+        </main>
     </div>
 </template>
