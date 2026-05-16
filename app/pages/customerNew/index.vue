@@ -254,12 +254,19 @@
 
             <!-- Animated Body Wrapper -->
             <div class="p-8 flex-1 bg-[#fcfcfd] relative overflow-hidden">
-                <Transition name="fade" mode="out-in">
-                    <CustomerNewTabGeneral v-if="activeTab === 1" :form="form" />
-                    <CustomerNewTabContact v-else-if="activeTab === 2" :form="form" />
-                    <CustomerNewTabHealth v-else-if="activeTab === 3" :form="form" />
-                    <CustomerNewTabAdditional v-else-if="activeTab === 4" :form="form" />
-                </Transition>
+                <ClientOnly>
+                    <Transition name="fade" mode="out-in">
+                        <CustomerNewTabGeneral v-if="activeTab === 1" key="tab1" :form="form" />
+                        <CustomerNewTabContact v-else-if="activeTab === 2" key="tab2" :form="form" />
+                        <CustomerNewTabHealth v-else-if="activeTab === 3" key="tab3" :form="form" />
+                        <CustomerNewTabAdditional v-else-if="activeTab === 4" key="tab4" :form="form" />
+                    </Transition>
+                    <template #fallback>
+                        <div class="flex h-64 items-center justify-center">
+                            <UIcon name="i-heroicons-arrow-path" class="w-10 h-10 animate-spin text-blue-500"/>
+                        </div>
+                    </template>
+                </ClientOnly>
             </div>
 
             <!-- Refined Footer -->
