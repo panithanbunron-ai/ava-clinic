@@ -31,14 +31,14 @@
                             {{ customer.name[0] }}
                         </div>
                     </td>
-                    
+
                     <!-- Customer Details -->
                     <td class="py-3 px-6">
                         <div class="font-bold text-gray-900 text-sm flex items-center gap-2">
                             {{ customer.name }}
-                            <UBadge v-for="tag in customer.tags" :key="tag" :color="tag === 'VIP' ? 'purple' : 'emerald'" variant="subtle" size="xs">
+                            <!-- <UBadge v-for="tag in customer.tags" :key="tag" variant="subtle" size="xs">
                                 {{ tag }}
-                            </UBadge>
+                            </UBadge> -->
                         </div>
                         <div class="text-xs text-gray-500 mt-0.5">
                             {{ customer.age }} ปี • {{ customer.gender }}
@@ -77,7 +77,7 @@
 
                     <!-- Actions -->
                     <td class="py-3 px-6 text-right">
-                        <UButton variant="ghost" color="gray" icon="i-heroicons-ellipsis-vertical" class="rounded-full" />
+                        <UButton variant="ghost" icon="i-heroicons-ellipsis-vertical" class="rounded-full" />
                     </td>
                 </tr>
             </tbody>

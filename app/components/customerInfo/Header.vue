@@ -6,10 +6,10 @@
             </div>
             <div>
                 <h1 class="text-xl font-bold text-gray-900 flex items-center gap-2 tracking-tight">
-                    ทะเบียนลูกค้า
+                    ข้อมูลลูกค้า
                 </h1>
                 <p class="text-sm text-gray-500 mt-1 font-medium flex items-center gap-2">
-                    เอวาคลินิกเวชกรรม • สาขาเลย • 
+                    เอวาคลินิกเวชกรรม • สาขาเลย •
                     <span class="text-emerald-500 flex items-center gap-1">
                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                         อัปเดต 13:43
@@ -21,7 +21,6 @@
         <div class="flex items-center gap-3">
             <UButton
                 variant="ghost"
-                color="gray"
                 icon="i-heroicons-arrow-path"
                 class="rounded-xl shadow-sm ring-1 ring-gray-200 hover:bg-gray-50 font-medium"
             >
@@ -29,7 +28,6 @@
             </UButton>
             <UButton
                 variant="ghost"
-                color="gray"
                 icon="i-heroicons-arrow-down-tray"
                 class="rounded-xl shadow-sm ring-1 ring-gray-200 hover:bg-gray-50 font-medium"
             >
@@ -37,7 +35,6 @@
             </UButton>
             <UButton
                 variant="ghost"
-                color="gray"
                 icon="i-heroicons-arrow-up-tray"
                 class="rounded-xl shadow-sm ring-1 ring-gray-200 hover:bg-gray-50 font-medium"
             >

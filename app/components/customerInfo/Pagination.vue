@@ -13,25 +13,23 @@
         <div class="flex items-center gap-1">
             <UButton
                 variant="ghost"
-                color="gray"
                 class="rounded-lg shadow-sm ring-1 ring-gray-200 bg-white hover:bg-gray-50 text-xs px-3"
                 icon="i-heroicons-chevron-left"
             >
                 ก่อนหน้า
             </UButton>
-            
+
             <div class="flex gap-1 mx-2">
-                <UButton variant="solid" color="indigo" class="rounded-lg w-8 h-8 flex justify-center p-0">1</UButton>
-                <UButton variant="ghost" color="gray" class="rounded-lg w-8 h-8 flex justify-center p-0 ring-1 ring-gray-200 bg-white">2</UButton>
-                <UButton variant="ghost" color="gray" class="rounded-lg w-8 h-8 flex justify-center p-0 ring-1 ring-gray-200 bg-white">3</UButton>
-                <UButton variant="ghost" color="gray" class="rounded-lg w-8 h-8 flex justify-center p-0 ring-1 ring-gray-200 bg-white">4</UButton>
+                <UButton variant="solid" class="rounded-lg w-8 h-8 flex justify-center p-0">1</UButton>
+                <UButton variant="ghost" class="rounded-lg w-8 h-8 flex justify-center p-0 ring-1 ring-gray-200 bg-white">2</UButton>
+                <UButton variant="ghost" class="rounded-lg w-8 h-8 flex justify-center p-0 ring-1 ring-gray-200 bg-white">3</UButton>
+                <UButton variant="ghost" class="rounded-lg w-8 h-8 flex justify-center p-0 ring-1 ring-gray-200 bg-white">4</UButton>
                 <span class="flex items-center justify-center w-6 text-gray-400">...</span>
-                <UButton variant="ghost" color="gray" class="rounded-lg px-2 h-8 flex justify-center ring-1 ring-gray-200 bg-white">325</UButton>
+                <UButton variant="ghost" class="rounded-lg px-2 h-8 flex justify-center ring-1 ring-gray-200 bg-white">325</UButton>
             </div>
 
             <UButton
                 variant="ghost"
-                color="gray"
                 class="rounded-lg shadow-sm ring-1 ring-gray-200 bg-white hover:bg-gray-50 text-xs px-3"
                 trailing-icon="i-heroicons-chevron-right"
             >
