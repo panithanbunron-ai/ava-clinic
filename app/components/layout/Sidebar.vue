@@ -12,7 +12,7 @@
         { name: 'คลังสินค้า', icon: 'i-lucide-package', to: '#' },
         { name: 'รายงาน', icon: 'i-lucide-bar-chart-2', to: '/reports' },
         { name: 'จุดบริการ', icon: 'i-lucide-activity', to: '#' },
-        { name: 'Teleconsult', icon: 'i-lucide-video', to: '#', badge: 'BETA' }
+        { name: 'Teleconsult', icon: 'i-lucide-video', to: '/teleconsult', badge: 'BETA' }
     ]
 
     const systemItems = [
