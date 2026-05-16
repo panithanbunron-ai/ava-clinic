@@ -17,7 +17,7 @@
                 placeholder="ค้นหาด้วยชื่อ HN เบอร์ หรือเลขบัตร"
                 class="w-full max-w-md"
                 size="md"
-                :ui="{ }"
+                :ui="{}"
             >
                 <template #trailing>
                     <div class="flex items-center gap-1">
@@ -28,20 +28,14 @@
             </UInput>
 
             <!-- Filters -->
-            <UBadge
-                variant="subtle"
-                class="rounded-lg px-2.5 py-1 text-xs font-semibold"
-            >
+            <UBadge variant="subtle" class="rounded-lg px-2.5 py-1 text-xs font-semibold">
                 VIP
                 <button class="ml-1 hover:text-purple-700">
                     <UIcon name="i-heroicons-x-mark" class="w-3 h-3" />
                 </button>
             </UBadge>
 
-            <UBadge
-                variant="subtle"
-                class="rounded-lg px-2.5 py-1 text-xs font-semibold"
-            >
+            <UBadge variant="subtle" class="rounded-lg px-2.5 py-1 text-xs font-semibold">
                 ลูกค้าใหม่
                 <button class="ml-1 hover:text-emerald-700">
                     <UIcon name="i-heroicons-x-mark" class="w-3 h-3" />

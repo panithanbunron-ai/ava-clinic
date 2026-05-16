@@ -22,7 +22,7 @@
                 <h2 class="font-bold text-gray-900 text-lg">สถิติ 7 วันย้อนหลัง</h2>
                 <p class="text-xs text-gray-500 font-medium">จำนวนเซสชัน · เฉลี่ย 9.4 / วัน</p>
             </div>
-            
+
             <USelectMenu
                 v-model="filter"
                 :options="['7 วัน', '14 วัน', '30 วัน']"
@@ -33,7 +33,9 @@
 
         <div class="flex-1 relative mt-4">
             <!-- Y Axis Labels -->
-            <div class="absolute left-0 top-0 bottom-6 flex flex-col justify-between text-[10px] text-gray-400 font-medium w-6">
+            <div
+                class="absolute left-0 top-0 bottom-6 flex flex-col justify-between text-[10px] text-gray-400 font-medium w-6"
+            >
                 <span>15</span>
                 <span>10</span>
                 <span>5</span>
@@ -50,13 +52,22 @@
 
             <!-- Bars -->
             <div class="absolute left-8 right-0 top-0 bottom-6 flex justify-around items-end px-2">
-                <div v-for="(item, index) in chartData" :key="index" class="w-8 flex flex-col items-center group">
-                    <span class="text-[10px] font-bold text-indigo-500 mb-1 opacity-0 group-hover:opacity-100 transition-opacity">{{ item.value }}</span>
-                    <div 
+                <div
+                    v-for="(item, index) in chartData"
+                    :key="index"
+                    class="w-8 flex flex-col items-center group"
+                >
+                    <span
+                        class="text-[10px] font-bold text-indigo-500 mb-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                        >{{ item.value }}</span
+                    >
+                    <div
                         class="w-full rounded-t-sm transition-all duration-500 group-hover:brightness-110"
                         :class="[
-                            item.color, 
-                            item.isDashed ? 'border-2 border-dashed border-indigo-300 bg-indigo-50/50' : 'shadow-sm'
+                            item.color,
+                            item.isDashed
+                                ? 'border-2 border-dashed border-indigo-300 bg-indigo-50/50'
+                                : 'shadow-sm'
                         ]"
                         :style="{ height: item.height }"
                     ></div>
@@ -65,7 +76,11 @@
 
             <!-- X Axis Labels -->
             <div class="absolute left-8 right-0 bottom-0 flex justify-around px-2">
-                <div v-for="(item, index) in chartData" :key="index" class="w-8 text-center text-[10px] font-medium text-gray-500">
+                <div
+                    v-for="(item, index) in chartData"
+                    :key="index"
+                    class="w-8 text-center text-[10px] font-medium text-gray-500"
+                >
                     {{ item.label }}
                 </div>
             </div>

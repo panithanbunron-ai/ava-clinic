@@ -1,5 +1,34 @@
 <script setup lang="ts">
+    import type { FormError, FormSubmitEvent } from '@nuxt/ui'
+
     defineProps<{ form: any }>()
+
+    const state = reactive({
+        email: undefined,
+        password: undefined
+    })
+
+    type Schema = typeof state
+
+    function validate(state: Partial<Schema>): FormError[] {
+        const errors = []
+        if (!state.email) errors.push({ name: 'email', message: 'Required' })
+        if (!state.password) errors.push({ name: 'password', message: 'Required' })
+        return errors
+    }
+
+    const toast = useToast()
+    async function onSubmit(event: FormSubmitEvent<Schema>) {
+        toast.add({
+            title: 'Success',
+            description: 'The form has been submitted.',
+            color: 'success'
+        })
+        console.log(event.data)
+    }
+
+    const items = ref(['Backlog', 'Todo', 'In Progress', 'Done'])
+    const value = ref('Backlog')
 </script>
 
 <template>
@@ -49,122 +78,68 @@
         </div>
 
         <!-- Main Form -->
-        <div class="flex-1 space-y-8">
-            <div class="flex items-center gap-3 border-b border-gray-100 pb-4">
+        <div class="flex-1 space-y-4">
+            <div class="flex items-center gap-3 border-b border-gray-200 pb-4">
                 <div
                     class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600"
                 >
                     <UIcon name="i-heroicons-identification" class="w-5 h-5" />
                 </div>
-                <h2 class="text-lg font-bold text-gray-800">ข้อมูลส่วนตัว</h2>
+                <h2 class="text-lg font-bold text-gray-900">ข้อมูลส่วนตัว</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
-                <UFormGroup
-                    label="คำนำหน้า"
-                    class="col-span-1 md:col-span-3 font-medium text-gray-700"
-                >
-                    <USelectMenu
-                        v-model="form.title"
-                        :options="['นาย', 'นาง', 'นางสาว']"
-                        size="lg"
-                        :ui="{}"
-                    />
-                </UFormGroup>
-                <UFormGroup required class="col-span-1 md:col-span-4 font-medium text-gray-700">
-                    <template #label> ชื่อ <span class="text-red-500">*</span> </template>
-                    <UInput v-model="form.firstName" placeholder="กรอกชื่อ" size="lg" :ui="{}" />
-                </UFormGroup>
-                <UFormGroup required class="col-span-1 md:col-span-5 font-medium text-gray-700">
-                    <template #label> นามสกุล <span class="text-red-500">*</span> </template>
-                    <UInput v-model="form.lastName" placeholder="กรอกนามสกุล" size="lg" :ui="{}" />
-                </UFormGroup>
-            </div>
+            <!-- demo input -->
+            <div>
+                <UForm :validate="validate" :state="state" class="space-y-4" @submit="onSubmit">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <UFormField label="Email" name="email">
+                            <UInputMenu class="rounded-2xl" v-model="value" :items="items" />
+                        </UFormField>
 
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
-                <UFormGroup label="เพศ" class="col-span-1 md:col-span-3 font-medium text-gray-700">
-                    <div
-                        class="flex bg-slate-100/80 p-1 rounded-xl ring-1 ring-slate-200 shadow-inner"
-                    >
-                        <button
-                            type="button"
-                            class="flex-1 py-1.5 text-sm rounded-lg transition-all duration-300 font-bold"
-                            :class="
-                                form.gender === 'ชาย'
-                                    ? 'bg-white shadow-sm text-blue-600 ring-1 ring-gray-200/50 scale-100'
-                                    : 'text-slate-500 hover:text-slate-700 scale-95 hover:bg-slate-200/50'
-                            "
-                            @click="form.gender = 'ชาย'"
-                        >
-                            ชาย
-                        </button>
-                        <button
-                            type="button"
-                            class="flex-1 py-1.5 text-sm rounded-lg transition-all duration-300 font-bold"
-                            :class="
-                                form.gender === 'หญิง'
-                                    ? 'bg-white shadow-sm text-pink-600 ring-1 ring-gray-200/50 scale-100'
-                                    : 'text-slate-500 hover:text-slate-700 scale-95 hover:bg-slate-200/50'
-                            "
-                            @click="form.gender = 'หญิง'"
-                        >
-                            หญิง
-                        </button>
+                        <UFormField label="Email" name="email">
+                            <UInput class="flex" v-model="state.email" />
+                        </UFormField>
+
+                        <UFormField label="Password" name="password">
+                            <UInput class="flex" v-model="state.password" type="password" />
+                        </UFormField>
+
+                        <UFormField label="Password" name="password">
+                            <UInput class="flex" v-model="state.password" type="password" />
+                        </UFormField>
+
+                        <UFormField label="Password" name="password">
+                            <UInput class="flex" v-model="state.password" type="password" />
+                        </UFormField>
+
+                        <UFormField label="Password" name="password">
+                            <UInput class="flex" v-model="state.password" type="password" />
+                        </UFormField>
                     </div>
-                </UFormGroup>
-                <UFormGroup
-                    label="วันเกิด"
-                    class="col-span-1 md:col-span-4 font-medium text-gray-700"
-                >
-                    <UInput
-                        v-model="form.birthDate"
-                        placeholder="DD/MM/YYYY"
-                        type="date"
-                        size="lg"
-                        :ui="{}"
-                        icon="i-heroicons-calendar"
-                    />
-                </UFormGroup>
-                <UFormGroup
-                    label="อายุ (คำนวณอัตโนมัติ)"
-                    class="col-span-1 md:col-span-5 font-medium text-gray-700"
-                >
-                    <UInput disabled placeholder="—" size="lg" :ui="{ base: 'bg-slate-50' }" />
-                </UFormGroup>
-            </div>
 
-            <UFormGroup label="เลขบัตรประชาชน" class="font-medium text-gray-700">
-                <div class="flex flex-col sm:flex-row gap-3">
-                    <div class="relative flex-1 group">
+                    <div>
+                        <UFormField label="Password" name="password">
+                            <UInput class="flex" v-model="state.password" type="password" />
+                        </UFormField>
+
                         <div
-                            class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none"
+                            class="flex items-center px-5 py-3 bg-emerald-50 text-emerald-700 rounded-xl text-sm font-bold border border-emerald-200/60 shadow-sm shrink-0"
                         >
-                            <UIcon
-                                name="i-heroicons-credit-card"
-                                class="h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors"
-                            />
+                            <span class="relative flex h-2.5 w-2.5 mr-2.5">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
+                                ></span>
+                                <span
+                                    class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"
+                                ></span>
+                            </span>
+                            ตรวจสอบแล้ว
                         </div>
-                        <input
-                            v-model="form.idCard"
-                            placeholder="X-XXXX-XXXXX-XX-X"
-                            class="block w-full pl-11 pr-4 py-3 bg-slate-800 text-white rounded-xl border-none ring-1 ring-slate-700 focus:ring-2 focus:ring-blue-500 shadow-inner font-mono text-lg transition-shadow placeholder-slate-500"
-                        />
                     </div>
-                    <div
-                        class="flex items-center px-5 py-3 bg-emerald-50 text-emerald-700 rounded-xl text-sm font-bold border border-emerald-200/60 shadow-sm shrink-0"
-                    >
-                        <span class="relative flex h-2.5 w-2.5 mr-2.5">
-                            <span
-                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
-                            ></span>
-                            <span
-                                class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"
-                            ></span>
-                        </span>
-                        ตรวจสอบแล้ว
-                    </div>
-                </div>
-            </UFormGroup>
+
+                    <UButton type="submit"> Submit </UButton>
+                </UForm>
+            </div>
 
             <div
                 class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200/60 rounded-2xl p-4 flex gap-3 text-amber-800 text-sm mt-8 shadow-sm"

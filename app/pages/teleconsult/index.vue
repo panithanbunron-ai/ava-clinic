@@ -18,14 +18,20 @@
 <template>
     <div class="p-4 md:p-8 max-w-7xl mx-auto min-h-screen">
         <div class="relative min-h-[80vh]">
-            <div v-if="pending" class="absolute inset-0 bg-[#fcfcfd]/50 backdrop-blur-sm z-50 flex items-center justify-center rounded-3xl">
-                <UIcon name="i-heroicons-arrow-path" class="w-10 h-10 text-indigo-600 animate-spin" />
+            <div
+                v-if="pending"
+                class="absolute inset-0 bg-[#fcfcfd]/50 backdrop-blur-sm z-50 flex items-center justify-center rounded-3xl"
+            >
+                <UIcon
+                    name="i-heroicons-arrow-path"
+                    class="w-10 h-10 text-indigo-600 animate-spin"
+                />
             </div>
 
             <div v-if="teleconsultData?.data" class="space-y-6">
                 <!-- Header Component -->
                 <Header />
-                
+
                 <!-- Summary 4 Cards Component -->
                 <SummaryCards :summary="teleconsultData.data.summary" />
 

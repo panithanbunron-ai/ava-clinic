@@ -159,13 +159,10 @@
                     <UButton
                         v-if="activeTab === 1"
                         variant="solid"
-                        class="shadow-sm ring-1 ring-gray-200 hover:bg-gray-50 transition-all hover:shadow-md rounded-xl font-medium"
+                        class="shadow-sm ring-1 ring-gray-200 transition-all rounded-2xl font-medium"
                     >
                         <template #leading>
-                            <UIcon
-                                name="i-heroicons-identification"
-                                class="w-5 h-5 text-blue-500"
-                            />
+                            <UIcon name="i-heroicons-identification" class="w-5 h-5" />
                         </template>
                         เสียบบัตรประชาชน
                     </UButton>
@@ -257,13 +254,24 @@
                 <ClientOnly>
                     <Transition name="fade" mode="out-in">
                         <CustomerNewTabGeneral v-if="activeTab === 1" key="tab1" :form="form" />
-                        <CustomerNewTabContact v-else-if="activeTab === 2" key="tab2" :form="form" />
+                        <CustomerNewTabContact
+                            v-else-if="activeTab === 2"
+                            key="tab2"
+                            :form="form"
+                        />
                         <CustomerNewTabHealth v-else-if="activeTab === 3" key="tab3" :form="form" />
-                        <CustomerNewTabAdditional v-else-if="activeTab === 4" key="tab4" :form="form" />
+                        <CustomerNewTabAdditional
+                            v-else-if="activeTab === 4"
+                            key="tab4"
+                            :form="form"
+                        />
                     </Transition>
                     <template #fallback>
                         <div class="flex h-64 items-center justify-center">
-                            <UIcon name="i-heroicons-arrow-path" class="w-10 h-10 animate-spin text-blue-500"/>
+                            <UIcon
+                                name="i-heroicons-arrow-path"
+                                class="w-10 h-10 animate-spin text-blue-500"
+                            />
                         </div>
                     </template>
                 </ClientOnly>

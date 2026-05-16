@@ -308,22 +308,121 @@ export const mockTeleconsultSummary = {
 }
 
 export const mockTeleconsultSchedule = [
-    { id: 1, time: '14:30', duration: '30 นาที', patient: 'ปทมา คำสิหา', initial: 'ปท', type: 'Follow-up · ผื่นแพ้ครีม', hn: 'HN 6700870', status: 'LIVE', isVip: true },
-    { id: 2, time: '14:00', duration: '30 นาที', patient: 'วิชัย สุขเกษม', initial: 'วช', type: 'First visit · ปวดศีรษะ', hn: 'HN 6700871', status: 'LIVE', isVip: false },
-    { id: 3, time: '15:00', duration: '30 นาที', patient: 'นภาพร แสงมณี', initial: 'นภ', type: 'Consult · ผลตรวจเลือด', hn: 'HN 6700872', status: 'WAITING', isVip: false },
-    { id: 4, time: '15:30', duration: '15 นาที', patient: 'กนกวรรณ ขวัญใจ', initial: 'กน', type: 'Follow-up · ผลหัตถการ', hn: 'HN 6700873', status: 'UPCOMING', isVip: false },
-    { id: 5, time: '13:30', duration: '30 นาที', patient: 'ธวัชชัย ดีเลิศ', initial: 'ธช', type: 'Acne course · 23 นาที · ส่งสรุปแล้ว', hn: '', status: 'COMPLETED', isVip: false }
+    {
+        id: 1,
+        time: '14:30',
+        duration: '30 นาที',
+        patient: 'ปทมา คำสิหา',
+        initial: 'ปท',
+        type: 'Follow-up · ผื่นแพ้ครีม',
+        hn: 'HN 6700870',
+        status: 'LIVE',
+        isVip: true
+    },
+    {
+        id: 2,
+        time: '14:00',
+        duration: '30 นาที',
+        patient: 'วิชัย สุขเกษม',
+        initial: 'วช',
+        type: 'First visit · ปวดศีรษะ',
+        hn: 'HN 6700871',
+        status: 'LIVE',
+        isVip: false
+    },
+    {
+        id: 3,
+        time: '15:00',
+        duration: '30 นาที',
+        patient: 'นภาพร แสงมณี',
+        initial: 'นภ',
+        type: 'Consult · ผลตรวจเลือด',
+        hn: 'HN 6700872',
+        status: 'WAITING',
+        isVip: false
+    },
+    {
+        id: 4,
+        time: '15:30',
+        duration: '15 นาที',
+        patient: 'กนกวรรณ ขวัญใจ',
+        initial: 'กน',
+        type: 'Follow-up · ผลหัตถการ',
+        hn: 'HN 6700873',
+        status: 'UPCOMING',
+        isVip: false
+    },
+    {
+        id: 5,
+        time: '13:30',
+        duration: '30 นาที',
+        patient: 'ธวัชชัย ดีเลิศ',
+        initial: 'ธช',
+        type: 'Acne course · 23 นาที · ส่งสรุปแล้ว',
+        hn: '',
+        status: 'COMPLETED',
+        isVip: false
+    }
 ]
 
 export const mockTeleconsultWaitingRoom = [
-    { id: 1, patient: 'นภาพร แสงมณี', initial: 'NP', status: 'ออนไลน์มา 5 นาที · นัด 15:00', action: 'รับ', color: 'bg-emerald-100 text-emerald-600' },
-    { id: 2, patient: 'กนกวรรณ ขวัญใจ', initial: 'KK', status: 'ออนไลน์มา 2 นาที · นัด 15:30', action: 'ทักทาย', color: 'bg-purple-100 text-purple-600' },
-    { id: 3, patient: 'สิรินทร์ รัตนา', initial: 'SR', status: 'ทดสอบกล้อง/ไมค์ · นัด 16:00', action: '', color: 'bg-rose-100 text-rose-600' }
+    {
+        id: 1,
+        patient: 'นภาพร แสงมณี',
+        initial: 'NP',
+        status: 'ออนไลน์มา 5 นาที · นัด 15:00',
+        action: 'รับ',
+        color: 'bg-emerald-100 text-emerald-600'
+    },
+    {
+        id: 2,
+        patient: 'กนกวรรณ ขวัญใจ',
+        initial: 'KK',
+        status: 'ออนไลน์มา 2 นาที · นัด 15:30',
+        action: 'ทักทาย',
+        color: 'bg-purple-100 text-purple-600'
+    },
+    {
+        id: 3,
+        patient: 'สิรินทร์ รัตนา',
+        initial: 'SR',
+        status: 'ทดสอบกล้อง/ไมค์ · นัด 16:00',
+        action: '',
+        color: 'bg-rose-100 text-rose-600'
+    }
 ]
 
 export const mockTeleconsultDoctors = [
-    { id: 1, name: 'Dr. สมศักดิ์ พ.', initial: 'สศ', status: 'กำลังตรวจ · ห้อง #042', statusColor: 'bg-rose-500', cases: 2 },
-    { id: 2, name: 'Dr. พิมลภา จ.', initial: 'พม', status: 'ว่าง · พร้อมรับเคส', statusColor: 'bg-emerald-500', cases: 3 },
-    { id: 3, name: 'Dr. ธนดล ส.', initial: 'ธด', status: 'พัก 15 นาที', statusColor: 'bg-amber-500', cases: 3 },
-    { id: 4, name: 'Dr. นันทกานต์ ภ.', initial: 'นก', status: 'ว่าง · พร้อมรับเคส', statusColor: 'bg-emerald-500', cases: 0 }
+    {
+        id: 1,
+        name: 'Dr. สมศักดิ์ พ.',
+        initial: 'สศ',
+        status: 'กำลังตรวจ · ห้อง #042',
+        statusColor: 'bg-rose-500',
+        cases: 2
+    },
+    {
+        id: 2,
+        name: 'Dr. พิมลภา จ.',
+        initial: 'พม',
+        status: 'ว่าง · พร้อมรับเคส',
+        statusColor: 'bg-emerald-500',
+        cases: 3
+    },
+    {
+        id: 3,
+        name: 'Dr. ธนดล ส.',
+        initial: 'ธด',
+        status: 'พัก 15 นาที',
+        statusColor: 'bg-amber-500',
+        cases: 3
+    },
+    {
+        id: 4,
+        name: 'Dr. นันทกานต์ ภ.',
+        initial: 'นก',
+        status: 'ว่าง · พร้อมรับเคส',
+        statusColor: 'bg-emerald-500',
+        cases: 0
+    }
 ]
