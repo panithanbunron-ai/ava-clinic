@@ -163,3 +163,133 @@ export const mockCustomers = [
         avatarColor: 'bg-pink-100 text-pink-600'
     }
 ]
+
+export const mockReportMetrics = {
+    revenue: {
+        value: 1247500,
+        trend: '+18.4%',
+        avg: 89107
+    },
+    bills: {
+        value: 412,
+        trend: '+12%',
+        diff: 368
+    },
+    avgPerBill: {
+        value: 3027,
+        trend: '+5.8%'
+    },
+    newCustomers: {
+        value: 86,
+        trend: '-3.2%'
+    }
+}
+
+export const mockTopServices = [
+    { id: 1, name: 'Filler Juvederm', revenue: 342000, bills: 42, avg: 8143, progress: 85 },
+    { id: 2, name: 'Laser Treatment', revenue: 268500, bills: 68, avg: 3949, progress: 65 },
+    { id: 3, name: 'Botox 50 Units', revenue: 198000, bills: 36, avg: 5500, progress: 50 },
+    { id: 4, name: 'Acne Course', revenue: 156200, bills: 28, avg: 5579, progress: 40 },
+    { id: 5, name: 'Vitamin Drip', revenue: 98400, bills: 76, avg: 1295, progress: 25 }
+]
+
+export const mockStaffRevenue = [
+    {
+        id: 1,
+        initial: 'PM',
+        name: 'พิมลภา จันทร์เพ็ญ',
+        revenue: 542000,
+        bills: 186,
+        progress: 90,
+        color: 'bg-rose-100 text-rose-600',
+        barColor: 'bg-indigo-600'
+    },
+    {
+        id: 2,
+        initial: 'TD',
+        name: 'ธนดล สวัสดี',
+        revenue: 398000,
+        bills: 142,
+        progress: 65,
+        color: 'bg-emerald-100 text-emerald-600',
+        barColor: 'bg-indigo-500'
+    },
+    {
+        id: 3,
+        initial: 'NK',
+        name: 'นันทกานต์ ภู่กัน',
+        revenue: 216000,
+        bills: 68,
+        progress: 35,
+        color: 'bg-blue-100 text-blue-600',
+        barColor: 'bg-indigo-400'
+    },
+    {
+        id: 4,
+        initial: 'CK',
+        name: 'เฉลิม คงสกุล',
+        revenue: 91000,
+        bills: 16,
+        progress: 15,
+        color: 'bg-amber-100 text-amber-600',
+        barColor: 'bg-indigo-300'
+    }
+]
+
+export const mockRecentBills = [
+    {
+        id: 'INV-0412',
+        customer: 'สิรินทร์ รัตนา',
+        initial: 'SR',
+        color: 'bg-rose-100 text-rose-600',
+        service: 'Filler Juvederm',
+        amount: 28000,
+        payment: 'บัตรเครดิต',
+        paymentColor: 'bg-purple-100 text-purple-700',
+        time: '14:12 น.'
+    },
+    {
+        id: 'INV-0411',
+        customer: 'นภาพร แสงมณี',
+        initial: 'NP',
+        color: 'bg-blue-100 text-blue-600',
+        service: 'Laser, Botox 50u',
+        amount: 12500,
+        payment: 'QR Transfer',
+        paymentColor: 'bg-emerald-100 text-emerald-700',
+        time: '14:05 น.'
+    },
+    {
+        id: 'INV-0410',
+        customer: 'ธวัชชัย ดีเลิศ',
+        initial: 'TD',
+        color: 'bg-emerald-100 text-emerald-600',
+        service: 'Acne Course',
+        amount: 5500,
+        payment: 'QR Transfer',
+        paymentColor: 'bg-emerald-100 text-emerald-700',
+        time: '13:48 น.'
+    },
+    {
+        id: 'INV-0409',
+        customer: 'วิชัย สุขเกษม',
+        initial: 'WS',
+        color: 'bg-amber-100 text-amber-600',
+        service: 'Vitamin Drip',
+        amount: 3200,
+        payment: 'เงินสด',
+        paymentColor: 'bg-amber-100 text-amber-700',
+        time: '13:30 น.'
+    },
+    {
+        id: 'INV-0408',
+        customer: 'กนกวรรณ ขวัญใจ',
+        initial: 'KK',
+        color: 'bg-purple-100 text-purple-600',
+        service: 'Facial Treatment',
+        amount: 1500,
+        payment: 'บัตรเครดิต',
+        paymentColor: 'bg-purple-100 text-purple-700',
+        time: '12:55 น.'
+    }
+]

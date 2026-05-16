@@ -19,15 +19,30 @@
             </thead>
             <tbody class="divide-y divide-gray-50 bg-white relative">
                 <!-- Loading State -->
-                <tr v-if="pending" class="absolute inset-0 bg-white/50 backdrop-blur-sm z-10 flex items-center justify-center">
-                    <td><UIcon name="i-heroicons-arrow-path" class="w-8 h-8 text-indigo-500 animate-spin" /></td>
+                <tr
+                    v-if="pending"
+                    class="absolute inset-0 bg-white/50 backdrop-blur-sm z-10 flex items-center justify-center"
+                >
+                    <td>
+                        <UIcon
+                            name="i-heroicons-arrow-path"
+                            class="w-8 h-8 text-indigo-500 animate-spin"
+                        />
+                    </td>
                 </tr>
 
                 <!-- Data rows -->
-                <tr v-for="customer in customers" :key="customer.id" class="hover:bg-slate-50/50 transition-colors">
+                <tr
+                    v-for="customer in customers"
+                    :key="customer.id"
+                    class="hover:bg-slate-50/50 transition-colors"
+                >
                     <!-- Avatar / Initial -->
                     <td class="py-3 px-6">
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm" :class="customer.avatarColor">
+                        <div
+                            class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm"
+                            :class="customer.avatarColor"
+                        >
                             {{ customer.name[0] }}
                         </div>
                     </td>
@@ -58,14 +73,24 @@
                             {{ customer.phone }}
                         </div>
                         <div class="text-xs text-gray-500 mt-0.5 flex items-center gap-1">
-                            <UIcon name="i-heroicons-chat-bubble-oval-left-ellipsis" class="w-3.5 h-3.5 text-emerald-500" />
+                            <UIcon
+                                name="i-heroicons-chat-bubble-oval-left-ellipsis"
+                                class="w-3.5 h-3.5 text-emerald-500"
+                            />
                             {{ customer.lineId }}
                         </div>
                     </td>
 
                     <!-- Note -->
                     <td class="py-3 px-6">
-                        <span class="text-sm" :class="customer.note !== '-' ? 'text-rose-500 font-medium' : 'text-gray-400'">
+                        <span
+                            class="text-sm"
+                            :class="
+                                customer.note !== '-'
+                                    ? 'text-rose-500 font-medium'
+                                    : 'text-gray-400'
+                            "
+                        >
                             {{ customer.note }}
                         </span>
                     </td>
@@ -77,7 +102,11 @@
 
                     <!-- Actions -->
                     <td class="py-3 px-6 text-right">
-                        <UButton variant="ghost" icon="i-heroicons-ellipsis-vertical" class="rounded-full" />
+                        <UButton
+                            variant="ghost"
+                            icon="i-heroicons-ellipsis-vertical"
+                            class="rounded-full"
+                        />
                     </td>
                 </tr>
             </tbody>

@@ -1,7 +1,11 @@
 <template>
-    <div class="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-white rounded-t-3xl">
+    <div
+        class="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-white rounded-t-3xl"
+    >
         <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+            <div
+                class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0"
+            >
                 <UIcon name="i-heroicons-users" class="w-6 h-6" />
             </div>
             <div>

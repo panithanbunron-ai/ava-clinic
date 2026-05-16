@@ -102,7 +102,7 @@
                 :title="action.title"
                 :icon="action.icon"
                 :gradient="action.gradient"
-                @click="action.to ? navigateTo(action.to) : (action.action ? action.action() : null)"
+                @click="action.to ? navigateTo(action.to) : action.action ? action.action() : null"
             />
         </div>
 
