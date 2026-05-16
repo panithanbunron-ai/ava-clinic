@@ -13,12 +13,14 @@
         {
             title: 'เพิ่มลูกค้าใหม่',
             icon: 'i-lucide-user-plus',
-            gradient: 'linear-gradient(135deg, #3b82f6, #2563eb)'
+            gradient: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+            to: '/customerNew'
         },
         {
             title: 'ลงทะเบียน',
             icon: 'i-lucide-clipboard-check',
-            gradient: 'linear-gradient(135deg, #f59e0b, #d97706)'
+            gradient: 'linear-gradient(135deg, #f59e0b, #d97706)',
+            action: () => navigateTo('/register')
         },
         {
             title: 'คิวรับบริการ',
@@ -74,9 +76,9 @@
 </script>
 
 <template>
-    <div class="dash-page">
+    <div class="dash- p-4 md:p-8 max-w-6xl mx-auto min-h-screen">
         <!-- ── Clinic Header & Search ── -->
-        <div class="dash-header">
+        <div class="dash-header mb-8">
             <h1 class="clinic-name">AVA CLINIC</h1>
             <p class="clinic-sub">สาขาพระราม 9 | ศูนย์ความงามครบวงจร</p>
 
@@ -93,18 +95,19 @@
         </div>
 
         <!-- ── Quick Actions ── -->
-        <div class="quick-actions-grid">
+        <div class="quick-actions-grid mb-8">
             <DashboardQuickActionCard
                 v-for="(action, idx) in quickActions"
                 :key="idx"
                 :title="action.title"
                 :icon="action.icon"
                 :gradient="action.gradient"
+                @click="action.to ? navigateTo(action.to) : (action.action ? action.action() : null)"
             />
         </div>
 
         <!-- ── Summary Cards ── -->
-        <div class="summary-grid">
+        <div class="summary-grid mb-8">
             <DashboardSummaryCard
                 v-for="(card, idx) in summaryCards"
                 :key="idx"

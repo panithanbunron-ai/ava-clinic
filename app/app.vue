@@ -38,6 +38,7 @@
 
 <template>
     <UApp>
+        <AppLoadingScreen />
         <NuxtLayout>
             <NuxtPage />
         </NuxtLayout>
