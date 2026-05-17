@@ -1,250 +1,185 @@
 <script setup lang="ts">
-    defineProps<{ form: any }>()
+    defineProps<{
+        form: any
+        isMobileValid: boolean
+    }>()
+
+    const toast = useAppToast()
 </script>
 
 <template>
-    <div class="space-y-10 max-w-4xl mx-auto">
-        <!-- Address Section -->
-        <div class="space-y-6">
-            <div class="flex justify-between items-end border-b border-gray-100 pb-3">
+    <div id="section-02" class="bg-white rounded-3xl p-6 border border-gray-100 shadow-xl shadow-slate-200/40 relative animate-fade-in">
+        <!-- Section Header -->
+        <div class="flex items-start justify-between mb-6 pb-4 border-b border-gray-50">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-indigo-50 text-indigo-600 rounded-xl font-black text-sm flex items-center justify-center shrink-0">
+                    02
+                </div>
                 <div>
-                    <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
-                        <UIcon name="i-heroicons-home" class="w-5 h-5 text-blue-500" />
-                        ที่อยู่ตามทะเบียนบ้าน
-                    </h2>
-                    <p class="text-xs text-gray-400 mt-1">
-                        รายละเอียดที่อยู่สำหรับจัดส่งเอกสารและเวชระเบียน
-                    </p>
-                </div>
-                <UButton
-                    size="sm"
-                    variant="soft"
-                    class="rounded-lg shadow-sm font-medium hover:bg-blue-100 transition-all"
-                >
-                    asdasd
-                    <template #leading>
-                        <UIcon name="i-heroicons-document-duplicate" class="w-4 h-4" />
-                    </template>
-                    ดึงจากบัตรประชาชน
-                </UButton>
-            </div>
-
-            <div class="bg-white rounded-2xl p-6 ring-1 ring-gray-200 shadow-sm space-y-6">
-                <UFormGroup
-                    label="ที่อยู่ (เลขที่ / หมู่ / ซอย / ถนน)"
-                    class="font-medium text-gray-700"
-                >
-                    <UTextarea
-                        v-model="form.address"
-                        placeholder="เช่น 125/4 หมู่ 5 ซอยพหลโยธิน 24 ถ.พหลโยธิน"
-                        :rows="3"
-                        size="lg"
-                        :ui="{ base: 'bg-slate-50 focus:bg-white transition-colors' }"
-                    />
-                </UFormGroup>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
-                    <UFormGroup label="จังหวัด" class="font-medium text-gray-700">
-                        <USelectMenu
-                            v-model="form.province"
-                            :options="['กรุงเทพมหานคร', 'เชียงใหม่', 'ภูเก็ต']"
-                            placeholder="เลือกจังหวัด"
-                            size="lg"
-                            :ui="{}"
-                        />
-                    </UFormGroup>
-                    <UFormGroup label="อำเภอ / เขต" class="font-medium text-gray-700">
-                        <USelectMenu
-                            v-model="form.district"
-                            :options="['จตุจักร', 'บางเขน', 'ลาดพร้าว']"
-                            placeholder="เลือกอำเภอ"
-                            size="lg"
-                            :ui="{}"
-                        />
-                    </UFormGroup>
-                    <UFormGroup label="ตำบล / แขวง" class="font-medium text-gray-700">
-                        <USelectMenu
-                            v-model="form.subDistrict"
-                            :options="['ลาดยาว', 'จันทรเกษม']"
-                            placeholder="เลือกตำบล"
-                            size="lg"
-                            :ui="{}"
-                        />
-                    </UFormGroup>
-                    <UFormGroup label="รหัสไปรษณีย์" class="font-medium text-gray-700">
-                        <UInput
-                            v-model="form.zipcode"
-                            placeholder="เช่น 10900"
-                            size="lg"
-                            :ui="{}"
-                        />
-                    </UFormGroup>
+                    <h2 class="text-base md:text-lg font-black text-slate-800 tracking-tight">การติดต่อ</h2>
+                    <p class="text-[11px] font-semibold text-gray-400 mt-0.5">เบอร์โทร, LINE, อีเมล, ที่อยู่ — สำหรับยืนยันนัดและส่งโปรโมชั่น</p>
                 </div>
             </div>
+            <span class="text-[10px] font-bold text-gray-400 bg-slate-50 px-2 py-0.5 rounded-lg border border-slate-100">ฟิลด์บังคับ 1 ช่อง</span>
         </div>
 
-        <!-- Contact Section -->
-        <div class="space-y-6 pt-4">
-            <div class="border-b border-gray-100 pb-3">
-                <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
-                    <UIcon name="i-heroicons-device-phone-mobile" class="w-5 h-5 text-indigo-500" />
-                    ช่องทางติดต่อ
-                </h2>
-                <p class="text-xs text-gray-400 mt-1">เบอร์โทรศัพท์และช่องทางติดต่อทางออนไลน์</p>
-            </div>
-
-            <div
-                class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white rounded-2xl p-6 ring-1 ring-gray-200 shadow-sm"
-            >
-                <UFormGroup required class="font-medium text-gray-700">
-                    <template #label> เบอร์มือถือ <span class="text-red-500">*</span> </template>
-                    <UInput
+        <!-- Inputs Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- เบอร์โทรศัพท์หลัก -->
+            <div>
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">เบอร์โทรศัพท์หลัก <span class="text-rose-500">*</span></label>
+                <div class="relative">
+                    <input
                         v-model="form.mobile"
-                        placeholder="08X-XXX-XXXX"
-                        icon="i-heroicons-phone"
-                        size="lg"
-                        :ui="{}"
-                        class="dark-input-premium"
+                        type="text"
+                        placeholder="เช่น 081-234-5678"
+                        class="w-full bg-slate-50 border border-gray-200 rounded-xl pl-3 pr-8 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
                     />
-                </UFormGroup>
-                <UFormGroup label="เบอร์บ้าน / สำรอง" class="font-medium text-gray-700">
-                    <UInput
+                    <UIcon name="i-lucide-phone" class="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                </div>
+                <div v-if="isMobileValid" class="text-[10px] font-bold text-emerald-500 mt-1 flex items-center gap-1">
+                    <UIcon name="i-lucide-check-circle" class="w-3.5 h-3.5" />
+                    <span>ตรวจสอบรูปแบบเรียบร้อย</span>
+                </div>
+            </div>
+
+            <!-- เบอร์โทรสำรอง -->
+            <div>
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">เบอร์โทรสำรอง <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                <div class="relative">
+                    <input
                         v-model="form.homePhone"
-                        placeholder="02-XXX-XXXX"
-                        icon="i-heroicons-phone"
-                        size="lg"
-                        :ui="{}"
+                        type="text"
+                        placeholder="เช่น 02-xxx-xxxx"
+                        class="w-full bg-slate-50 border border-gray-200 rounded-xl pl-3 pr-8 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
                     />
-                </UFormGroup>
-                <UFormGroup label="อีเมล" class="font-medium text-gray-700">
-                    <UInput
+                    <UIcon name="i-lucide-phone-call" class="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                </div>
+            </div>
+
+            <!-- LINE ID -->
+            <div>
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">LINE ID <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                <div class="relative">
+                    <input
+                        v-model="form.lineId"
+                        type="text"
+                        placeholder="เช่น @pimonpa"
+                        class="w-full bg-slate-50 border border-gray-200 rounded-xl pl-3 pr-8 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                    />
+                    <UIcon name="i-lucide-message-circle" class="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                </div>
+            </div>
+
+            <!-- อีเมล -->
+            <div>
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">อีเมล <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                <div class="relative">
+                    <input
                         v-model="form.email"
-                        placeholder="name@example.com"
-                        icon="i-heroicons-envelope"
-                        size="lg"
-                        :ui="{}"
+                        type="text"
+                        placeholder="เช่น name@example.com"
+                        class="w-full bg-slate-50 border border-gray-200 rounded-xl pl-3 pr-8 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
                     />
-                </UFormGroup>
-                <UFormGroup label="Line ID" class="font-medium text-gray-700">
-                    <UInput v-model="form.lineId" placeholder="line_id" size="lg" :ui="{}">
-                        <template #leading>
-                            <span
-                                class="text-emerald-500 font-black text-sm bg-emerald-50 px-2 py-0.5 rounded-md"
-                                >@</span
-                            >
-                        </template>
-                    </UInput>
-                </UFormGroup>
+                    <UIcon name="i-lucide-mail" class="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                </div>
+            </div>
+
+            <!-- อาชีพ -->
+            <div class="md:col-span-2">
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">อาชีพ <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                <input
+                    v-model="form.occupation"
+                    type="text"
+                    placeholder="เช่น นักออกแบบ, แพทย์, ครู"
+                    class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                />
+            </div>
+
+            <!-- ที่อยู่ -->
+            <div class="md:col-span-2">
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">ที่อยู่ <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                <input
+                    v-model="form.address"
+                    type="text"
+                    placeholder="บ้านเลขที่ ซอย ถนน แขวง/ตำบล"
+                    class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                />
+            </div>
+
+            <!-- จังหวัด -->
+            <div>
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">จังหวัด <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                <select
+                    v-model="form.province"
+                    class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                >
+                    <option>กรุงเทพมหานคร</option>
+                    <option>เชียงใหม่</option>
+                    <option>นนทบุรี</option>
+                    <option>ปทุมธานี</option>
+                    <option>สมุทรปราการ</option>
+                    <option>ชลบุรี</option>
+                </select>
+            </div>
+
+            <!-- ผู้ติดต่อกรณีฉุกเฉิน -->
+            <div>
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">ผู้ติดต่อกรณีฉุกเฉิน <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                <input
+                    v-model="form.emergencyContact"
+                    type="text"
+                    placeholder="ชื่อ-นามสกุล"
+                    class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                />
+            </div>
+
+            <!-- ความสัมพันธ์ -->
+            <div>
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">ความสัมพันธ์ <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                <select
+                    v-model="form.emergencyRelation"
+                    class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                >
+                    <option>— เลือก —</option>
+                    <option>บิดา / มารดา</option>
+                    <option>สามี / ภรรยา</option>
+                    <option>บุตร</option>
+                    <option>ญาติ</option>
+                    <option>เพื่อน</option>
+                </select>
+            </div>
+
+            <!-- เบอร์ติดต่อกรณีฉุกเฉิน -->
+            <div>
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">เบอร์ติดต่อฉุกเฉิน <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                <input
+                    v-model="form.emergencyPhone"
+                    type="text"
+                    placeholder="08x-xxx-xxxx"
+                    class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                />
             </div>
         </div>
 
-        <!-- Marketing Section -->
-        <div class="space-y-6 pt-4">
-            <div class="border-b border-gray-100 pb-3">
-                <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
-                    <UIcon name="i-heroicons-chart-pie" class="w-5 h-5 text-purple-500" />
-                    การตลาด
-                </h2>
-                <p class="text-xs text-gray-400 mt-1">
-                    ข้อมูลเพื่อช่วยให้คลินิกวิเคราะห์และวัดผลแคมเปญได้ดียิ่งขึ้น
-                </p>
-            </div>
-
-            <div
-                class="bg-gradient-to-br from-purple-50/50 to-white rounded-2xl p-6 ring-1 ring-gray-200 shadow-sm space-y-8"
-            >
-                <UFormGroup label="รู้จักคลินิกผ่านช่องทางใด?" class="font-medium text-gray-800">
-                    <div class="flex flex-wrap gap-3 mt-3">
-                        <button
-                            v-for="channel in [
-                                'Facebook',
-                                'Instagram',
-                                'TikTok',
-                                'Google',
-                                'เพื่อนแนะนำ',
-                                'ผ่านหน้าร้าน'
-                            ]"
-                            :key="channel"
-                            type="button"
-                            class="px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center shadow-sm"
-                            :class="
-                                form.marketingChannels.includes(channel)
-                                    ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-blue-500/30 scale-105'
-                                    : 'bg-white text-gray-600 ring-1 ring-gray-200 hover:bg-gray-50 hover:ring-gray-300'
-                            "
-                            @click="
-                                form.marketingChannels.includes(channel)
-                                    ? (form.marketingChannels = form.marketingChannels.filter(
-                                          (c: string) => c !== channel
-                                      ))
-                                    : form.marketingChannels.push(channel)
-                            "
-                        >
-                            <UIcon
-                                v-if="form.marketingChannels.includes(channel)"
-                                name="i-heroicons-check"
-                                class="w-4 h-4 mr-1.5"
-                            />
-                            {{ channel }}
-                        </button>
-                        <button
-                            type="button"
-                            class="px-5 py-2.5 rounded-xl border-2 border-dashed border-gray-300 text-gray-500 font-semibold text-sm hover:bg-gray-50 hover:border-gray-400 transition-colors bg-white/50"
-                        >
-                            + ระบุช่องทางอื่น
-                        </button>
-                    </div>
-                </UFormGroup>
-
-                <UFormGroup
-                    label="ช่องทางที่ต้องการให้ติดต่อกลับ (สามารถเลือกได้มากกว่า 1)"
-                    class="font-medium text-gray-800"
+        <!-- Duplicate Patient Warning Banner (Amber notification box) -->
+        <div
+            v-if="form.mobile && form.mobile.startsWith('0812345678')"
+            class="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex gap-3 text-amber-800 text-xs mt-6 shadow-sm animate-fade-in"
+        >
+            <UIcon name="i-lucide-alert-triangle" class="w-5 h-5 shrink-0 text-amber-500 mt-0.5" />
+            <div class="leading-relaxed font-semibold">
+                <span>พบลูกค้าที่มีเบอร์ใกล้เคียง: </span>
+                <span class="text-slate-800 font-black">คุณพิมพ์ใจ จันทร์เพ็ง</span>
+                <span> (HN CN-00184) เบอร์ 081-234-5678 — อาจเป็นคนเดียวกัน? </span>
+                <a
+                    href="#"
+                    class="text-indigo-600 hover:text-indigo-800 font-bold underline underline-offset-4 ml-1 inline-flex items-center gap-0.5"
+                    @click.prevent="toast.info('เปิดรายละเอียด', 'กำลังเปิดโปรไฟล์ลูกค้า พิมพ์ใจ จันทร์เพ็ง...')"
                 >
-                    <div class="flex flex-wrap gap-3 mt-3">
-                        <button
-                            v-for="pref in ['Line', 'โทรศัพท์', 'SMS', 'อีเมล']"
-                            :key="pref"
-                            type="button"
-                            class="px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center shadow-sm"
-                            :class="
-                                form.contactPreference.includes(pref)
-                                    ? 'bg-emerald-500 text-white shadow-emerald-500/30 scale-105'
-                                    : 'bg-white text-gray-600 ring-1 ring-gray-200 hover:bg-gray-50 hover:ring-gray-300'
-                            "
-                            @click="
-                                form.contactPreference.includes(pref)
-                                    ? (form.contactPreference = form.contactPreference.filter(
-                                          (c: string) => c !== pref
-                                      ))
-                                    : form.contactPreference.push(pref)
-                            "
-                        >
-                            <UIcon
-                                v-if="form.contactPreference.includes(pref)"
-                                name="i-heroicons-check-circle"
-                                class="w-4 h-4 mr-1.5"
-                            />
-                            {{ pref }}
-                        </button>
-                    </div>
-                </UFormGroup>
+                    เปิดดูข้อมูล ➔
+                </a>
             </div>
         </div>
     </div>
 </template>
-
-<style scoped>
-    /* Only apply dark background to mobile input as requested, keeping others clean */
-    :deep(.dark-input-premium input) {
-        background-color: #1e293b;
-        color: white;
-        border: none;
-        box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.1);
-    }
-    :deep(.dark-input-premium input::placeholder) {
-        color: #64748b;
-    }
-    :deep(.dark-input-premium svg) {
-        color: #94a3b8;
-    }
-</style>

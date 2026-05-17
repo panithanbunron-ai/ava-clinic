@@ -1,290 +1,222 @@
 <script setup lang="ts">
-    defineProps<{ form: any }>()
+    import { ref } from 'vue'
+
+    const props = defineProps<{
+        form: any
+    }>()
+
+    // Allergies & diseases pools
+    const availableAllergies = ref(['Penicillin', 'Lidocaine', 'Sulfa', 'Aspirin', 'Latex', 'Iodine', 'อาหารทะเล'])
+    const availableDiseases = ref(['ความดันสูง', 'ความดันต่ำ', 'เบาหวาน', 'หอบหืด', 'ผิวแพ้ง่าย', 'แผลคีลอยด์', 'ตั้งครรภ์/ให้นมบุตร', 'ไทรอยด์'])
+
+    const newAllergyInput = ref('')
+    const newDiseaseInput = ref('')
+    const showAddAllergy = ref(false)
+    const showAddDisease = ref(false)
+
+    // Tag handlers
+    const toggleAllergy = (tag: string) => {
+        const idx = props.form.drugAllergies.indexOf(tag)
+        if (idx > -1) {
+            props.form.drugAllergies.splice(idx, 1)
+        } else {
+            props.form.drugAllergies.push(tag)
+        }
+    }
+
+    const toggleDisease = (tag: string) => {
+        const idx = props.form.chronicDiseases.indexOf(tag)
+        if (idx > -1) {
+            props.form.chronicDiseases.splice(idx, 1)
+        } else {
+            props.form.chronicDiseases.push(tag)
+        }
+    }
+
+    const addCustomAllergy = () => {
+        if (newAllergyInput.value.trim()) {
+            const tag = newAllergyInput.value.trim()
+            if (!availableAllergies.value.includes(tag)) {
+                availableAllergies.value.push(tag)
+            }
+            props.form.drugAllergies.push(tag)
+            newAllergyInput.value = ''
+            showAddAllergy.value = false
+        }
+    }
+
+    const addCustomDisease = () => {
+        if (newDiseaseInput.value.trim()) {
+            const tag = newDiseaseInput.value.trim()
+            if (!availableDiseases.value.includes(tag)) {
+                availableDiseases.value.push(tag)
+            }
+            props.form.chronicDiseases.push(tag)
+            newDiseaseInput.value = ''
+            showAddDisease.value = false
+        }
+    }
 </script>
 
 <template>
-    <div class="space-y-10 max-w-4xl mx-auto">
-        <!-- Basic Health -->
-        <div class="space-y-6">
-            <div class="border-b border-gray-100 pb-3">
-                <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
-                    <UIcon
-                        name="i-heroicons-clipboard-document-list"
-                        class="w-5 h-5 text-blue-500"
-                    />
-                    ข้อมูลพื้นฐาน
-                </h2>
-                <p class="text-xs text-gray-400 mt-1">กรุ๊ปเลือดและสิทธิการรักษาพยาบาล</p>
+    <div id="section-03" class="bg-white rounded-3xl p-6 border border-gray-100 shadow-xl shadow-slate-200/40 relative animate-fade-in">
+        <!-- Section Header -->
+        <div class="flex items-start justify-between mb-6 pb-4 border-b border-gray-50">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-indigo-50 text-indigo-600 rounded-xl font-black text-sm flex items-center justify-center shrink-0">
+                    03
+                </div>
+                <div>
+                    <h2 class="text-base md:text-lg font-black text-slate-800 tracking-tight">ข้อมูลทางการแพทย์ & ความชอบ</h2>
+                    <p class="text-[11px] font-semibold text-gray-400 mt-0.5">ป้องกันการแพ้และจัดประสบการณ์ให้เหมาะกับลูกค้า</p>
+                </div>
             </div>
-
-            <div
-                class="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white rounded-2xl p-6 ring-1 ring-gray-200 shadow-sm"
-            >
-                <UFormGroup label="กรุ๊ปเลือด (Blood Type)" class="font-bold text-gray-800">
-                    <div class="grid grid-cols-4 gap-3 mt-2">
-                        <button
-                            v-for="bg in ['A', 'B', 'AB', 'O']"
-                            :key="bg"
-                            type="button"
-                            class="py-3 rounded-xl text-base font-black transition-all shadow-sm"
-                            :class="
-                                form.bloodGroup === bg
-                                    ? 'bg-gradient-to-b from-red-500 to-red-600 text-white shadow-red-500/30 scale-105'
-                                    : 'bg-white ring-1 ring-gray-200 text-gray-600 hover:bg-red-50 hover:text-red-500 hover:ring-red-200'
-                            "
-                            @click="form.bloodGroup = bg"
-                        >
-                            {{ bg }}
-                        </button>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3 mt-3">
-                        <button
-                            v-for="r in ['Rh+', 'Rh-']"
-                            :key="r"
-                            type="button"
-                            class="py-2.5 rounded-xl text-sm font-bold transition-all shadow-sm"
-                            :class="
-                                form.rh === r
-                                    ? 'bg-blue-600 text-white shadow-blue-500/30 scale-105'
-                                    : 'bg-white ring-1 ring-gray-200 text-gray-600 hover:bg-blue-50 hover:text-blue-600 hover:ring-blue-200'
-                            "
-                            @click="form.rh = r"
-                        >
-                            {{ r }}
-                        </button>
-                    </div>
-                </UFormGroup>
-
-                <UFormGroup label="สิทธิการรักษา (Treatment Right)" class="font-bold text-gray-800">
-                    <div class="grid grid-cols-2 gap-3 mt-2">
-                        <button
-                            v-for="right in ['เงินสด', 'ประกันสังคม', 'บัตรทอง', 'ประกันชีวิต']"
-                            :key="right"
-                            type="button"
-                            class="py-3 px-2 rounded-xl text-sm font-bold transition-all shadow-sm h-full flex items-center justify-center"
-                            :class="
-                                form.treatmentRight === right
-                                    ? 'bg-emerald-500 text-white shadow-emerald-500/30 scale-105'
-                                    : 'bg-white ring-1 ring-gray-200 text-gray-600 hover:bg-emerald-50 hover:text-emerald-600 hover:ring-emerald-200'
-                            "
-                            @click="form.treatmentRight = right"
-                        >
-                            {{ right }}
-                        </button>
-                    </div>
-                </UFormGroup>
-            </div>
+            <span class="text-[10px] font-bold text-gray-400 bg-slate-50 px-2 py-0.5 rounded-lg border border-slate-100">ไม่บังคับ</span>
         </div>
 
-        <!-- Allergy -->
-        <div class="space-y-6 pt-4 relative">
-            <div
-                class="absolute right-0 top-0 px-4 py-1.5 bg-red-100 text-red-700 text-xs font-black rounded-full border border-red-200 flex items-center gap-1.5 shadow-sm animate-pulse"
-            >
-                <UIcon name="i-heroicons-exclamation-triangle-solid" class="w-4 h-4" />
-                สำคัญต่อความปลอดภัย
-            </div>
-            <div class="border-b border-gray-100 pb-3">
-                <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
-                    <UIcon name="i-heroicons-shield-exclamation" class="w-5 h-5 text-red-500" />
-                    ประวัติการแพ้
-                </h2>
-                <p class="text-xs text-gray-400 mt-1">
-                    ข้อมูลการแพ้ยาและแพ้อาหาร (จำเป็นต้องระบุหากมี)
-                </p>
-            </div>
-
-            <div class="bg-red-50/30 rounded-2xl p-6 ring-1 ring-red-100 shadow-sm space-y-6">
-                <UFormGroup label="แพ้ยา (Drug Allergy)" class="font-bold text-red-800">
-                    <div
-                        class="flex flex-wrap items-center gap-2 p-2 bg-white ring-1 ring-gray-200 rounded-xl min-h-[56px] focus-within:ring-2 focus-within:ring-red-400 focus-within:ring-offset-1 transition-shadow shadow-inner"
+        <!-- Medical fields -->
+        <div class="space-y-5">
+            <!-- ประวัติแพ้ยา / สารเคมี -->
+            <div>
+                <label class="block text-[11px] font-black text-slate-600 mb-2">ประวัติการแพ้ยา / สารเคมี <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                
+                <!-- Interactive Capsule Tags -->
+                <div class="flex flex-wrap gap-2 mb-3">
+                    <button
+                        type="button"
+                        v-for="tag in availableAllergies"
+                        :key="tag"
+                        class="text-xs px-3 py-1.5 rounded-full border font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+                        :class="form.drugAllergies.includes(tag) ? 'bg-rose-50 border-rose-200 text-rose-600' : 'bg-white border-gray-200 text-slate-500 hover:bg-slate-50'"
+                        @click="toggleAllergy(tag)"
                     >
-                        <div
-                            v-for="drug in form.drugAllergies"
-                            :key="drug"
-                            class="flex items-center px-3 py-1.5 bg-gradient-to-r from-red-500 to-rose-500 text-white font-semibold rounded-lg text-sm shadow-sm"
-                        >
-                            <UIcon
-                                name="i-heroicons-beaker"
-                                class="w-3.5 h-3.5 mr-1.5 opacity-80"
-                            />
-                            {{ drug }}
-                            <button
-                                @click="
-                                    form.drugAllergies = form.drugAllergies.filter(
-                                        (d: string) => d !== drug
-                                    )
-                                "
-                                class="ml-2 hover:bg-white/20 rounded-full p-0.5 transition-colors"
-                            >
-                                <UIcon name="i-heroicons-x-mark" class="w-3.5 h-3.5" />
-                            </button>
-                        </div>
+                        <UIcon v-if="form.drugAllergies.includes(tag)" name="i-lucide-check" class="w-3.5 h-3.5" />
+                        <span>{{ tag }}</span>
+                    </button>
+                    
+                    <!-- Toggle Input Field to Add Tag -->
+                    <button
+                        type="button"
+                        v-if="!showAddAllergy"
+                        class="text-xs px-3 py-1.5 rounded-full border border-gray-200 bg-slate-50 text-slate-500 hover:bg-slate-100 font-bold flex items-center gap-1 cursor-pointer transition-all"
+                        @click="showAddAllergy = true"
+                    >
+                        <UIcon name="i-lucide-plus" class="w-3.5 h-3.5" />
+                        <span>เพิ่ม</span>
+                    </button>
+                    <div v-else class="flex items-center gap-1 bg-white border border-indigo-200 rounded-full px-2 py-0.5 shadow-sm">
                         <input
+                            v-model="newAllergyInput"
                             type="text"
-                            placeholder="พิมพ์ชื่อยาแล้วกด Enter..."
-                            class="flex-1 outline-none bg-transparent text-sm min-w-[200px] p-2 text-gray-700 font-medium placeholder-gray-400"
-                            @keydown.enter.prevent="
-                                if (($event.target as HTMLInputElement).value) {
-                                    form.drugAllergies.push(
-                                        ($event.target as HTMLInputElement).value
-                                    )
-                                    ;($event.target as HTMLInputElement).value = ''
-                                }
-                            "
+                            placeholder="พิมพ์แพ้ยา..."
+                            class="bg-transparent text-xs font-semibold px-2 py-0.5 outline-none w-20 text-slate-700"
+                            @keyup.enter="addCustomAllergy"
                         />
-                    </div>
-                </UFormGroup>
-
-                <UFormGroup label="แพ้อาหาร (Food Allergy)" class="font-bold text-orange-800">
-                    <div class="flex flex-wrap gap-3 mt-2">
-                        <button
-                            v-for="food in ['กุ้ง', 'นม', 'ถั่ว', 'ไข่']"
-                            :key="food"
-                            type="button"
-                            class="px-5 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center shadow-sm"
-                            :class="
-                                form.foodAllergies.includes(food)
-                                    ? 'bg-amber-500 text-white shadow-amber-500/30 scale-105'
-                                    : 'bg-white ring-1 ring-gray-200 text-gray-600 hover:bg-amber-50 hover:text-amber-600 hover:ring-amber-200'
-                            "
-                            @click="
-                                form.foodAllergies.includes(food)
-                                    ? (form.foodAllergies = form.foodAllergies.filter(
-                                          (f: string) => f !== food
-                                      ))
-                                    : form.foodAllergies.push(food)
-                            "
-                        >
-                            <UIcon
-                                v-if="form.foodAllergies.includes(food)"
-                                name="i-heroicons-check-circle"
-                                class="w-4 h-4 mr-1.5"
-                            />
-                            {{ food }}
-                        </button>
-                        <button
-                            type="button"
-                            class="px-5 py-2.5 rounded-xl border-2 border-dashed border-gray-300 text-gray-500 font-bold text-sm hover:bg-gray-50 hover:border-gray-400 transition-colors bg-white/80"
-                        >
-                            + ระบุอาหารอื่น
+                        <button type="button" class="bg-indigo-600 text-white rounded-full p-1 flex items-center justify-center cursor-pointer" @click="addCustomAllergy">
+                            <UIcon name="i-lucide-check" class="w-3 h-3" />
                         </button>
                     </div>
-                </UFormGroup>
-            </div>
-        </div>
-
-        <!-- Disease & Notes -->
-        <div class="space-y-6 pt-4">
-            <div class="border-b border-gray-100 pb-3">
-                <h2 class="text-lg font-bold text-gray-800 flex items-center gap-2">
-                    <UIcon name="i-heroicons-heart" class="w-5 h-5 text-rose-500" />
-                    โรคประจำตัวและหมายเหตุ
-                </h2>
-                <p class="text-xs text-gray-400 mt-1">ข้อมูลสุขภาพอื่นๆ ที่แพทย์และพยาบาลควรทราบ</p>
+                </div>
             </div>
 
-            <div
-                class="bg-slate-900 rounded-3xl p-8 shadow-xl shadow-slate-900/20 space-y-8 relative overflow-hidden"
-            >
-                <!-- Abstract dark background decorations -->
-                <div
-                    class="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"
-                ></div>
-                <div
-                    class="absolute bottom-0 left-0 w-48 h-48 bg-rose-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4"
-                ></div>
+            <!-- โรคประจำตัว / ภาวะสุขภาพ -->
+            <div>
+                <label class="block text-[11px] font-black text-slate-600 mb-2">โรคประจำตัว / ภาวะสุขภาพ <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                
+                <!-- Interactive Capsule Tags -->
+                <div class="flex flex-wrap gap-2 mb-3">
+                    <button
+                        type="button"
+                        v-for="tag in availableDiseases"
+                        :key="tag"
+                        class="text-xs px-3 py-1.5 rounded-full border font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+                        :class="form.chronicDiseases.includes(tag) ? 'bg-indigo-50 border-indigo-200 text-indigo-600' : 'bg-white border-gray-200 text-slate-500 hover:bg-slate-50'"
+                        @click="toggleDisease(tag)"
+                    >
+                        <UIcon v-if="form.chronicDiseases.includes(tag)" name="i-lucide-check" class="w-3.5 h-3.5" />
+                        <span>{{ tag }}</span>
+                    </button>
 
-                <UFormGroup class="relative z-10">
-                    <template #label>
-                        <span class="text-slate-300 font-bold text-base flex items-center gap-2">
-                            <UIcon name="i-heroicons-squares-plus" class="w-5 h-5 text-blue-400" />
-                            โรคประจำตัว (Chronic Diseases)
-                        </span>
-                    </template>
-                    <div class="flex flex-wrap gap-3 mt-4 mb-5">
-                        <button
-                            type="button"
-                            class="px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-sm"
-                            :class="
-                                form.chronicDiseases.length === 0
-                                    ? 'bg-slate-700 text-white ring-1 ring-slate-600 shadow-lg'
-                                    : 'bg-slate-800/80 text-slate-400 ring-1 ring-slate-700/50 hover:bg-slate-700 hover:text-slate-200'
-                            "
-                            @click="form.chronicDiseases = []"
-                        >
-                            ไม่มีโรคประจำตัว
-                        </button>
-
-                        <button
-                            v-for="disease in [
-                                'ความดันสูง',
-                                'เบาหวาน',
-                                'หัวใจ',
-                                'ไทรอยด์',
-                                'หอบหืด'
-                            ]"
-                            :key="disease"
-                            type="button"
-                            class="px-5 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center shadow-sm backdrop-blur-sm"
-                            :class="
-                                form.chronicDiseases.includes(disease)
-                                    ? 'bg-blue-500 text-white shadow-blue-500/20 scale-105'
-                                    : 'bg-slate-800/80 text-slate-300 ring-1 ring-slate-700/50 hover:bg-slate-700 hover:text-white hover:ring-slate-600'
-                            "
-                            @click="
-                                form.chronicDiseases.includes(disease)
-                                    ? (form.chronicDiseases = form.chronicDiseases.filter(
-                                          (d: string) => d !== disease
-                                      ))
-                                    : form.chronicDiseases.push(disease)
-                            "
-                        >
-                            <UIcon
-                                v-if="form.chronicDiseases.includes(disease)"
-                                name="i-heroicons-check-circle"
-                                class="w-4 h-4 mr-1.5"
-                            />
-                            {{ disease }}
-                        </button>
-                    </div>
-
-                    <div class="relative mt-2">
-                        <div
-                            class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
-                        >
-                            <UIcon
-                                name="i-heroicons-pencil-square"
-                                class="h-5 w-5 text-slate-500"
-                            />
-                        </div>
+                    <!-- Toggle Input Field to Add Tag -->
+                    <button
+                        type="button"
+                        v-if="!showAddDisease"
+                        class="text-xs px-3 py-1.5 rounded-full border border-gray-200 bg-slate-50 text-slate-500 hover:bg-slate-100 font-bold flex items-center gap-1 cursor-pointer transition-all"
+                        @click="showAddDisease = true"
+                    >
+                        <UIcon name="i-lucide-plus" class="w-3.5 h-3.5" />
+                        <span>เพิ่ม</span>
+                    </button>
+                    <div v-else class="flex items-center gap-1 bg-white border border-indigo-200 rounded-full px-2 py-0.5 shadow-sm">
                         <input
-                            placeholder="โรคอื่นๆ — พิมพ์รายละเอียดเพิ่มเติม..."
-                            class="block w-full pl-12 pr-4 py-3.5 bg-slate-800/80 text-white rounded-xl border border-slate-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 shadow-inner font-medium transition-colors placeholder-slate-500 backdrop-blur-sm"
+                            v-model="newDiseaseInput"
+                            type="text"
+                            placeholder="พิมพ์โรคประจำตัว..."
+                            class="bg-transparent text-xs font-semibold px-2 py-0.5 outline-none w-24 text-slate-700"
+                            @keyup.enter="addCustomDisease"
                         />
+                        <button type="button" class="bg-indigo-600 text-white rounded-full p-1 flex items-center justify-center cursor-pointer" @click="addCustomDisease">
+                            <UIcon name="i-lucide-check" class="w-3 h-3" />
+                        </button>
                     </div>
-                </UFormGroup>
+                </div>
+            </div>
 
-                <UFormGroup class="relative z-10">
-                    <template #label>
-                        <span class="text-slate-300 font-bold text-base flex items-center gap-2">
-                            <UIcon
-                                name="i-heroicons-document-text"
-                                class="w-5 h-5 text-emerald-400"
-                            />
-                            หมายเหตุทางการแพทย์
-                            <span class="text-xs font-medium text-slate-500 ml-1 font-normal"
-                                >(เห็นเฉพาะแพทย์และพยาบาล)</span
-                            >
-                        </span>
-                    </template>
-                    <textarea
-                        v-model="form.medicalNotes"
-                        placeholder="ตัวอย่าง: กำลังตั้งครรภ์ 12 สัปดาห์, ใส่เครื่องกระตุ้นหัวใจ, เพิ่งผ่านการผ่าตัดเมื่อเดือนที่แล้ว..."
-                        rows="4"
-                        class="mt-3 block w-full p-4 bg-slate-800/80 text-white rounded-xl border border-slate-700 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 shadow-inner font-medium transition-colors placeholder-slate-500 resize-none backdrop-blur-sm leading-relaxed"
-                    ></textarea>
-                </UFormGroup>
+            <!-- หมายเหตุเพิ่มเติม / สิ่งที่ควรระวัง -->
+            <div>
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">หมายเหตุเพิ่มเติม / สิ่งที่ควรระวัง <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                <textarea
+                    v-model="form.medicalNotes"
+                    rows="3"
+                    placeholder="เช่น แพ้ผลิตภัณฑ์ที่มีน้ำหอม, เคยมีรอยช้ำหลังฉีด, ชอบ/ไม่ชอบบริการแบบใด..."
+                    class="w-full bg-slate-50 border border-gray-200 rounded-2xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none resize-none font-semibold"
+                ></textarea>
+            </div>
+
+            <!-- Dropdowns Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- รู้จักเราจากที่ไหน -->
+                <div>
+                    <label class="block text-[11px] font-black text-slate-600 mb-1.5">รู้จักเราจากที่ไหน <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                    <select
+                        v-model="form.leadSource"
+                        class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                    >
+                        <option>Facebook / Instagram</option>
+                        <option>TikTok</option>
+                        <option>เพื่อนแนะนำ</option>
+                        <option>Google Search</option>
+                        <option>ป้ายหน้าคลินิก</option>
+                    </select>
+                </div>
+
+                <!-- พนักงานแนะนำ -->
+                <div>
+                    <label class="block text-[11px] font-black text-slate-600 mb-1.5">พนักงานแนะนำ <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                    <select
+                        v-model="form.referredBy"
+                        class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                    >
+                        <option>— ไม่ระบุ —</option>
+                        <option>สมใจ รักดี</option>
+                        <option>พยาบาลจอย</option>
+                        <option>หมอโอ๊ค</option>
+                    </select>
+                </div>
+
+                <!-- กลุ่มลูกค้า -->
+                <div>
+                    <label class="block text-[11px] font-black text-slate-600 mb-1.5">กลุ่มลูกค้า <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                    <select
+                        v-model="form.customerGroup"
+                        class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                    >
+                        <option>Standard</option>
+                        <option>VIP</option>
+                        <option>VVIP</option>
+                        <option>Corporate</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>

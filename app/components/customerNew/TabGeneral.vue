@@ -1,212 +1,210 @@
 <script setup lang="ts">
-    import type { FormError, FormSubmitEvent } from '@nuxt/ui'
-
-    defineProps<{ form: any }>()
-
-    const state = reactive({
-        email: undefined,
-        password: undefined
-    })
-
-    type Schema = typeof state
-
-    function validate(state: Partial<Schema>): FormError[] {
-        const errors = []
-        if (!state.email) errors.push({ name: 'email', message: 'Required' })
-        if (!state.password) errors.push({ name: 'password', message: 'Required' })
-        return errors
-    }
+    defineProps<{
+        form: any
+        avatarInitials: string
+        computedAge: number | null
+        isIdCardValid: boolean
+    }>()
 
     const toast = useAppToast()
-    async function onSubmit(event: FormSubmitEvent<Schema>) {
-        toast.success('Success', 'The form has been submitted.')
-        console.log(event.data)
-    }
-
-    const items = ref(['Backlog', 'Todo', 'In Progress', 'Done'])
-    const value = ref('Backlog')
 </script>
 
 <template>
-    <div class="flex flex-col lg:flex-row gap-10">
-        <!-- Left Sidebar (Avatar & ID) -->
-        <div class="w-full lg:w-[280px] shrink-0 space-y-6">
-            <!-- Photo Upload Area -->
-            <div
-                class="group relative border-2 border-dashed border-gray-200 hover:border-blue-400 rounded-3xl p-8 flex flex-col items-center justify-center text-center gap-4 bg-white/50 hover:bg-blue-50/30 transition-all duration-300 h-[240px] shadow-sm hover:shadow-md cursor-pointer overflow-hidden"
-            >
-                <div
-                    class="absolute inset-0 bg-gradient-to-b from-transparent to-blue-50/20 opacity-0 group-hover:opacity-100 transition-opacity"
-                ></div>
-                <div
-                    class="w-16 h-16 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-100 transition-all duration-300 relative z-10 shadow-sm"
-                >
-                    <UIcon name="i-heroicons-camera" class="w-8 h-8" />
+    <div id="section-01" class="bg-white rounded-3xl p-6 border border-gray-100 shadow-xl shadow-slate-200/40 relative animate-fade-in">
+        <!-- Section Header -->
+        <div class="flex items-start justify-between mb-6 pb-4 border-b border-gray-50">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-indigo-50 text-indigo-600 rounded-xl font-black text-sm flex items-center justify-center shrink-0">
+                    01
                 </div>
-                <div class="relative z-10">
-                    <div
-                        class="font-bold text-gray-700 group-hover:text-blue-700 transition-colors"
-                    >
-                        อัปโหลดรูปโปรไฟล์
-                    </div>
-                    <div class="text-xs text-gray-400 mt-1.5 font-medium">
-                        รองรับ JPG, PNG (สูงสุด 2MB)
-                    </div>
+                <div>
+                    <h2 class="text-base md:text-lg font-black text-slate-800 tracking-tight">ข้อมูลพื้นฐาน</h2>
+                    <p class="text-[11px] font-semibold text-gray-400 mt-0.5">ชื่อ-นามสกุล วันเกิด เลขประจำตัวประชาชน — สำหรับ HN และระบุตัวตน</p>
                 </div>
             </div>
+            <span class="text-[10px] font-bold text-gray-400 bg-slate-50 px-2 py-0.5 rounded-lg border border-slate-100">ฟิลด์บังคับ 5 ช่อง</span>
+        </div>
 
-            <!-- Customer Code Banner -->
-            <div
-                class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 border border-slate-700 shadow-xl shadow-slate-900/10 relative overflow-hidden group"
-            >
-                <div
-                    class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"
-                ></div>
-                <div class="text-xs text-slate-400 mb-1 font-medium tracking-wide">
-                    รหัสลูกค้า (Customer ID)
-                </div>
-                <div class="text-2xl font-black text-white tracking-wider font-mono">CN-00184</div>
-                <div class="text-[10px] text-emerald-400 mt-2 flex items-center gap-1 font-medium">
-                    <UIcon name="i-heroicons-check-circle-20-solid" class="w-3 h-3" />
-                    ระบบสร้างรหัสอัตโนมัติ
+        <!-- Profile Photo Selection area -->
+        <div class="flex flex-col sm:flex-row gap-5 items-center p-4 border border-dashed border-indigo-100 rounded-2xl bg-indigo-50/10 mb-6">
+            <!-- Abbreviation avatar inside light purple circle -->
+            <div class="w-20 h-20 rounded-full bg-[#f0eaff] border border-indigo-100/50 flex items-center justify-center font-black text-2xl text-indigo-600 shrink-0 shadow-inner">
+                {{ avatarInitials }}
+            </div>
+            <div class="flex-1 text-center sm:text-left">
+                <h4 class="text-xs font-bold text-slate-700">รูปโปรไฟล์ลูกค้า</h4>
+                <p class="text-[10px] text-gray-400 font-semibold mt-1">PNG / JPG ขนาดไม่เกิน 4 MB · แนะนำสี่เหลี่ยมจัตุรัส 400x400 px</p>
+                <p class="text-[10px] text-gray-400/80 font-bold mt-0.5">หากไม่มี ระบบจะใช้อักษรย่อ {{ avatarInitials }} เป็นรูปแทน</p>
+                
+                <div class="flex items-center justify-center sm:justify-start gap-2 mt-3">
+                    <button type="button" class="border border-gray-100 hover:border-gray-200 bg-white hover:bg-slate-50 text-slate-600 font-bold text-[10px] px-3 py-1.5 rounded-xl flex items-center gap-1 shadow-sm transition-all cursor-pointer" @click="toast.info('อัปโหลดไฟล์', 'เปิดกล่องอัปโหลดรูปภาพ')">
+                        <UIcon name="i-lucide-upload" class="w-3.5 h-3.5" />
+                        <span>เลือกไฟล์</span>
+                    </button>
+                    <button type="button" class="border border-gray-100 hover:border-gray-200 bg-white hover:bg-slate-50 text-slate-600 font-bold text-[10px] px-3 py-1.5 rounded-xl flex items-center gap-1 shadow-sm transition-all cursor-pointer" @click="toast.info('ถ่ายภาพ', 'เปิดใช้งานกล้องถ่ายรูป')">
+                        <UIcon name="i-lucide-camera" class="w-3.5 h-3.5" />
+                        <span>ถ่ายภาพ</span>
+                    </button>
+                    <button type="button" class="border border-rose-100 bg-rose-50 text-rose-500 hover:bg-rose-100 font-bold text-[10px] px-3 py-1.5 rounded-xl flex items-center gap-1 transition-all cursor-pointer" @click="toast.info('ลบรูปภาพ', 'ล้างรูปภาพเรียบร้อย')">
+                        <UIcon name="i-lucide-trash-2" class="w-3.5 h-3.5" />
+                        <span>ลบ</span>
+                    </button>
                 </div>
             </div>
         </div>
 
-        <!-- Main Form -->
-        <div class="flex-1 space-y-4">
-            <div class="flex items-center gap-3 border-b border-gray-200 pb-4">
-                <div
-                    class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600"
-                >
-                    <UIcon name="i-heroicons-identification" class="w-5 h-5" />
-                </div>
-                <h2 class="text-lg font-bold text-gray-900">ข้อมูลส่วนตัว</h2>
-            </div>
-
-            <!-- demo input -->
+        <!-- Input Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <!-- คำนำหน้า -->
             <div>
-                <UForm :validate="validate" :state="state" class="space-y-4" @submit="onSubmit">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <UFormField label="Email" name="email">
-                            <UInputMenu class="rounded-2xl" v-model="value" :items="items" />
-                        </UFormField>
-
-                        <UFormField label="Email" name="email">
-                            <UInput class="flex" v-model="state.email" />
-                        </UFormField>
-
-                        <UFormField label="Password" name="password">
-                            <UInput class="flex" v-model="state.password" type="password" />
-                        </UFormField>
-
-                        <UFormField label="Password" name="password">
-                            <UInput class="flex" v-model="state.password" type="password" />
-                        </UFormField>
-
-                        <UFormField label="Password" name="password">
-                            <UInput class="flex" v-model="state.password" type="password" />
-                        </UFormField>
-
-                        <UFormField label="Password" name="password">
-                            <UInput class="flex" v-model="state.password" type="password" />
-                        </UFormField>
-                    </div>
-
-                    <div>
-                        <UFormField label="Password" name="password">
-                            <UInput class="flex" v-model="state.password" type="password" />
-                        </UFormField>
-
-                        <div
-                            class="flex items-center px-5 py-3 bg-emerald-50 text-emerald-700 rounded-xl text-sm font-bold border border-emerald-200/60 shadow-sm shrink-0"
-                        >
-                            <span class="relative flex h-2.5 w-2.5 mr-2.5">
-                                <span
-                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
-                                ></span>
-                                <span
-                                    class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"
-                                ></span>
-                            </span>
-                            ตรวจสอบแล้ว
-                        </div>
-                    </div>
-
-                    <UButton type="submit"> Submit </UButton>
-                </UForm>
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">คำนำหน้า <span class="text-rose-500">*</span></label>
+                <select
+                    v-model="form.title"
+                    class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                >
+                    <option>นางสาว</option>
+                    <option>นาย</option>
+                    <option>นาง</option>
+                    <option>เด็กหญิง</option>
+                    <option>เด็กชาย</option>
+                </select>
             </div>
 
-            <div
-                class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200/60 rounded-2xl p-4 flex gap-3 text-amber-800 text-sm mt-8 shadow-sm"
-            >
-                <UIcon
-                    name="i-heroicons-exclamation-triangle"
-                    class="w-5 h-5 shrink-0 text-amber-500 mt-0.5"
+            <!-- ชื่อจริง -->
+            <div class="md:col-span-2">
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">ชื่อจริง <span class="text-rose-500">*</span></label>
+                <input
+                    v-model="form.firstName"
+                    type="text"
+                    placeholder="เช่น พิมลภา"
+                    class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
                 />
-                <div class="font-medium leading-relaxed">
-                    ฟิลด์ที่จำเป็นมีเครื่องหมาย
-                    <span class="text-red-500 font-bold text-base">*</span>
-                    <span class="text-amber-700/80 mx-1">·</span>
-                    ข้อมูลส่วนที่เหลือสามารถกลับมาเพิ่มหรือแก้ไขได้ที่หน้า
-                    <span class="font-bold underline decoration-amber-300 underline-offset-4"
-                        >โปรไฟล์ลูกค้า</span
+            </div>
+
+            <!-- นามสกุล -->
+            <div>
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">นามสกุล <span class="text-rose-500">*</span></label>
+                <input
+                    v-model="form.lastName"
+                    type="text"
+                    placeholder="เช่น จันทร์เพ็ญ"
+                    class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                />
+            </div>
+
+            <!-- ชื่อเล่น -->
+            <div>
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">ชื่อเล่น <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                <input
+                    v-model="form.nickname"
+                    type="text"
+                    placeholder="เช่น พิบ"
+                    class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                />
+            </div>
+
+            <!-- เพศ (Segmented custom cards) -->
+            <div class="md:col-span-3">
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">เพศ <span class="text-rose-500">*</span></label>
+                <div class="grid grid-cols-3 gap-3">
+                    <div
+                        class="border-2 rounded-xl p-2.5 flex items-center justify-center gap-2 cursor-pointer transition-all shadow-sm"
+                        :class="form.gender === 'หญิง' ? 'border-indigo-500 bg-indigo-50/20 text-indigo-700 font-bold' : 'border-gray-200 text-slate-500 hover:bg-slate-50'"
+                        @click="form.gender = 'หญิง'"
                     >
-                    ในภายหลัง
+                        <span class="w-4 h-4 rounded-full border flex items-center justify-center" :class="form.gender === 'หญิง' ? 'border-indigo-600 bg-indigo-600 text-white text-[8px]' : 'border-gray-300 bg-white'">
+                            <span v-if="form.gender === 'หญิง'" class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                        </span>
+                        <span class="text-xs">หญิง</span>
+                    </div>
+                    
+                    <div
+                        class="border-2 rounded-xl p-2.5 flex items-center justify-center gap-2 cursor-pointer transition-all shadow-sm"
+                        :class="form.gender === 'ชาย' ? 'border-indigo-500 bg-indigo-50/20 text-indigo-700 font-bold' : 'border-gray-200 text-slate-500 hover:bg-slate-50'"
+                        @click="form.gender = 'ชาย'"
+                    >
+                        <span class="w-4 h-4 rounded-full border flex items-center justify-center" :class="form.gender === 'ชาย' ? 'border-indigo-600 bg-indigo-600 text-white text-[8px]' : 'border-gray-300 bg-white'">
+                            <span v-if="form.gender === 'ชาย'" class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                        </span>
+                        <span class="text-xs">ชาย</span>
+                    </div>
+
+                    <div
+                        class="border-2 rounded-xl p-2.5 flex items-center justify-center gap-2 cursor-pointer transition-all shadow-sm"
+                        :class="form.gender === 'ไม่ระบุ / อื่นๆ' ? 'border-indigo-500 bg-indigo-50/20 text-indigo-700 font-bold' : 'border-gray-200 text-slate-500 hover:bg-slate-50'"
+                        @click="form.gender = 'ไม่ระบุ / อื่นๆ'"
+                    >
+                        <span class="w-4 h-4 rounded-full border flex items-center justify-center" :class="form.gender === 'ไม่ระบุ / อื่นๆ' ? 'border-indigo-600 bg-indigo-600 text-white text-[8px]' : 'border-gray-300 bg-white'">
+                            <span v-if="form.gender === 'ไม่ระบุ / อื่นๆ'" class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                        </span>
+                        <span class="text-xs">ไม่ระบุ / อื่นๆ</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Accordions -->
-            <div class="space-y-3 pt-6">
-                <div
-                    class="group bg-white ring-1 ring-gray-200 hover:ring-blue-300 rounded-2xl transition-all duration-200 hover:shadow-md overflow-hidden"
-                >
-                    <div
-                        class="flex items-center justify-between p-4 cursor-pointer text-gray-700 hover:bg-slate-50/50"
-                    >
-                        <div class="flex items-center font-bold">
-                            <div
-                                class="w-8 h-8 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform"
-                            >
-                                <UIcon name="i-heroicons-globe-alt" class="w-4 h-4" />
-                            </div>
-                            ข้อมูลภาษาอังกฤษ / Passport
-                            <span
-                                class="text-xs font-medium text-slate-400 ml-2 bg-slate-100 px-2 py-0.5 rounded-md hidden sm:inline-block"
-                                >ลูกค้าต่างชาติ</span
-                            >
-                        </div>
-                        <div
-                            class="flex items-center text-sm font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full group-hover:bg-blue-100 transition-colors"
-                        >
-                            ขยาย
-                            <UIcon name="i-heroicons-chevron-down" class="w-4 h-4 ml-1" />
-                        </div>
-                    </div>
+            <!-- วันเกิด -->
+            <div>
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">วันเกิด <span class="text-rose-500">*</span></label>
+                <div class="relative">
+                    <input
+                        v-model="form.birthDate"
+                        type="date"
+                        class="w-full bg-slate-50 border border-gray-200 rounded-xl pl-3 pr-8 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                    />
+                    <UIcon name="i-lucide-calendar" class="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                 </div>
+                <div v-if="computedAge !== null" class="text-[10px] font-bold text-emerald-500 mt-1 flex items-center gap-1">
+                    <UIcon name="i-lucide-check-circle" class="w-3.5 h-3.5" />
+                    <span>อายุ {{ computedAge }} ปี</span>
+                </div>
+            </div>
 
-                <div
-                    class="group bg-white ring-1 ring-gray-200 hover:ring-indigo-300 rounded-2xl transition-all duration-200 hover:shadow-md overflow-hidden"
+            <!-- หมู่เลือด -->
+            <div>
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">หมู่เลือด <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                <select
+                    v-model="form.bloodGroup"
+                    class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
                 >
-                    <div
-                        class="flex items-center justify-between p-4 cursor-pointer text-gray-700 hover:bg-slate-50/50"
-                    >
-                        <div class="flex items-center font-bold">
-                            <div
-                                class="w-8 h-8 rounded-full bg-indigo-50 text-indigo-500 flex items-center justify-center mr-3 group-hover:scale-110 transition-transform"
-                            >
-                                <UIcon name="i-heroicons-building-office-2" class="w-4 h-4" />
-                            </div>
-                            ข้อมูลบริษัท / ที่ทำงาน
-                        </div>
-                        <div
-                            class="flex items-center text-sm font-medium text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full group-hover:bg-indigo-100 transition-colors"
-                        >
-                            ขยาย
-                            <UIcon name="i-heroicons-chevron-down" class="w-4 h-4 ml-1" />
-                        </div>
-                    </div>
+                    <option>— ไม่ทราบ —</option>
+                    <option>A</option>
+                    <option>B</option>
+                    <option>O</option>
+                    <option>AB</option>
+                </select>
+            </div>
+
+            <!-- เลขประจำตัวประชาชน -->
+            <div class="md:col-span-2">
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">เลขประจำตัวประชาชน / หนังสือเดินทาง <span class="text-rose-500">*</span></label>
+                <div class="relative">
+                    <input
+                        v-model="form.idCard"
+                        type="text"
+                        placeholder="กรอกตัวเลข 13 หลัก"
+                        class="w-full bg-slate-50 border border-gray-200 rounded-xl pl-3 pr-8 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                    />
+                    <UIcon name="i-lucide-fingerprint" class="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
                 </div>
+                <div v-if="isIdCardValid" class="text-[10px] font-bold text-emerald-500 mt-1 flex items-center gap-1">
+                    <UIcon name="i-lucide-check-circle" class="w-3.5 h-3.5" />
+                    <span>ตรวจสอบรูปแบบถูกต้อง 13 หลัก</span>
+                </div>
+            </div>
+
+            <!-- HN Auto generated -->
+            <div class="md:col-span-2">
+                <label class="block text-[11px] font-black text-slate-600 mb-1.5">HN (Hospital Number) <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                <div class="relative">
+                    <input
+                        type="text"
+                        disabled
+                        placeholder="สร้างอัตโนมัติ ➔ CN-00192"
+                        class="w-full bg-gray-50 border border-gray-200 rounded-xl pl-3 pr-8 py-2 text-xs font-semibold text-gray-400 outline-none cursor-not-allowed select-none"
+                    />
+                    <UIcon name="i-lucide-lock" class="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                </div>
+                <span class="text-[9px] text-slate-400 font-semibold block mt-1.5">ปล่อยว่างเพื่อให้ระบบสร้างให้อัตโนมัติ</span>
             </div>
         </div>
     </div>
