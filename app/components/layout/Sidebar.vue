@@ -9,6 +9,7 @@
         { name: 'หน้าแรก', icon: 'i-lucide-home', to: '/dashboard' },
         { name: 'เพิ่มลูกค้าใหม่', icon: 'i-lucide-user-plus', to: '/customerNew' },
         { name: 'ข้อมูลลูกค้า', icon: 'i-lucide-users', to: '/customerInfo' },
+        { name: 'ปฏิทินนัดหมาย', icon: 'i-lucide-calendar', to: '/appointment' },
         { name: 'คลังสินค้า', icon: 'i-lucide-package', to: '#' },
         { name: 'รายงาน', icon: 'i-lucide-bar-chart-2', to: '/reports' },
         { name: 'จุดบริการ', icon: 'i-lucide-activity', to: '#' },
