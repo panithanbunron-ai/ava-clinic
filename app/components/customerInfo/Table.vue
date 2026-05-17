@@ -35,7 +35,8 @@
                 <tr
                     v-for="customer in customers"
                     :key="customer.id"
-                    class="hover:bg-slate-50/50 transition-colors"
+                    class="hover:bg-slate-50/50 transition-colors cursor-pointer"
+                    @click="navigateTo(`/customerInfo/${customer.id}`)"
                 >
                     <!-- Avatar / Initial -->
                     <td class="py-3 px-6">
