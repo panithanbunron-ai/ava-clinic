@@ -77,7 +77,7 @@
             </div>
 
             <!-- Right Side: Sticky Appointment Side Booking Panel (spans 4 cols) -->
-            <div class="lg:col-span-4 lg:sticky lg:top-24">
+            <div class="lg:col-span-4 lg:sticky lg:top-24 h-full" >
                 <SidebarPanel
                     :selected-day="selectedDay"
                     @save-booking="onSaveBooking"

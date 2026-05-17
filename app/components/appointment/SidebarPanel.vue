@@ -31,7 +31,7 @@
         const bookedTimes = ['09:30', '11:00', '14:00', '15:30']
         // Mocked closed/blocked times from screenshot
         const closedTimes = ['12:00', '12:30', '17:30', '18:00', '18:30']
-        
+
         if (bookedTimes.includes(slot)) return 'booked'
         if (closedTimes.includes(slot)) return 'closed'
         if (selectedTimeSlot.value === slot) return 'selected'
@@ -87,7 +87,7 @@
         <!-- ── Date & Roster Header (Gradient matches top header exactly) ── -->
         <div class="bg-gradient-to-tr from-[#5b21b6] via-[#6d28d9] to-[#7c3aed] p-6 text-white relative shrink-0">
             <div class="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
-            
+
             <span class="text-[10px] font-black text-indigo-200/90 uppercase tracking-widest block mb-1">เลือกวัน • พฤษภาคม</span>
             <h3 class="text-2xl font-black tracking-tight flex items-baseline gap-1">
                 อาทิตย์ ที่ {{ selectedDay }}
@@ -103,7 +103,7 @@
 
         <!-- ── Scrollable Sidebar Content (pb-12 to let scroll fit the card fully) ── -->
         <div class="p-5 space-y-6 flex-1 overflow-y-auto scrollbar-thin pb-12">
-            
+
             <!-- 1. Doctors Duty Schedule -->
             <div class="space-y-3">
                 <div class="flex items-center justify-between">
@@ -118,8 +118,8 @@
                         type="button"
                         class="w-full p-3 rounded-2xl border text-left flex items-center gap-3 transition-all cursor-pointer"
                         :class="[
-                            selectedDoctorId === doc.id 
-                                ? 'border-2 border-[#6366f1] bg-white shadow-lg shadow-indigo-100/50' 
+                            selectedDoctorId === doc.id
+                                ? 'border-2 border-[#6366f1] bg-white shadow-lg shadow-indigo-100/50'
                                 : 'border-slate-100 bg-white hover:bg-slate-50'
                         ]"
                         @click="selectedDoctorId = doc.id"
@@ -128,7 +128,7 @@
                         <div class="w-10 h-10 rounded-full flex items-center justify-center font-black text-xs shrink-0 shadow-sm" :class="doc.color">
                             {{ doc.initial }}
                         </div>
-                        
+
                         <!-- Doctor Info -->
                         <div class="min-w-0 flex-1">
                             <span class="text-xs font-black text-slate-800 block truncate">{{ doc.name }}</span>
@@ -182,12 +182,12 @@
                         type="button"
                         class="w-full py-2.5 rounded-xl border text-center font-black text-xs transition-all cursor-pointer"
                         :class="[
-                            getSlotState(slot) === 'booked' 
-                                ? 'bg-[#fef2f2] border border-[#fee2e2] text-[#f87171] line-through pointer-events-none' 
+                            getSlotState(slot) === 'booked'
+                                ? 'bg-[#fef2f2] border border-[#fee2e2] text-[#f87171] line-through pointer-events-none'
                                 : getSlotState(slot) === 'closed'
                                     ? 'bg-[#f1f5f9] border border-transparent text-[#94a3b8] pointer-events-none'
-                                    : getSlotState(slot) === 'selected' 
-                                        ? 'bg-[#6366f1] border-transparent text-white shadow-md shadow-indigo-200' 
+                                    : getSlotState(slot) === 'selected'
+                                        ? 'bg-[#6366f1] border-transparent text-white shadow-md shadow-indigo-200'
                                         : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
                         ]"
                         @click="selectSlot(slot)"
@@ -228,8 +228,8 @@
                     <div class="flex items-center justify-between border-t border-purple-200/50 pt-2.5">
                         <span class="font-bold text-[#7c3aed]/70">ลูกค้า</span>
                         <div class="relative flex items-center">
-                            <select 
-                                v-model="selectedCustomer" 
+                            <select
+                                v-model="selectedCustomer"
                                 class="bg-transparent border-0 font-bold outline-none cursor-pointer pr-1 text-xs text-right appearance-none"
                                 :class="selectedCustomer ? 'text-slate-800' : 'text-slate-400'"
                             >
@@ -255,7 +255,7 @@
                         <UIcon name="i-lucide-save" class="w-4 h-4 text-slate-500" />
                         <span>บันทึก</span>
                     </button>
-                    
+
                     <!-- Confirm Button -->
                     <button
                         type="button"
@@ -288,10 +288,10 @@
                         <div class="flex items-center gap-3 min-w-0">
                             <!-- Left thick colored line indicator -->
                             <div class="w-1 rounded h-8 shrink-0" :class="app.colorClass"></div>
-                            
+
                             <!-- Time Slot -->
                             <span class="text-xs font-black text-slate-800 shrink-0">{{ app.time }}</span>
-                            
+
                             <!-- Customer & Branch details -->
                             <div class="min-w-0">
                                 <span class="text-xs font-black text-slate-800 block truncate">{{ app.customer }}</span>
