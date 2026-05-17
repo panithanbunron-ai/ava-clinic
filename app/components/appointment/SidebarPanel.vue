@@ -9,10 +9,10 @@
         (e: 'save-booking', payload: any): void
     }>()
 
-    // 3 Mockup Doctors (พิมลภา - พระราม 9, ธนดล - พระราม 9, นันทกานต์ - เลย)
+    // 3 Mockup Doctors aligned with active database branches: เมืองทองธานี, เลย
     const doctors = ref([
-        { id: 1, name: 'พิมลภา จันทร์เพ็ญ', branch: 'พระราม 9', specialty: 'ความงาม', time: '10:00-19:00', initial: 'พม', color: 'bg-[#ec4899] text-white' },
-        { id: 2, name: 'ธนดล สวัสดี', branch: 'พระราม 9', specialty: 'ผิวหนัง', time: '13:00-20:00', initial: 'ธด', color: 'bg-[#3b82f6] text-white' },
+        { id: 1, name: 'พิมลภา จันทร์เพ็ญ', branch: 'เมืองทองธานี', specialty: 'ความงาม', time: '10:00-19:00', initial: 'พม', color: 'bg-[#ec4899] text-white' },
+        { id: 2, name: 'ธนดล สวัสดี', branch: 'เมืองทองธานี', specialty: 'ผิวหนัง', time: '13:00-20:00', initial: 'ธด', color: 'bg-[#3b82f6] text-white' },
         { id: 3, name: 'นันทกานต์ ภู่กัน', branch: 'เลย', specialty: 'จิตเวช', time: '10:00-18:00', initial: 'นก', color: 'bg-[#10b981] text-white' }
     ])
 
@@ -27,7 +27,9 @@
 
     // Mock booked/free/closed slots mapping exactly to mockup illustration
     const getSlotState = (slot: string) => {
+        // Mocked booked times from screenshot
         const bookedTimes = ['09:30', '11:00', '14:00', '15:30']
+        // Mocked closed/blocked times from screenshot
         const closedTimes = ['12:00', '12:30', '17:30', '18:00', '18:30']
         
         if (bookedTimes.includes(slot)) return 'booked'
@@ -51,21 +53,21 @@
         }
     }
 
-    // Existing Appointments for Day 17 (Matches Mockup Image 2 exactly!)
+    // Existing Appointments for Day 17 (Matches Mockup Image 2 exactly, aligned with database branches)
     const dayAppointments = ref([
-        { id: 101, time: '09:30', customer: 'คุณรุ่งทอง', branch: 'พระราม 9', colorClass: 'bg-[#6366f1]' },
-        { id: 102, time: '11:00', customer: 'คุณภัทรา', branch: 'พระราม 9', colorClass: 'bg-[#6366f1]' },
+        { id: 101, time: '09:30', customer: 'คุณรุ่งทอง', branch: 'เมืองทองธานี', colorClass: 'bg-[#6366f1]' },
+        { id: 102, time: '11:00', customer: 'คุณภัทรา', branch: 'เมืองทองธานี', colorClass: 'bg-[#6366f1]' },
         { id: 103, time: '14:00', customer: 'คุณวารี', branch: 'เลย', colorClass: 'bg-[#10b981]' },
-        { id: 104, time: '15:30', customer: 'คุณสมหญิง', branch: 'พระราม 9', colorClass: 'bg-[#6366f1]' }
+        { id: 104, time: '15:30', customer: 'คุณสมหญิง', branch: 'เมืองทองธานี', colorClass: 'bg-[#6366f1]' }
     ])
 
     const getBranchTextColor = (branch: string) => {
-        if (branch === 'พระราม 9') return 'text-[#6366f1]'
+        if (branch === 'เมืองทองธานี') return 'text-[#6366f1]'
         return 'text-[#10b981]'
     }
 
     const getBranchDotColor = (branch: string) => {
-        if (branch === 'พระราม 9') return 'bg-[#6366f1]'
+        if (branch === 'เมืองทองธานี') return 'bg-[#6366f1]'
         return 'bg-[#10b981]'
     }
 
@@ -81,7 +83,7 @@
 </script>
 
 <template>
-    <div class="bg-white rounded-3xl border border-gray-100 shadow-xl shadow-slate-200/40 overflow-hidden flex flex-col h-full">
+    <div class="bg-white rounded-3xl border border-gray-100 shadow-xl shadow-slate-200/40 overflow-hidden flex flex-col h-full lg:h-[calc(100vh-140px)]">
         <!-- ── Date & Roster Header (Gradient matches top header exactly) ── -->
         <div class="bg-gradient-to-tr from-[#5b21b6] via-[#6d28d9] to-[#7c3aed] p-6 text-white relative shrink-0">
             <div class="absolute top-0 right-0 w-24 h-24 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
@@ -99,8 +101,8 @@
             </p>
         </div>
 
-        <!-- ── Scrollable Sidebar Content (pb-12 to let scroll fit the card fully, max-h-[700px] strictly matches current length) ── -->
-        <div class="p-5 space-y-6 flex-1 overflow-y-auto scrollbar-thin max-h-[700px] pb-12">
+        <!-- ── Scrollable Sidebar Content (pb-12 to let scroll fit the card fully) ── -->
+        <div class="p-5 space-y-6 flex-1 overflow-y-auto scrollbar-thin pb-12">
             
             <!-- 1. Doctors Duty Schedule -->
             <div class="space-y-3">
