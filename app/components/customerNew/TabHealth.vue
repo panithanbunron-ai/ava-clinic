@@ -68,17 +68,17 @@
                 </div>
                 <div>
                     <h2 class="text-base md:text-lg font-black text-slate-800 tracking-tight">ข้อมูลทางการแพทย์ & ความชอบ</h2>
-                    <p class="text-[11px] font-semibold text-gray-400 mt-0.5">ป้องกันการแพ้และจัดประสบการณ์ให้เหมาะกับลูกค้า</p>
+                    <p class="text-xs font-semibold text-gray-400 mt-0.5">ป้องกันการแพ้และจัดประสบการณ์ให้เหมาะกับลูกค้า</p>
                 </div>
             </div>
-            <span class="text-[10px] font-bold text-gray-400 bg-slate-50 px-2 py-0.5 rounded-lg border border-slate-100">ไม่บังคับ</span>
+            <span class="text-xs font-bold text-gray-400 bg-slate-50 px-2 py-0.5 rounded-lg border border-slate-100">ไม่บังคับ</span>
         </div>
 
         <!-- Medical fields -->
         <div class="space-y-5">
             <!-- ประวัติแพ้ยา / สารเคมี -->
             <div>
-                <label class="block text-[11px] font-black text-slate-600 mb-2">ประวัติการแพ้ยา / สารเคมี <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                <label class="block text-xs md:text-sm font-bold text-slate-700 mb-2">ประวัติการแพ้ยา / สารเคมี <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
                 
                 <!-- Interactive Capsule Tags -->
                 <div class="flex flex-wrap gap-2 mb-3">
@@ -86,7 +86,7 @@
                         type="button"
                         v-for="tag in availableAllergies"
                         :key="tag"
-                        class="text-xs px-3 py-1.5 rounded-full border font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+                        class="text-xs md:text-sm px-3.5 py-2 rounded-full border font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
                         :class="form.drugAllergies.includes(tag) ? 'bg-rose-50 border-rose-200 text-rose-600' : 'bg-white border-gray-200 text-slate-500 hover:bg-slate-50'"
                         @click="toggleAllergy(tag)"
                     >
@@ -98,7 +98,7 @@
                     <button
                         type="button"
                         v-if="!showAddAllergy"
-                        class="text-xs px-3 py-1.5 rounded-full border border-gray-200 bg-slate-50 text-slate-500 hover:bg-slate-100 font-bold flex items-center gap-1 cursor-pointer transition-all"
+                        class="text-xs md:text-sm px-3.5 py-2 rounded-full border border-gray-200 bg-slate-50 text-slate-500 hover:bg-slate-100 font-bold flex items-center gap-1 cursor-pointer transition-all"
                         @click="showAddAllergy = true"
                     >
                         <UIcon name="i-lucide-plus" class="w-3.5 h-3.5" />
@@ -109,7 +109,7 @@
                             v-model="newAllergyInput"
                             type="text"
                             placeholder="พิมพ์แพ้ยา..."
-                            class="bg-transparent text-xs font-semibold px-2 py-0.5 outline-none w-20 text-slate-700"
+                            class="bg-transparent text-xs md:text-sm font-semibold px-2 py-0.5 outline-none w-20 text-slate-700"
                             @keyup.enter="addCustomAllergy"
                         />
                         <button type="button" class="bg-indigo-600 text-white rounded-full p-1 flex items-center justify-center cursor-pointer" @click="addCustomAllergy">
@@ -121,7 +121,7 @@
 
             <!-- โรคประจำตัว / ภาวะสุขภาพ -->
             <div>
-                <label class="block text-[11px] font-black text-slate-600 mb-2">โรคประจำตัว / ภาวะสุขภาพ <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                <label class="block text-xs md:text-sm font-bold text-slate-700 mb-2">โรคประจำตัว / ภาวะสุขภาพ <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
                 
                 <!-- Interactive Capsule Tags -->
                 <div class="flex flex-wrap gap-2 mb-3">
@@ -129,7 +129,7 @@
                         type="button"
                         v-for="tag in availableDiseases"
                         :key="tag"
-                        class="text-xs px-3 py-1.5 rounded-full border font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+                        class="text-xs md:text-sm px-3.5 py-2 rounded-full border font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
                         :class="form.chronicDiseases.includes(tag) ? 'bg-indigo-50 border-indigo-200 text-indigo-600' : 'bg-white border-gray-200 text-slate-500 hover:bg-slate-50'"
                         @click="toggleDisease(tag)"
                     >
@@ -141,7 +141,7 @@
                     <button
                         type="button"
                         v-if="!showAddDisease"
-                        class="text-xs px-3 py-1.5 rounded-full border border-gray-200 bg-slate-50 text-slate-500 hover:bg-slate-100 font-bold flex items-center gap-1 cursor-pointer transition-all"
+                        class="text-xs md:text-sm px-3.5 py-2 rounded-full border border-gray-200 bg-slate-50 text-slate-500 hover:bg-slate-100 font-bold flex items-center gap-1 cursor-pointer transition-all"
                         @click="showAddDisease = true"
                     >
                         <UIcon name="i-lucide-plus" class="w-3.5 h-3.5" />
@@ -152,7 +152,7 @@
                             v-model="newDiseaseInput"
                             type="text"
                             placeholder="พิมพ์โรคประจำตัว..."
-                            class="bg-transparent text-xs font-semibold px-2 py-0.5 outline-none w-24 text-slate-700"
+                            class="bg-transparent text-xs md:text-sm font-semibold px-2 py-0.5 outline-none w-24 text-slate-700"
                             @keyup.enter="addCustomDisease"
                         />
                         <button type="button" class="bg-indigo-600 text-white rounded-full p-1 flex items-center justify-center cursor-pointer" @click="addCustomDisease">
@@ -164,12 +164,12 @@
 
             <!-- หมายเหตุเพิ่มเติม / สิ่งที่ควรระวัง -->
             <div>
-                <label class="block text-[11px] font-black text-slate-600 mb-1.5">หมายเหตุเพิ่มเติม / สิ่งที่ควรระวัง <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                <label class="block text-xs md:text-sm font-bold text-slate-700 mb-1.5">หมายเหตุเพิ่มเติม / สิ่งที่ควรระวัง <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
                 <textarea
                     v-model="form.medicalNotes"
                     rows="3"
                     placeholder="เช่น แพ้ผลิตภัณฑ์ที่มีน้ำหอม, เคยมีรอยช้ำหลังฉีด, ชอบ/ไม่ชอบบริการแบบใด..."
-                    class="w-full bg-slate-50 border border-gray-200 rounded-2xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none resize-none font-semibold"
+                    class="w-full bg-slate-50 border border-gray-200 rounded-2xl px-3 py-2 text-sm font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none resize-none font-semibold"
                 ></textarea>
             </div>
 
@@ -177,10 +177,10 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <!-- รู้จักเราจากที่ไหน -->
                 <div>
-                    <label class="block text-[11px] font-black text-slate-600 mb-1.5">รู้จักเราจากที่ไหน <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                    <label class="block text-xs md:text-sm font-bold text-slate-700 mb-1.5">รู้จักเราจากที่ไหน <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
                     <select
                         v-model="form.leadSource"
-                        class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                        class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
                     >
                         <option>Facebook / Instagram</option>
                         <option>TikTok</option>
@@ -192,10 +192,10 @@
 
                 <!-- พนักงานแนะนำ -->
                 <div>
-                    <label class="block text-[11px] font-black text-slate-600 mb-1.5">พนักงานแนะนำ <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                    <label class="block text-xs md:text-sm font-bold text-slate-700 mb-1.5">พนักงานแนะนำ <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
                     <select
                         v-model="form.referredBy"
-                        class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                        class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
                     >
                         <option>— ไม่ระบุ —</option>
                         <option>สมใจ รักดี</option>
@@ -206,10 +206,10 @@
 
                 <!-- กลุ่มลูกค้า -->
                 <div>
-                    <label class="block text-[11px] font-black text-slate-600 mb-1.5">กลุ่มลูกค้า <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
+                    <label class="block text-xs md:text-sm font-bold text-slate-700 mb-1.5">กลุ่มลูกค้า <span class="text-gray-400 font-bold">(ไม่บังคับ)</span></label>
                     <select
                         v-model="form.customerGroup"
-                        class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
+                        class="w-full bg-slate-50 border border-gray-200 rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 focus:bg-white focus:border-indigo-500 outline-none"
                     >
                         <option>Standard</option>
                         <option>VIP</option>
