@@ -76,23 +76,9 @@
 </script>
 
 <template>
-    <div class="dash- p-4 md:p-8 max-w-6xl mx-auto min-h-screen">
+    <div class="dash- p-4 md:p-4 max-w-6xl mx-auto min-h-screen">
         <!-- ── Clinic Header & Search ── -->
-        <div class="dash-header mb-8">
-            <h1 class="clinic-name">AVA CLINIC</h1>
-            <p class="clinic-sub">สาขาพระราม 9 | ศูนย์ความงามครบวงจร</p>
-
-            <div class="search-wrap">
-                <UIcon name="i-lucide-search" class="search-icon" />
-                <input
-                    v-model="searchQuery"
-                    type="text"
-                    placeholder="ค้นหาลูกค้า ชื่อ, เบอร์โทร, HN..."
-                    class="search-input"
-                    data-testid="global-search"
-                />
-            </div>
-        </div>
+        <DashboardClinicHeader v-model:searchQuery="searchQuery" />
 
         <!-- ── Quick Actions ── -->
         <div class="quick-actions-grid mb-8">
@@ -184,67 +170,6 @@
         gap: 24px;
     }
 
-    /* ── Header ── */
-    .dash-header {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 6px;
-        padding: 24px 0 8px;
-    }
-    .clinic-name {
-        font-size: 26px;
-        font-weight: 800;
-        background: linear-gradient(135deg, #4f46e5, #7c3aed);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        margin: 0;
-        letter-spacing: 1px;
-    }
-    .clinic-sub {
-        font-size: 13px;
-        color: #94a3b8;
-        margin: 0;
-    }
-
-    /* Search */
-    .search-wrap {
-        position: relative;
-        width: 100%;
-        max-width: 580px;
-        margin-top: 12px;
-    }
-    .search-icon {
-        position: absolute;
-        left: 16px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 18px;
-        height: 18px;
-        color: #94a3b8;
-    }
-    .search-input {
-        width: 100%;
-        padding: 13px 18px 13px 46px;
-        border-radius: 50px;
-        border: 1.5px solid #e2e8f0;
-        background: white;
-        font-size: 14px;
-        color: #374151;
-        outline: none;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        transition:
-            border-color 0.2s,
-            box-shadow 0.2s;
-    }
-    .search-input::placeholder {
-        color: #94a3b8;
-    }
-    .search-input:focus {
-        border-color: #4f46e5;
-        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-    }
 
     /* ── Quick Actions ── */
     .quick-actions-grid {
