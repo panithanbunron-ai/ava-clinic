@@ -43,8 +43,8 @@
 
 <template>
     <div class="space-y-6">
-        <!-- ── Top Calendar Control Row ── -->
-        <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm flex flex-col xl:flex-row xl:items-center justify-between gap-6">
+        <!-- ── Top Calendar Control Row (Transparent / borderless) ── -->
+        <div class="flex flex-col xl:flex-row xl:items-center justify-between gap-6 py-2 px-1">
             <div class="flex items-center gap-4">
                 <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 shadow-md shadow-indigo-100">
                     <UIcon name="i-lucide-calendar" class="w-7 h-7" />
