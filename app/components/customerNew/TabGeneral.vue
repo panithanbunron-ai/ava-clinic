@@ -17,13 +17,9 @@
         return errors
     }
 
-    const toast = useToast()
+    const toast = useAppToast()
     async function onSubmit(event: FormSubmitEvent<Schema>) {
-        toast.add({
-            title: 'Success',
-            description: 'The form has been submitted.',
-            color: 'success'
-        })
+        toast.success('Success', 'The form has been submitted.')
         console.log(event.data)
     }
 

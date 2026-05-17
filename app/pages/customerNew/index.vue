@@ -68,6 +68,8 @@
         if (activeTab.value > 1) activeTab.value--
     }
 
+    const toast = useAppToast()
+
     const saveCustomer = async () => {
         if (isLoading.value) return
         isLoading.value = true
@@ -76,21 +78,13 @@
                 method: 'POST',
                 body: form
             })
-            useToast().add({
-                title: 'สำเร็จ',
-                description: 'บันทึกลูกค้าใหม่เรียบร้อยแล้ว',
-                icon: 'i-heroicons-check-circle'
-            })
+            toast.success('สำเร็จ', 'บันทึกลูกค้าใหม่เรียบร้อยแล้ว')
             setTimeout(() => {
                 navigateTo('/customerInfo')
             }, 800)
         } catch (error) {
             isLoading.value = false
-            useToast().add({
-                title: 'ข้อผิดพลาด',
-                description: 'ไม่สามารถบันทึกข้อมูลได้',
-                icon: 'i-heroicons-x-circle'
-            })
+            toast.error('ข้อผิดพลาด', 'ไม่สามารถบันทึกข้อมูลได้')
         }
     }
 </script>
@@ -160,6 +154,7 @@
                         v-if="activeTab === 1"
                         variant="solid"
                         class="shadow-sm ring-1 ring-gray-200 transition-all rounded-2xl font-medium"
+                        @click="toast.error('ข้อผิดพลาด', 'ยังไม่เปิดใช้บริการ')"
                     >
                         <template #leading>
                             <UIcon name="i-heroicons-identification" class="w-5 h-5" />
