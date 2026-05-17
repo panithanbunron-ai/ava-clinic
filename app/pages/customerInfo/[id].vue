@@ -409,24 +409,24 @@
                         <!-- Readonly View Mode -->
                         <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="bg-slate-50/50 p-4 rounded-2xl border border-slate-100/60">
-                                <span class="text-xs font-bold text-slate-400 block mb-1">ชื่อ-นามสกุลจริง</span>
-                                <span class="text-sm md:text-base font-black text-slate-800">{{ form.title }} {{ form.firstName }} {{ form.lastName }}</span>
+                                <span class="text-xs font-bold text-slate-500 block mb-1">ชื่อ-นามสกุลจริง</span>
+                                <span class="text-xs md:text-sm font-bold text-slate-700">{{ form.title }} {{ form.firstName }} {{ form.lastName }}</span>
                             </div>
                             <div class="bg-slate-50/50 p-4 rounded-2xl border border-slate-100/60">
-                                <span class="text-xs font-bold text-slate-400 block mb-1">ชื่อเล่น</span>
-                                <span class="text-sm md:text-base font-black text-slate-800">{{ form.nickname || '—' }}</span>
+                                <span class="text-xs font-bold text-slate-500 block mb-1">ชื่อเล่น</span>
+                                <span class="text-xs md:text-sm font-bold text-slate-700">{{ form.nickname || '—' }}</span>
                             </div>
                             <div class="bg-slate-50/50 p-4 rounded-2xl border border-slate-100/60">
-                                <span class="text-xs font-bold text-slate-400 block mb-1">เพศสภาพ</span>
-                                <span class="text-sm md:text-base font-black text-slate-800" :class="form.gender === 'หญิง' ? 'text-rose-500' : 'text-indigo-600'">{{ form.gender }}</span>
+                                <span class="text-xs font-bold text-slate-500 block mb-1">เพศสภาพ</span>
+                                <span class="text-xs md:text-sm font-bold" :class="form.gender === 'หญิง' ? 'text-rose-500' : 'text-indigo-600'">{{ form.gender }}</span>
                             </div>
                             <div class="bg-slate-50/50 p-4 rounded-2xl border border-slate-100/60">
-                                <span class="text-xs font-bold text-slate-400 block mb-1">วันเกิด / อายุ</span>
-                                <span class="text-sm md:text-base font-black text-slate-800">{{ form.birthDate }} ({{ computedAge }} ปี)</span>
+                                <span class="text-xs font-bold text-slate-500 block mb-1">วันเกิด / อายุ</span>
+                                <span class="text-xs md:text-sm font-bold text-slate-700">{{ form.birthDate }} ({{ computedAge }} ปี)</span>
                             </div>
                             <div class="bg-slate-50/50 p-4 rounded-2xl border border-slate-100/60 md:col-span-2">
-                                <span class="text-xs font-bold text-slate-400 block mb-1">เลขบัตรประชาชน</span>
-                                <span class="text-sm md:text-base font-black text-slate-800 tracking-wider">{{ form.idCard }}</span>
+                                <span class="text-xs font-bold text-slate-500 block mb-1">เลขบัตรประชาชน</span>
+                                <span class="text-xs md:text-sm font-bold text-slate-700 tracking-wider">{{ form.idCard }}</span>
                             </div>
                         </div>
                     </div>
@@ -489,36 +489,36 @@
                             <div class="bg-slate-50/50 p-4 rounded-2xl border border-slate-100/60 flex items-center gap-3">
                                 <UIcon name="i-lucide-phone" class="w-5 h-5 text-indigo-500 shrink-0" />
                                 <div>
-                                    <span class="text-xs font-bold text-slate-400 block">เบอร์โทรหลัก / สำรอง</span>
-                                    <span class="text-sm font-black text-slate-800">{{ form.mobile }} <span v-if="form.homePhone" class="text-xs text-gray-400 font-bold">({{ form.homePhone }})</span></span>
+                                    <span class="text-xs font-bold text-slate-500 block">เบอร์โทรหลัก / สำรอง</span>
+                                    <span class="text-xs md:text-sm font-bold text-slate-700">{{ form.mobile }} <span v-if="form.homePhone" class="text-xs text-gray-400 font-bold">({{ form.homePhone }})</span></span>
                                 </div>
                             </div>
                             <div class="bg-slate-50/50 p-4 rounded-2xl border border-slate-100/60 flex items-center gap-3">
                                 <UIcon name="i-lucide-message-circle" class="w-5 h-5 text-emerald-500 shrink-0" />
                                 <div>
-                                    <span class="text-xs font-bold text-slate-400 block">LINE ID</span>
-                                    <span class="text-sm font-black text-slate-800">{{ form.lineId || '—' }}</span>
+                                    <span class="text-xs font-bold text-slate-500 block">LINE ID</span>
+                                    <span class="text-xs md:text-sm font-bold text-slate-700">{{ form.lineId || '—' }}</span>
                                 </div>
                             </div>
                             <div class="bg-slate-50/50 p-4 rounded-2xl border border-slate-100/60 flex items-center gap-3">
                                 <UIcon name="i-lucide-mail" class="w-5 h-5 text-blue-500 shrink-0" />
                                 <div>
-                                    <span class="text-xs font-bold text-slate-400 block">อีเมล</span>
-                                    <span class="text-sm font-black text-slate-800">{{ form.email || '—' }}</span>
+                                    <span class="text-xs font-bold text-slate-500 block">อีเมล</span>
+                                    <span class="text-xs md:text-sm font-bold text-slate-700">{{ form.email || '—' }}</span>
                                 </div>
                             </div>
                             <div class="bg-slate-50/50 p-4 rounded-2xl border border-slate-100/60 flex items-center gap-3">
                                 <UIcon name="i-lucide-map-pin" class="w-5 h-5 text-rose-500 shrink-0" />
                                 <div>
-                                    <span class="text-xs font-bold text-slate-400 block">ที่อยู่</span>
-                                    <span class="text-sm font-black text-slate-800 leading-relaxed">{{ form.address || '—' }}</span>
+                                    <span class="text-xs font-bold text-slate-500 block">ที่อยู่</span>
+                                    <span class="text-xs md:text-sm font-bold text-slate-700 leading-relaxed">{{ form.address || '—' }}</span>
                                 </div>
                             </div>
                             <div class="bg-slate-50/50 p-4 rounded-2xl border border-slate-100/60 flex items-center gap-3 md:col-span-2">
                                 <UIcon name="i-lucide-shield-alert" class="w-5 h-5 text-amber-500 shrink-0" />
                                 <div>
-                                    <span class="text-xs font-bold text-slate-400 block">ผู้ติดต่อฉุกเฉิน</span>
-                                    <span class="text-sm font-black text-slate-800">{{ form.emergencyName ? `${form.emergencyName} (${form.emergencyRelation}) — โทร ${form.emergencyMobile}` : '— ไม่ได้ระบุ —' }}</span>
+                                    <span class="text-xs font-bold text-slate-500 block">ผู้ติดต่อฉุกเฉิน</span>
+                                    <span class="text-xs md:text-sm font-bold text-slate-700">{{ form.emergencyName ? `${form.emergencyName} (${form.emergencyRelation}) — โทร ${form.emergencyMobile}` : '— ไม่ได้ระบุ —' }}</span>
                                 </div>
                             </div>
                         </div>
@@ -683,18 +683,18 @@
                 <div class="bg-white rounded-3xl border border-gray-100 shadow-xl shadow-slate-200/40 overflow-hidden relative">
                     <!-- Top Gradient -->
                     <div class="h-20 bg-gradient-to-tr from-indigo-600 to-indigo-800 p-4 flex items-start justify-between relative overflow-hidden">
-                        <span class="text-xs font-black text-indigo-200 uppercase tracking-widest bg-indigo-900/30 px-2.5 py-0.5 rounded-md border border-indigo-400/20 backdrop-blur-md">เวชระเบียนคลินิก</span>
+                        <span class="text-xs font-bold text-indigo-200 uppercase tracking-widest bg-indigo-900/30 px-2.5 py-0.5 rounded-md border border-indigo-400/20 backdrop-blur-md">เวชระเบียนคลินิก</span>
                         <span class="text-xs font-bold text-white/80">CN-{{ form.hn }}</span>
                     </div>
 
                     <!-- Card Body -->
                     <div class="p-6 pt-0 relative text-center">
                         <!-- Avatar overlapping top header -->
-                        <div class="w-20 h-20 rounded-full border-4 border-white flex items-center justify-center font-black text-2xl shadow-md -mt-10 mb-4 mx-auto relative z-10 shrink-0" :class="form.avatarColor || 'bg-indigo-100 text-indigo-600'">
+                        <div class="w-20 h-20 rounded-full border-4 border-white flex items-center justify-center font-bold text-2xl shadow-md -mt-10 mb-4 mx-auto relative z-10 shrink-0" :class="form.avatarColor || 'bg-indigo-100 text-indigo-600'">
                             {{ avatarInitials }}
                         </div>
 
-                        <h3 class="text-base font-black text-slate-800">
+                        <h3 class="text-base font-bold text-slate-800">
                             {{ form.title }} {{ form.firstName }} {{ form.lastName }}
                         </h3>
                         <p class="text-xs text-gray-400 font-bold mt-1 flex items-center justify-center gap-1.5">
@@ -710,15 +710,15 @@
                         <div class="grid grid-cols-3 gap-2 text-left mb-4">
                             <div class="bg-slate-50 p-2 rounded-xl border border-slate-100">
                                 <span class="text-[9px] font-bold text-gray-400 block uppercase">เข้ารับบริการ</span>
-                                <span class="text-sm font-black text-indigo-600 block mt-0.5">14 ครั้ง</span>
+                                <span class="text-sm font-bold text-indigo-600 block mt-0.5">14 ครั้ง</span>
                             </div>
                             <div class="bg-slate-50 p-2 rounded-xl border border-slate-100">
                                 <span class="text-[9px] font-bold text-gray-400 block uppercase">ยอดใช้จ่าย</span>
-                                <span class="text-sm font-black text-emerald-600 block mt-0.5">42.8k ฿</span>
+                                <span class="text-sm font-bold text-emerald-600 block mt-0.5">42.8k ฿</span>
                             </div>
                             <div class="bg-slate-50 p-2 rounded-xl border border-slate-100">
                                 <span class="text-[9px] font-bold text-gray-400 block uppercase">พบแพทย์ล่าสุด</span>
-                                <span class="text-xs font-black text-slate-700 block mt-1 truncate">หมอโอ๊ค</span>
+                                <span class="text-xs font-bold text-slate-700 block mt-1 truncate">หมอโอ๊ค</span>
                             </div>
                         </div>
 
