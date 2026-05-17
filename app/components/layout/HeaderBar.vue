@@ -1,15 +1,60 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+    import { computed } from 'vue'
+    import { useRoute } from 'vue-router'
+
+    const route = useRoute()
+
+    interface MenuInfo {
+        parent: string
+        child: string
+        icon?: string
+    }
+
+    // Define route categories and page titles
+    const routeMap: Record<string, MenuInfo> = {
+        '/dashboard': { parent: 'เมนูหลัก', child: 'หน้าแรก', icon: 'i-lucide-home' },
+        '/customerNew': { parent: 'เมนูหลัก', child: 'เพิ่มลูกค้าใหม่', icon: 'i-lucide-user-plus' },
+        '/customerInfo': { parent: 'เมนูหลัก', child: 'ข้อมูลลูกค้า', icon: 'i-lucide-users' },
+        '/reports': { parent: 'เมนูหลัก', child: 'รายงาน', icon: 'i-lucide-bar-chart-2' },
+        '/teleconsult': { parent: 'เมนูหลัก', child: 'Teleconsult', icon: 'i-lucide-video' },
+        '/settings': { parent: 'ระบบ', child: 'ตั้งค่า', icon: 'i-lucide-settings' },
+        '/search': { parent: 'ระบบ', child: 'ค้นหา', icon: 'i-lucide-search' }
+    }
+
+    const currentMenu = computed((): MenuInfo => {
+        // If exact match is found
+        const exactMatch = routeMap[route.path]
+        if (exactMatch) {
+            return exactMatch
+        }
+        
+        // Fallback: search for partial matches (e.g., /customerInfo/123)
+        const matchedKey = Object.keys(routeMap).find(key => 
+            key !== '/' && route.path.startsWith(key)
+        )
+        if (matchedKey) {
+            const partialMatch = routeMap[matchedKey]
+            if (partialMatch) {
+                return partialMatch
+            }
+        }
+        
+        // Default fallback
+        return { parent: 'เมนูหลัก', child: 'หน้าแรก', icon: 'i-lucide-home' }
+    })
+</script>
 
 <template>
     <header
         class="h-16 border-b border-gray-200 bg-white flex items-center justify-between px-6 fixed top-0 left-[255px] right-0 z-40"
     >
-        <div class="flex items-center text-sm">
-            <span class="text-gray-400">หน้าแรก</span>
-            <UIcon name="i-lucide-chevron-right" class="w-4 h-4 text-gray-400 mx-2" />
-            <span class="font-semibold text-gray-800 tracking-widest text-xs uppercase"
-                >Dashboard</span
-            >
+        <div class="flex items-center text-sm gap-2">
+            <span class="text-gray-400 font-medium transition-all duration-300">{{ currentMenu.parent }}</span>
+            <UIcon name="i-lucide-chevron-right" class="w-4 h-4 text-gray-400" />
+            <div class="flex items-center gap-1.5 font-semibold text-gray-800 bg-gray-50 px-2.5 py-1 rounded-lg ring-1 ring-gray-200/50 transition-all duration-300">
+                <UIcon v-if="currentMenu.icon" :name="currentMenu.icon" class="w-4 h-4 text-primary-500" />
+                <span class="text-xs tracking-wider uppercase">{{ currentMenu.child }}</span>
+            </div>
         </div>
 
         <div class="flex items-center gap-4">
