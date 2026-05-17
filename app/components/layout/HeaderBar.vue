@@ -57,46 +57,62 @@
             </div>
         </div>
 
-        <div class="flex items-center gap-4">
-            <div class="flex items-center bg-gray-100 rounded-full p-1 text-xs font-semibold">
+        <div class="flex items-center gap-3">
+            <!-- ── Premium Shortcut Search Input ── -->
+            <div class="relative w-48 md:w-60">
+                <UIcon name="i-lucide-search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                <input
+                    type="text"
+                    placeholder="ค้นหาลูกค้า, HN, นัดหมาย..."
+                    class="w-full pl-9 pr-14 py-1.5 rounded-xl bg-slate-50 border border-gray-200/60 focus:border-indigo-500 focus:bg-white text-xs text-slate-700 outline-none transition-all duration-300 font-semibold placeholder-gray-400 shadow-sm"
+                />
+                <div class="absolute right-2 top-1/2 -translate-y-1/2 bg-white border border-gray-200/30 text-gray-400 px-1.5 py-0.5 rounded-md text-[9px] font-bold font-mono shadow-sm pointer-events-none select-none">
+                    ⌘K
+                </div>
+            </div>
+
+            <!-- ── Language Toggle Pill (TH / EN) ── -->
+            <div class="flex items-center bg-slate-100 rounded-full p-0.5 text-[10px] font-extrabold border border-gray-200/10 shadow-inner">
                 <button
-                    class="px-3 py-1 rounded-full bg-white text-gray-800 shadow-sm"
+                    class="px-2.5 py-1 rounded-full bg-white text-slate-800 shadow-sm transition-all"
                     data-testid="lang-th"
                 >
                     TH
                 </button>
                 <button
-                    class="px-3 py-1 rounded-full text-gray-400 hover:text-gray-600"
+                    class="px-2.5 py-1 rounded-full text-slate-400 hover:text-slate-600 transition-all"
                     data-testid="lang-en"
                 >
                     EN
                 </button>
             </div>
 
+            <!-- ── Globe Button (Border Box) ── -->
             <button
-                class="text-gray-400 hover:text-gray-600 transition-colors"
+                class="w-8 h-8 rounded-xl border border-gray-200/60 bg-white hover:bg-slate-50 hover:border-gray-300 text-slate-500 hover:text-indigo-600 transition-all duration-300 shadow-sm flex items-center justify-center cursor-pointer"
                 data-testid="btn-global"
             >
-                <UIcon name="i-lucide-globe" class="w-5 h-5" />
+                <UIcon name="i-lucide-globe" class="w-4 h-4" />
             </button>
 
-            <div class="relative">
-                <button
-                    class="text-gray-400 hover:text-gray-600 transition-colors mt-1"
-                    data-testid="btn-notification"
-                >
-                    <UIcon name="i-lucide-bell" class="w-5 h-5" />
-                </button>
-                <span
-                    class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full border border-white"
-                ></span>
-            </div>
-
+            <!-- ── Bell Notification Button with Pulsing Red Indicator ── -->
             <button
-                class="text-gray-400 hover:text-gray-600 transition-colors"
+                class="w-8 h-8 rounded-xl border border-gray-200/60 bg-white hover:bg-slate-50 hover:border-gray-300 text-slate-500 hover:text-indigo-600 transition-all duration-300 shadow-sm flex items-center justify-center relative cursor-pointer"
+                data-testid="btn-notification"
+            >
+                <UIcon name="i-lucide-bell" class="w-4 h-4" />
+                <span class="absolute top-1.5 right-1.5 flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                </span>
+            </button>
+
+            <!-- ── Help / Question Button (Border Box) ── -->
+            <button
+                class="w-8 h-8 rounded-xl border border-gray-200/60 bg-white hover:bg-slate-50 hover:border-gray-300 text-slate-500 hover:text-indigo-600 transition-all duration-300 shadow-sm flex items-center justify-center cursor-pointer"
                 data-testid="btn-help"
             >
-                <UIcon name="i-lucide-help-circle" class="w-5 h-5" />
+                <UIcon name="i-lucide-help-circle" class="w-4 h-4" />
             </button>
         </div>
     </header>
