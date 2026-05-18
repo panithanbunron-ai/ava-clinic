@@ -3,6 +3,7 @@ import { simulateDelay } from '../../utils/delay'
 
 export default defineEventHandler(async event => {
     await simulateDelay(200)
+    requireAuth(event)
     const idParam = getRouterParam(event, 'id')
     const id = parseInt(idParam || '1') || 1
 

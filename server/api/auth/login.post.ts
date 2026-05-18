@@ -9,7 +9,7 @@ export default defineEventHandler(async event => {
         throw createError({ statusCode: 400, statusMessage: 'Bad Request: Missing credentials' })
     }
 
-    // In a real app, hash password and check DB
+    // TODO (production): query real DB, compare with bcrypt.compare(password, user.passwordHash)
     let token = ''
     let user = null
 

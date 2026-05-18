@@ -2,8 +2,8 @@ import { mockCustomers } from '../../utils/db'
 import { simulateDelay } from '../../utils/delay'
 
 export default defineEventHandler(async event => {
-    // Simulate network delay
     await simulateDelay(300)
+    requireAuth(event)
 
     // Parse query params for pagination
     const query = getQuery(event)
@@ -13,11 +13,15 @@ export default defineEventHandler(async event => {
     // Simulate simple pagination (just returning the mock array)
     // Normally you'd slice the array based on page and limit
 
+    // TODO (production): filter by search query before slicing
+    const total = mockCustomers.length
+    const items = mockCustomers.slice((page - 1) * limit, page * limit)
+
     return {
         status: 'success',
         data: {
-            items: mockCustomers,
-            total: 3250, // Fake total to match the UI
+            items,
+            total,
             page,
             limit
         }

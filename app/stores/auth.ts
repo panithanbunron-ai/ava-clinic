@@ -11,11 +11,18 @@ export type User = {
 }
 
 export const useAuthStore = defineStore('auth', () => {
-    // Both token and user persisted in cookies — survives page refresh
-    const token = useCookie<string | null>('auth_token', { default: () => null })
+    // TODO (production): switch auth_token to httpOnly + server-side session so JS cannot read it.
+    // Currently readable by JS to include in Authorization headers — keep secure + sameSite in the meantime.
+    const token = useCookie<string | null>('auth_token', {
+        default: () => null,
+        secure: true,
+        sameSite: 'strict'
+    })
+    // TODO (production): sign/encrypt auth_user cookie to prevent client-side role tampering.
     const userCookie = useCookie<User | null>('auth_user', {
-        default: () => null
-        // serialize/parse JSON automatically via useCookie
+        default: () => null,
+        secure: true,
+        sameSite: 'strict'
     })
 
     const user = ref<User | null>(userCookie.value)

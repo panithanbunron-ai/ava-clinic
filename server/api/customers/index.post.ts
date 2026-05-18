@@ -1,4 +1,5 @@
 export default defineEventHandler(async event => {
+    requireAuth(event)
     const body = await readBody(event)
 
     // Validate request if necessary

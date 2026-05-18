@@ -13,7 +13,9 @@ export const requireAuth = (event: H3Event, allowedRoles?: string[]) => {
 
     const token = authHeader.split(' ')[1]
 
-    // Mock token decoding (In a real app, verify JWT signature here)
+    // TODO (production): replace with real JWT verification:
+    //   const payload = jwt.verify(token, process.env.JWT_SECRET)
+    //   const userRole = payload.role
     let userRole = ''
     if (token === 'mock-admin-token') userRole = 'admin'
     if (token === 'mock-superadmin-token') userRole = 'superadmin'

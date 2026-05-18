@@ -13,15 +13,20 @@
 
     const toast = useAppToast()
 
+    const THAI_MONTHS = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม']
+    const now = new Date()
+    const currentMonthName = THAI_MONTHS[now.getMonth()]
+    const currentThaiYear = now.getFullYear() + 543
+
     // Primary Interactive States
     const selectedBranch = ref('ทั้งหมด')
     const selectedDoctor = ref('ทั้งหมด')
     const searchQuery = ref('')
-    const selectedDay = ref(17)
+    const selectedDay = ref(now.getDate())
 
     const onSelectDay = (day: number) => {
         selectedDay.value = day
-        toast.info('เปลี่ยนวันตรวจ', `แสดงข้อมูลนัดหมายของวันที่ ${day} พฤษภาคม 2569`, {
+        toast.info('เปลี่ยนวันตรวจ', `แสดงข้อมูลนัดหมายของวันที่ ${day} ${currentMonthName} ${currentThaiYear}`, {
             icon: 'i-lucide-calendar'
         })
     }

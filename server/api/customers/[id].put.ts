@@ -2,6 +2,7 @@ import { simulateDelay } from '../../utils/delay'
 
 export default defineEventHandler(async event => {
     await simulateDelay(300)
+    requireAuth(event)
     const body = await readBody(event)
     const idParam = getRouterParam(event, 'id')
 

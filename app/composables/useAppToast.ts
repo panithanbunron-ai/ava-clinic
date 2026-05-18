@@ -6,9 +6,6 @@ export interface ToastOptions {
 export const useAppToast = () => {
     const toast = useToast()
 
-    /**
-     * Show a premium Success Toast
-     */
     const success = (title: string, description?: string, options?: ToastOptions) => {
         toast.add({
             title,
@@ -19,9 +16,6 @@ export const useAppToast = () => {
         })
     }
 
-    /**
-     * Show a premium Error/Danger Toast
-     */
     const error = (title: string, description?: string, options?: ToastOptions) => {
         toast.add({
             title,
@@ -32,9 +26,6 @@ export const useAppToast = () => {
         })
     }
 
-    /**
-     * Show a premium Warning Toast
-     */
     const warning = (title: string, description?: string, options?: ToastOptions) => {
         toast.add({
             title,
@@ -45,9 +36,6 @@ export const useAppToast = () => {
         })
     }
 
-    /**
-     * Show a premium Info Toast
-     */
     const info = (title: string, description?: string, options?: ToastOptions) => {
         toast.add({
             title,
@@ -58,11 +46,5 @@ export const useAppToast = () => {
         })
     }
 
-    return {
-        success,
-        error,
-        warning,
-        info,
-        toast // Expose raw toast instance just in case it is needed for custom configurations
-    }
+    return { success, error, warning, info }
 }
